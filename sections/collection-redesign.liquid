@@ -1,9 +1,16 @@
 {{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
 
 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
 
 <section class="vrai-store-page vrai-collection">
-  <header class="vrai-collection__head">
+  <nav class="vrai-breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="vrai-breadcrumbs__separator">/</span>
+    <span aria-current="page">{{ collection.title }}</span>
+  </nav>
+
+  <header class="vrai-collection__head vrai-reveal">
     <p class="vrai-store-page__eyebrow">Collection</p>
     <h1 class="vrai-store-page__title">{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
@@ -23,24 +30,72 @@
     </form>
   </div>
 
-  {%- if collection.all_tags.size > 0 -%}
-    <div class="vrai-collection__filters" aria-label="Popular tags">
-      {%- for tag in collection.all_tags limit: 12 -%}
-        {%- if current_tags contains tag -%}
-          {{ tag | link_to_remove_tag: tag }}
-        {%- else -%}
-          {{ tag | link_to_tag: tag }}
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
-
   {%- paginate collection.products by 12 -%}
+    {%- if collection.all_tags.size > 0 -%}
+      {%- comment -%} Filter out technical tags (model numbers, material codes, price ranges) {%- endcomment -%}
+      {%- assign clean_tags = '' | split: '' -%}
+      {%- for tag in collection.all_tags -%}
+        {%- assign tag_lower = tag | downcase -%}
+        {%- assign is_technical = false -%}
+        
+        {%- comment -%} Skip if tag contains numbers + letters mixed (14075C, 14120LU) {%- endcomment -%}
+        {%- if tag contains '0' or tag contains '1' or tag contains '2' or tag contains '3' or tag contains '4' or tag contains '5' or tag contains '6' or tag contains '7' or tag contains '8' or tag contains '9' -%}
+          {%- if tag.size < 8 and tag != tag_lower -%}
+            {%- assign is_technical = true -%}
+          {%- endif -%}
+        {%- endif -%}
+        
+        {%- comment -%} Skip if tag starts with "100%" (material codes) {%- endcomment -%}
+        {%- if tag contains '100%' -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+        
+        {%- comment -%} Skip if tag is just a number {%- endcomment -%}
+        {%- assign tag_as_number = tag | times: 1 -%}
+        {%- if tag_as_number != 0 and tag.size < 4 -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+        
+        {%- comment -%} Skip price ranges {%- endcomment -%}
+        {%- if tag contains '$' or tag contains '-$' -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+        
+        {%- comment -%} Skip if tag is all uppercase and contains numbers {%- endcomment -%}
+        {%- if tag == tag | upcase and tag != tag_lower and tag.size < 10 -%}
+          {%- if tag contains '0' or tag contains '1' or tag contains '2' or tag contains '3' or tag contains '4' or tag contains '5' or tag contains '6' or tag contains '7' or tag contains '8' or tag contains '9' -%}
+            {%- assign is_technical = true -%}
+          {%- endif -%}
+        {%- endif -%}
+        
+        {%- unless is_technical -%}
+          {%- assign clean_tags = clean_tags | append: tag | append: ',' | split: ',' -%}
+        {%- endunless -%}
+      {%- endfor -%}
+      
+      {%- if clean_tags.size > 0 -%}
+        <div class="vrai-collection__filters" aria-label="Filter by category">
+          {%- for tag in clean_tags limit: 12 -%}
+            {%- if current_tags contains tag -%}
+              {{ tag | link_to_remove_tag: tag }}
+            {%- else -%}
+              {{ tag | link_to_tag: tag }}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
     {%- if collection.products_count > 0 -%}
       <div class="vrai-collection__grid">
         {%- for product in collection.products -%}
-          <article class="vrai-card">
+          <article class="vrai-card vrai-reveal">
             <a class="vrai-card__image" href="{{ product.url }}">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="vrai-card__badge vrai-card__badge--sale">Sale</span>
+              {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%S' -%}
+                <span class="vrai-card__badge vrai-card__badge--new">New</span>
+              {%- endif -%}
               {%- if product.featured_image != blank -%}
                 {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
               {%- endif -%}

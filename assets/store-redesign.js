@@ -1,6 +1,28 @@
 (function () {
   'use strict';
 
+  /* ── Scroll-reveal animation ── */
+  function initScrollReveal() {
+    var els = document.querySelectorAll('.vrai-reveal');
+    if (!els.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('vrai-reveal--visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vrai-reveal--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(function (el) { observer.observe(el); });
+  }
+
   function formatMoneyFromExistingDisplay(cents, fallbackDisplay) {
     if (!fallbackDisplay) return '';
     const digits = fallbackDisplay.replace(/\d+[\d,.]*/g, '').trim();
@@ -68,8 +90,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProductVariantUI);
+    document.addEventListener('DOMContentLoaded', function () {
+      initProductVariantUI();
+      initScrollReveal();
+    });
   } else {
     initProductVariantUI();
+    initScrollReveal();
   }
 })();

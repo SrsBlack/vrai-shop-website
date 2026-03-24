@@ -1,7 +1,16 @@
 {{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
 
 <section class="vrai-store-page vrai-article-page">
-  <header class="vrai-product__top">
+  <nav class="vrai-breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="vrai-breadcrumbs__separator">/</span>
+    <a href="{{ blog.url }}">Journal</a>
+    <span class="vrai-breadcrumbs__separator">/</span>
+    <span aria-current="page">{{ article.title | truncate: 40 }}</span>
+  </nav>
+
+  <header class="vrai-product__top vrai-reveal">
     <p class="vrai-store-page__eyebrow">Editorial</p>
     <h1 class="vrai-store-page__title">{{ article.title }}</h1>
     <p class="vrai-article__meta">{{ article.published_at | date: '%B %d, %Y' }}{% if article.author != blank %} / {{ article.author }}{% endif %}</p>

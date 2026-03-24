@@ -1,7 +1,14 @@
 {{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
 
 <section class="vrai-store-page">
-  <header class="vrai-product__top">
+  <nav class="vrai-breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="vrai-breadcrumbs__separator">/</span>
+    <span aria-current="page">Search</span>
+  </nav>
+
+  <header class="vrai-product__top vrai-reveal">
     <p class="vrai-store-page__eyebrow">Search</p>
     <h1 class="vrai-store-page__title">Find your next piece</h1>
     <p class="vrai-store-page__lead">Browse products, pages, and editorials from one place.</p>

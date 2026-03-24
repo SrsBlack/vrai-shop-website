@@ -4,13 +4,23 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
 <section class="vrai-store-page vrai-product-page">
-  <header class="vrai-product__top">
+  <nav class="vrai-breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="vrai-breadcrumbs__separator">/</span>
+    {%- if product.collections.size > 0 -%}
+      <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+      <span class="vrai-breadcrumbs__separator">/</span>
+    {%- endif -%}
+    <span aria-current="page">{{ product.title | truncate: 40 }}</span>
+  </nav>
+
+  <header class="vrai-product__top vrai-reveal">
     <p class="vrai-store-page__eyebrow">Product</p>
     <h1 class="vrai-store-page__title">{{ product.title }}</h1>
   </header>
 
   <div class="vrai-product">
-    <div class="vrai-product__gallery">
+    <div class="vrai-product__gallery vrai-reveal">
       {%- if product.featured_image != blank -%}
         {{ product.featured_image | image_url: width: 1400 | image_tag: alt: product.title, class: 'vrai-product__featured', loading: 'eager' }}
       {%- endif -%}
@@ -24,7 +34,7 @@
       {%- endif -%}
     </div>
 
-    <div class="vrai-product__details">
+    <div class="vrai-product__details vrai-reveal">
       <p class="vrai-product__vendor">{{ product.vendor }}</p>
       <h2 class="vrai-product__name">{{ product.title }}</h2>
 
@@ -70,7 +80,7 @@
     </div>
   </div>
 
-  <aside class="vrai-product__meta">
+  <aside class="vrai-product__meta vrai-reveal">
     <h3>Fit and finish</h3>
     <p>Designed with elevated materials and made to style seamlessly from day to evening.</p>
     <h3>Shipping</h3>

@@ -1,4 +1,5 @@
 {{ 'homepage-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
 
 {%- liquid
   assign all_collection = collections['all']
@@ -31,7 +32,13 @@
 
   <header class="vrai-homepage__header" aria-label="VRAI header">
     <div class="vrai-homepage__header-inner">
-      <a class="vrai-homepage__wordmark" href="{{ routes.root_url }}">VRAI</a>
+      <a class="vrai-homepage__wordmark" href="{{ routes.root_url }}">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 200 | image_tag: alt: shop.name, class: 'vrai-homepage__logo' }}
+        {%- else -%}
+          VRAI
+        {%- endif -%}
+      </a>
       <nav class="vrai-homepage__nav" aria-label="Primary">
         <a href="{{ routes.all_products_collection_url }}">New Arrivals</a>
         <a href="{{ minimal_url }}">Minimal</a>
@@ -48,7 +55,7 @@
   </header>
 
   <main id="VraiHomepageMain" class="vrai-homepage__main">
-    <section class="vrai-homepage__hero" aria-labelledby="VraiHomepageHeroTitle">
+    <section class="vrai-homepage__hero vrai-reveal" aria-labelledby="VraiHomepageHeroTitle">
       <div class="vrai-homepage__hero-copy">
         <p class="vrai-homepage__eyebrow">Spring Summer 2026</p>
         <h1 id="VraiHomepageHeroTitle">An editorial storefront for modern dressing.</h1>
@@ -61,39 +68,59 @@
         </div>
       </div>
       <div class="vrai-homepage__hero-media">
-        <img
-          src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80"
-          alt="Model wearing a tailored neutral look in studio lighting"
-          loading="eager"
-        >
+        {%- if all_collection.products.first.featured_image != blank -%}
+          {{ all_collection.products.first.featured_image | image_url: width: 1400 | image_tag: alt: 'New season arrivals', loading: 'eager' }}
+        {%- elsif all_collection.image != blank -%}
+          {{ all_collection.image | image_url: width: 1400 | image_tag: alt: 'Shop the collection', loading: 'eager' }}
+        {%- else -%}
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80" alt="Model wearing a tailored neutral look in studio lighting" loading="eager">
+        {%- endif -%}
       </div>
     </section>
 
-    <section class="vrai-homepage__collections" aria-labelledby="VraiHomepageCollectionsTitle">
+    <section class="vrai-homepage__collections vrai-reveal" aria-labelledby="VraiHomepageCollectionsTitle">
       <div class="vrai-homepage__section-heading">
         <p class="vrai-homepage__eyebrow">Collections</p>
         <h2 id="VraiHomepageCollectionsTitle">Shop by mood</h2>
       </div>
       <div class="vrai-homepage__collection-grid">
         <a class="vrai-homepage__collection-card" href="{{ minimal_url }}">
-          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection in neutral tailored styling" loading="lazy">
+          {%- if minimal_collection.image != blank -%}
+            {{ minimal_collection.image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
+          {%- elsif minimal_collection.products.first.featured_image != blank -%}
+            {{ minimal_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection" loading="lazy">
+          {%- endif -%}
           <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
           <strong>Minimal</strong>
         </a>
         <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
-          <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection with layered monochrome styling" loading="lazy">
+          {%- if streetwear_collection.image != blank -%}
+            {{ streetwear_collection.image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
+          {%- elsif streetwear_collection.products.first.featured_image != blank -%}
+            {{ streetwear_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection" loading="lazy">
+          {%- endif -%}
           <span class="vrai-homepage__collection-meta">Utility layers</span>
           <strong>Streetwear</strong>
         </a>
         <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
-          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection featuring technical outerwear" loading="lazy">
+          {%- if adventure_collection.image != blank -%}
+            {{ adventure_collection.image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
+          {%- elsif adventure_collection.products.first.featured_image != blank -%}
+            {{ adventure_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection" loading="lazy">
+          {%- endif -%}
           <span class="vrai-homepage__collection-meta">Technical outerwear</span>
           <strong>Adventure</strong>
         </a>
       </div>
     </section>
 
-    <section class="vrai-homepage__products" aria-labelledby="VraiHomepageProductsTitle">
+    <section class="vrai-homepage__products vrai-reveal" aria-labelledby="VraiHomepageProductsTitle">
       <div class="vrai-homepage__section-heading vrai-homepage__section-heading--split">
         <div>
           <p class="vrai-homepage__eyebrow">Now available</p>
@@ -146,9 +173,16 @@
       </div>
     </section>
 
-    <section class="vrai-homepage__editorial" aria-labelledby="VraiHomepageEditorialTitle">
+    <section class="vrai-homepage__editorial vrai-reveal" aria-labelledby="VraiHomepageEditorialTitle">
       <div class="vrai-homepage__editorial-media">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=80" alt="Editorial fashion portrait with structured outerwear" loading="lazy">
+        {%- assign editorial_product = all_collection.products | where: 'available', true | sample -%}
+        {%- if editorial_product.images[1] != blank -%}
+          {{ editorial_product.images[1] | image_url: width: 1400 | image_tag: alt: 'Editorial styling', loading: 'lazy' }}
+        {%- elsif editorial_product.featured_image != blank -%}
+          {{ editorial_product.featured_image | image_url: width: 1400 | image_tag: alt: 'Editorial styling', loading: 'lazy' }}
+        {%- else -%}
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=80" alt="Editorial fashion portrait" loading="lazy">
+        {%- endif -%}
       </div>
       <div class="vrai-homepage__editorial-copy">
         <p class="vrai-homepage__eyebrow">Brand point of view</p>
@@ -160,7 +194,7 @@
       </div>
     </section>
 
-    <section class="vrai-homepage__newsletter" aria-labelledby="VraiHomepageNewsletterTitle">
+    <section class="vrai-homepage__newsletter vrai-reveal" aria-labelledby="VraiHomepageNewsletterTitle">
       <div>
         <p class="vrai-homepage__eyebrow">Private list</p>
         <h2 id="VraiHomepageNewsletterTitle">Early access to drops and capsule releases.</h2>

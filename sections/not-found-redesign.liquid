@@ -1,8 +1,9 @@
 {{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
 
 <section class="vrai-store-page vrai-not-found-page">
   <div class="vrai-not-found">
-    <header class="vrai-not-found__hero">
+    <header class="vrai-not-found__hero vrai-reveal">
       <p class="vrai-store-page__eyebrow">404</p>
       <h1 class="vrai-store-page__title">This piece is off runway.</h1>
       <p class="vrai-store-page__lead">The page you requested is no longer available. Continue shopping from our current edit.</p>
