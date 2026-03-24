@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRAI — Modern Fashion & Apparel</title>
+  <meta name="description" content="VRAI — Authentic fashion for the modern individual. Discover curated collections of timeless, sustainable apparel.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free shipping on orders over $150 — Use code VRAI15 for 15% off your first order
+  </div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="VRAI home">VRAI</a>
+
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <a href="collections.html" class="header__nav-link header__nav-link--active">New Arrivals</a>
+        <a href="collections.html" class="header__nav-link">Women</a>
+        <a href="collections.html" class="header__nav-link">Men</a>
+        <a href="collections.html" class="header__nav-link">Accessories</a>
+        <a href="about.html" class="header__nav-link">Our Story</a>
+      </nav>
+
+      <div class="header__actions">
+        <!-- Search -->
+        <button class="header__action-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <!-- Wishlist -->
+        <button class="header__action-btn" data-open-wishlist aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="header__badge" data-wishlist-count data-count="0"></span>
+        </button>
+
+        <!-- Cart -->
+        <button class="header__action-btn" aria-label="Cart (0 items)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="header__badge" data-count="0"></span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="header__menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="collections.html" class="mobile-nav__link">New Arrivals</a>
+    <a href="collections.html" class="mobile-nav__link">Women</a>
+    <a href="collections.html" class="mobile-nav__link">Men</a>
+    <a href="collections.html" class="mobile-nav__link">Accessories</a>
+    <a href="about.html" class="mobile-nav__link">Our Story</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Welcome banner">
+      <div class="hero__media">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=80" alt="Fashion model in elegant attire" loading="eager" fetchpriority="high">
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="hero__subtitle">Spring / Summer 2026</p>
+        <h1 class="hero__title">The Art of<br>Authentic Style</h1>
+        <div class="hero__cta">
+          <a href="collections.html" class="btn btn-primary">Explore Collection</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section" aria-labelledby="categories-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-subtitle">Browse</p>
+          <h2 class="section-title" id="categories-title">Shop by Category</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="categories-grid">
+          <a href="collections.html" class="category-card fade-in fade-in-delay-1">
+            <div class="category-card__media">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80" alt="Women's collection featuring elegant dresses and contemporary styles" loading="lazy">
+            </div>
+            <div class="category-card__overlay">
+              <div class="category-card__content">
+                <h3 class="category-card__title">Women</h3>
+                <span class="category-card__link">Shop Now</span>
+              </div>
+            </div>
+          </a>
+          <a href="collections.html" class="category-card fade-in fade-in-delay-2">
+            <div class="category-card__media">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="Men's collection featuring tailored suits and modern casual wear" loading="lazy">
+            </div>
+            <div class="category-card__overlay">
+              <div class="category-card__content">
+                <h3 class="category-card__title">Men</h3>
+                <span class="category-card__link">Shop Now</span>
+              </div>
+            </div>
+          </a>
+          <a href="collections.html" class="category-card fade-in fade-in-delay-3">
+            <div class="category-card__media">
+              <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80" alt="Accessories collection including bags, jewelry, and sunglasses" loading="lazy">
+            </div>
+            <div class="category-card__overlay">
+              <div class="category-card__content">
+                <h3 class="category-card__title">Accessories</h3>
+                <span class="category-card__link">Shop Now</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="products-section" aria-labelledby="new-arrivals-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-subtitle">Just In</p>
+          <h2 class="section-title" id="new-arrivals-title">New Arrivals</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="product-grid">
+
+          <!-- Product Card 1 -->
+          <div class="product-card fade-in fade-in-delay-1">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80" alt="Oversized Linen Blazer in natural beige tone" loading="lazy">
+              <span class="product-card__badge product-card__badge--new">New</span>
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-1" data-product-name="Oversized Linen Blazer" data-product-price="$285" data-product-image="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80" data-product-url="product.html" aria-label="Add Oversized Linen Blazer to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Oversized Linen Blazer</a></h3>
+              <p class="product-card__price">$285</p>
+            </div>
+          </div>
+
+          <!-- Product Card 2 -->
+          <div class="product-card fade-in fade-in-delay-2">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Silk Midi Dress in soft ivory shade" loading="lazy">
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-2" data-product-name="Silk Midi Dress" data-product-price="$345" data-product-image="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" data-product-url="product.html" aria-label="Add Silk Midi Dress to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Silk Midi Dress</a></h3>
+              <p class="product-card__price">$345</p>
+            </div>
+          </div>
+
+          <!-- Product Card 3 -->
+          <div class="product-card fade-in fade-in-delay-2">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" alt="Tailored Wool Coat in charcoal grey" loading="lazy">
+              <span class="product-card__badge product-card__badge--sale">Sale</span>
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-3" data-product-name="Tailored Wool Coat" data-product-price="$420" data-product-image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" data-product-url="product.html" aria-label="Add Tailored Wool Coat to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Tailored Wool Coat</a></h3>
+              <p class="product-card__price product-card__price--sale">$420 <s>$560</s></p>
+            </div>
+          </div>
+
+          <!-- Product Card 4 -->
+          <div class="product-card fade-in fade-in-delay-3">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?w=600&q=80" alt="Cashmere Knit Sweater in cream white" loading="lazy">
+              <span class="product-card__badge product-card__badge--new">New</span>
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-4" data-product-name="Cashmere Knit Sweater" data-product-price="$195" data-product-image="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?w=600&q=80" data-product-url="product.html" aria-label="Add Cashmere Knit Sweater to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Cashmere Knit Sweater</a></h3>
+              <p class="product-card__price">$195</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center" style="margin-top: var(--space-2xl);">
+          <a href="collections.html" class="btn btn-secondary">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="promo-banner fade-in" aria-labelledby="promo-title">
+      <div class="promo-banner__inner">
+        <div class="promo-banner__media">
+          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=960&q=80" alt="Model wearing VRAI sustainable collection in a natural setting" loading="lazy">
+        </div>
+        <div class="promo-banner__content">
+          <p class="promo-banner__label">Our Philosophy</p>
+          <h2 class="promo-banner__title" id="promo-title">Designed with<br>Purpose & Care</h2>
+          <p class="promo-banner__text">
+            Every piece in the VRAI collection is crafted from sustainably sourced materials, designed to last beyond seasons. We believe in fashion that respects both the wearer and the world.
+          </p>
+          <a href="about.html" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bestsellers -->
+    <section class="products-section products-section--alt" aria-labelledby="bestsellers-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-subtitle">Most Loved</p>
+          <h2 class="section-title" id="bestsellers-title">Bestsellers</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="product-grid">
+
+          <div class="product-card fade-in fade-in-delay-1">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&q=80" alt="Essential Cotton Tee in classic white" loading="lazy">
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-5" data-product-name="Essential Cotton Tee" data-product-price="$65" data-product-image="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&q=80" data-product-url="product.html" aria-label="Add Essential Cotton Tee to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Essential Cotton Tee</a></h3>
+              <p class="product-card__price">$65</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in fade-in-delay-1">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&q=80" alt="Wide-Leg Trousers in navy blue" loading="lazy">
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-6" data-product-name="Wide-Leg Trousers" data-product-price="$175" data-product-image="https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&q=80" data-product-url="product.html" aria-label="Add Wide-Leg Trousers to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Wide-Leg Trousers</a></h3>
+              <p class="product-card__price">$175</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in fade-in-delay-2">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Leather Crossbody Bag in tan" loading="lazy">
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-7" data-product-name="Leather Crossbody Bag" data-product-price="$225" data-product-image="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" data-product-url="product.html" aria-label="Add Leather Crossbody Bag to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Leather Crossbody Bag</a></h3>
+              <p class="product-card__price">$225</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in fade-in-delay-3">
+            <div class="product-card__media">
+              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80" alt="Structured Denim Jacket in classic blue" loading="lazy">
+              <div class="product-card__actions">
+                <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-8" data-product-name="Structured Denim Jacket" data-product-price="$210" data-product-image="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80" data-product-url="product.html" aria-label="Add Structured Denim Jacket to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+              </div>
+              <div class="product-card__quick-add">
+                <button class="btn">Quick Add</button>
+              </div>
+            </div>
+            <div class="product-card__info">
+              <p class="product-card__brand">VRAI</p>
+              <h3 class="product-card__name"><a href="product.html">Structured Denim Jacket</a></h3>
+              <p class="product-card__price">$210</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-subtitle">What They Say</p>
+          <h2 class="section-title" id="testimonials-title">Loved by Our Community</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card fade-in fade-in-delay-1">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-card__text">"The quality of VRAI pieces is exceptional. I've never felt more confident in clothing that aligns with my values. The linen blazer is now a staple in my wardrobe."</p>
+            <p class="testimonial-card__author">— Sophia M.</p>
+          </div>
+          <div class="testimonial-card fade-in fade-in-delay-2">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-card__text">"Finally, a brand that understands modern minimalism without compromising on comfort. The fit is perfect and the fabrics feel luxurious against the skin."</p>
+            <p class="testimonial-card__author">— James R.</p>
+          </div>
+          <div class="testimonial-card fade-in fade-in-delay-3">
+            <div class="testimonial-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-card__text">"I love the intention behind each design. These are pieces you wear for years, not months. The silk midi dress is absolutely stunning for every occasion."</p>
+            <p class="testimonial-card__author">— Amara K.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section" aria-labelledby="newsletter-title">
+      <div class="container">
+        <div class="fade-in">
+          <p class="section-subtitle">Stay Connected</p>
+          <h2 class="section-title" id="newsletter-title">Join the VRAI World</h2>
+          <p class="newsletter__text">Be the first to discover new collections, exclusive offers, and stories from our atelier.</p>
+          <form class="newsletter__form" aria-label="Newsletter signup">
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input type="email" id="newsletter-email" class="newsletter__input" placeholder="Enter your email address" required autocomplete="email">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Wishlist Drawer -->
+  <div class="wishlist-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="wishlist-drawer" aria-label="Wishlist" aria-hidden="true" role="complementary">
+    <div class="wishlist-drawer__header">
+      <h2 class="wishlist-drawer__title">Wishlist <span class="wishlist-drawer__count">(0)</span></h2>
+      <button class="wishlist-drawer__close" aria-label="Close wishlist">✕</button>
+    </div>
+    <div class="wishlist-drawer__items">
+      <div class="wishlist-drawer__empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <p>Your wishlist is empty</p>
+        <a href="collections.html" class="btn btn-secondary btn-sm">Browse Collection</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="header__logo" style="color: #fff; display: inline-block; margin-bottom: 0;">VRAI</a>
+          <p class="footer__brand-text">
+            Authentic fashion for the modern individual. Crafted with care, designed to last. VRAI — French for "true."
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.19-.78 1.2-5.07 1.2-5.07s-.31-.61-.31-1.51c0-1.42.82-2.48 1.84-2.48.87 0 1.29.65 1.29 1.43 0 .87-.56 2.18-.84 3.39-.24 1.01.51 1.83 1.5 1.83 1.8 0 3.19-1.9 3.19-4.65 0-2.43-1.75-4.13-4.24-4.13-2.89 0-4.58 2.16-4.58 4.4 0 .87.34 1.8.75 2.31.08.1.09.19.07.29l-.28 1.14c-.05.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.06 0-3.31 2.41-6.35 6.94-6.35 3.65 0 6.48 2.6 6.48 6.07 0 3.62-2.28 6.54-5.46 6.54-1.07 0-2.07-.55-2.41-1.21l-.66 2.5c-.24.91-.88 2.06-1.31 2.76.99.31 2.03.47 3.12.47 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__title">Shop</h3>
+          <a href="collections.html" class="footer__link">New Arrivals</a>
+          <a href="collections.html" class="footer__link">Women</a>
+          <a href="collections.html" class="footer__link">Men</a>
+          <a href="collections.html" class="footer__link">Accessories</a>
+          <a href="collections.html" class="footer__link">Sale</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Help</h3>
+          <a href="#" class="footer__link">Shipping & Returns</a>
+          <a href="#" class="footer__link">Size Guide</a>
+          <a href="#" class="footer__link">FAQ</a>
+          <a href="#" class="footer__link">Contact Us</a>
+          <a href="#" class="footer__link">Track Order</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Company</h3>
+          <a href="about.html" class="footer__link">Our Story</a>
+          <a href="#" class="footer__link">Sustainability</a>
+          <a href="#" class="footer__link">Careers</a>
+          <a href="#" class="footer__link">Press</a>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <div class="footer__bottom">
+        <p>&copy; 2026 VRAI. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

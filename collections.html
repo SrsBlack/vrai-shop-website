@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections — VRAI</title>
+  <meta name="description" content="Explore the VRAI collection. Curated fashion pieces crafted from sustainable materials for modern style.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free shipping on orders over $150 — Use code VRAI15 for 15% off your first order
+  </div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="VRAI home">VRAI</a>
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <a href="collections.html" class="header__nav-link header__nav-link--active">New Arrivals</a>
+        <a href="collections.html" class="header__nav-link">Women</a>
+        <a href="collections.html" class="header__nav-link">Men</a>
+        <a href="collections.html" class="header__nav-link">Accessories</a>
+        <a href="about.html" class="header__nav-link">Our Story</a>
+      </nav>
+      <div class="header__actions">
+        <button class="header__action-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="header__action-btn" data-open-wishlist aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="header__badge" data-wishlist-count data-count="0"></span>
+        </button>
+        <button class="header__action-btn" aria-label="Cart (0 items)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="header__badge" data-count="0"></span>
+        </button>
+        <button class="header__menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="collections.html" class="mobile-nav__link">New Arrivals</a>
+    <a href="collections.html" class="mobile-nav__link">Women</a>
+    <a href="collections.html" class="mobile-nav__link">Men</a>
+    <a href="collections.html" class="mobile-nav__link">Accessories</a>
+    <a href="about.html" class="mobile-nav__link">Our Story</a>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="container">
+        <nav class="page-header__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> / <span aria-current="page">All Collections</span>
+        </nav>
+        <h1 class="page-header__title">New Arrivals</h1>
+      </div>
+    </div>
+
+    <!-- Collection Content -->
+    <div class="container">
+      <div class="collection-toolbar">
+        <p class="collection-toolbar__results">Showing 12 of 48 products</p>
+        <div class="collection-toolbar__controls">
+          <div class="collection-toolbar__sort">
+            <label for="sort-select" class="sr-only">Sort by</label>
+            <select id="sort-select">
+              <option>Featured</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest First</option>
+              <option>Best Selling</option>
+            </select>
+          </div>
+          <div class="collection-toolbar__view" role="group" aria-label="Grid view options">
+            <button class="collection-toolbar__view-btn is-active" aria-label="4-column grid" aria-pressed="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="3" height="3"/><rect x="4.3" y="0" width="3" height="3"/><rect x="8.6" y="0" width="3" height="3"/><rect x="12.9" y="0" width="3" height="3"/><rect x="0" y="4.3" width="3" height="3"/><rect x="4.3" y="4.3" width="3" height="3"/><rect x="8.6" y="4.3" width="3" height="3"/><rect x="12.9" y="4.3" width="3" height="3"/></svg>
+            </button>
+            <button class="collection-toolbar__view-btn" aria-label="3-column grid" aria-pressed="false">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="4" height="4"/><rect x="6" y="0" width="4" height="4"/><rect x="12" y="0" width="4" height="4"/><rect x="0" y="6" width="4" height="4"/><rect x="6" y="6" width="4" height="4"/><rect x="12" y="6" width="4" height="4"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="collection-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters" aria-label="Product filters">
+          <div class="filter-group">
+            <button class="filter-group__title" aria-expanded="true">
+              Category
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="checkbox"> Tops <span class="filter-option__count">(14)</span></label>
+              <label class="filter-option"><input type="checkbox"> Dresses <span class="filter-option__count">(9)</span></label>
+              <label class="filter-option"><input type="checkbox"> Outerwear <span class="filter-option__count">(7)</span></label>
+              <label class="filter-option"><input type="checkbox"> Bottoms <span class="filter-option__count">(11)</span></label>
+              <label class="filter-option"><input type="checkbox"> Accessories <span class="filter-option__count">(7)</span></label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="filter-group__title" aria-expanded="true">
+              Size
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="filter-group__options">
+              <div class="filter-sizes">
+                <button class="filter-size-btn">XS</button>
+                <button class="filter-size-btn">S</button>
+                <button class="filter-size-btn">M</button>
+                <button class="filter-size-btn">L</button>
+                <button class="filter-size-btn">XL</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="filter-group__title" aria-expanded="true">
+              Color
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="filter-group__options">
+              <div class="filter-colors">
+                <button class="filter-color-swatch" style="background: #1a1a1a" aria-label="Black"></button>
+                <button class="filter-color-swatch" style="background: #f5f0eb" aria-label="Cream"></button>
+                <button class="filter-color-swatch" style="background: #2c3e50" aria-label="Navy"></button>
+                <button class="filter-color-swatch" style="background: #8b7355" aria-label="Camel"></button>
+                <button class="filter-color-swatch" style="background: #c0392b" aria-label="Red"></button>
+                <button class="filter-color-swatch" style="background: #7f8c8d" aria-label="Grey"></button>
+                <button class="filter-color-swatch" style="background: #f5f5dc" aria-label="Beige"></button>
+                <button class="filter-color-swatch" style="background: #2e8b57" aria-label="Forest Green"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="filter-group__title" aria-expanded="true">
+              Price
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="filter-group__options">
+              <div class="filter-price-range">
+                <label for="price-min" class="sr-only">Minimum price</label>
+                <input type="number" id="price-min" placeholder="$0" min="0">
+                <span class="filter-price-range__sep">—</span>
+                <label for="price-max" class="sr-only">Maximum price</label>
+                <input type="number" id="price-max" placeholder="$500" min="0">
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button class="filter-group__title" aria-expanded="true">
+              Material
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="filter-group__options">
+              <label class="filter-option"><input type="checkbox"> Cotton <span class="filter-option__count">(18)</span></label>
+              <label class="filter-option"><input type="checkbox"> Linen <span class="filter-option__count">(8)</span></label>
+              <label class="filter-option"><input type="checkbox"> Silk <span class="filter-option__count">(5)</span></label>
+              <label class="filter-option"><input type="checkbox"> Wool <span class="filter-option__count">(7)</span></label>
+              <label class="filter-option"><input type="checkbox"> Cashmere <span class="filter-option__count">(4)</span></label>
+              <label class="filter-option"><input type="checkbox"> Leather <span class="filter-option__count">(6)</span></label>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Product Grid -->
+        <div>
+          <div class="product-grid" style="grid-template-columns: repeat(3, 1fr);">
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80" alt="Oversized Linen Blazer in natural beige tone" loading="lazy">
+                <span class="product-card__badge product-card__badge--new">New</span>
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-1" data-product-name="Oversized Linen Blazer" data-product-price="$285" data-product-image="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80" data-product-url="product.html" aria-label="Add Oversized Linen Blazer to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Oversized Linen Blazer</a></h3>
+                <p class="product-card__price">$285</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Silk Midi Dress in soft ivory shade" loading="lazy">
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-2" data-product-name="Silk Midi Dress" data-product-price="$345" data-product-image="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" data-product-url="product.html" aria-label="Add Silk Midi Dress to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Silk Midi Dress</a></h3>
+                <p class="product-card__price">$345</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" alt="Tailored Wool Coat in charcoal grey" loading="lazy">
+                <span class="product-card__badge product-card__badge--sale">Sale</span>
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-3" data-product-name="Tailored Wool Coat" data-product-price="$420" data-product-image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" data-product-url="product.html" aria-label="Add Tailored Wool Coat to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Tailored Wool Coat</a></h3>
+                <p class="product-card__price product-card__price--sale">$420 <s>$560</s></p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?w=600&q=80" alt="Cashmere Knit Sweater in cream white" loading="lazy">
+                <span class="product-card__badge product-card__badge--new">New</span>
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-4" data-product-name="Cashmere Knit Sweater" data-product-price="$195" data-product-image="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?w=600&q=80" data-product-url="product.html" aria-label="Add Cashmere Knit Sweater to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Cashmere Knit Sweater</a></h3>
+                <p class="product-card__price">$195</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&q=80" alt="Essential Cotton Tee in classic white" loading="lazy">
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-5" data-product-name="Essential Cotton Tee" data-product-price="$65" data-product-image="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&q=80" data-product-url="product.html" aria-label="Add Essential Cotton Tee to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Essential Cotton Tee</a></h3>
+                <p class="product-card__price">$65</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&q=80" alt="Wide-Leg Trousers in navy blue" loading="lazy">
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-6" data-product-name="Wide-Leg Trousers" data-product-price="$175" data-product-image="https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&q=80" data-product-url="product.html" aria-label="Add Wide-Leg Trousers to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Wide-Leg Trousers</a></h3>
+                <p class="product-card__price">$175</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Leather Crossbody Bag in tan" loading="lazy">
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-7" data-product-name="Leather Crossbody Bag" data-product-price="$225" data-product-image="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" data-product-url="product.html" aria-label="Add Leather Crossbody Bag to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Leather Crossbody Bag</a></h3>
+                <p class="product-card__price">$225</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80" alt="Structured Denim Jacket in classic blue" loading="lazy">
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-8" data-product-name="Structured Denim Jacket" data-product-price="$210" data-product-image="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80" data-product-url="product.html" aria-label="Add Structured Denim Jacket to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Structured Denim Jacket</a></h3>
+                <p class="product-card__price">$210</p>
+              </div>
+            </div>
+
+            <div class="product-card fade-in">
+              <div class="product-card__media">
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80" alt="Organic Cotton Hoodie in olive green" loading="lazy">
+                <span class="product-card__badge product-card__badge--new">New</span>
+                <div class="product-card__actions">
+                  <button class="product-card__wishlist" data-wishlist-toggle data-product-id="prod-9" data-product-name="Organic Cotton Hoodie" data-product-price="$125" data-product-image="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80" data-product-url="product.html" aria-label="Add Organic Cotton Hoodie to wishlist" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                </div>
+                <div class="product-card__quick-add"><button class="btn">Quick Add</button></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__brand">VRAI</p>
+                <h3 class="product-card__name"><a href="product.html">Organic Cotton Hoodie</a></h3>
+                <p class="product-card__price">$125</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pagination -->
+          <nav class="pagination" aria-label="Pagination">
+            <button class="pagination__btn" aria-label="Previous page" disabled>←</button>
+            <button class="pagination__btn is-active" aria-label="Page 1" aria-current="page">1</button>
+            <button class="pagination__btn" aria-label="Page 2">2</button>
+            <button class="pagination__btn" aria-label="Page 3">3</button>
+            <button class="pagination__btn" aria-label="Page 4">4</button>
+            <button class="pagination__btn" aria-label="Next page">→</button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Wishlist Drawer -->
+  <div class="wishlist-drawer__backdrop" aria-hidden="true"></div>
+  <aside class="wishlist-drawer" aria-label="Wishlist" aria-hidden="true" role="complementary">
+    <div class="wishlist-drawer__header">
+      <h2 class="wishlist-drawer__title">Wishlist <span class="wishlist-drawer__count">(0)</span></h2>
+      <button class="wishlist-drawer__close" aria-label="Close wishlist">✕</button>
+    </div>
+    <div class="wishlist-drawer__items">
+      <div class="wishlist-drawer__empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <p>Your wishlist is empty</p>
+        <a href="collections.html" class="btn btn-secondary btn-sm">Browse Collection</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="header__logo" style="color: #fff; display: inline-block; margin-bottom: 0;">VRAI</a>
+          <p class="footer__brand-text">Authentic fashion for the modern individual. Crafted with care, designed to last. VRAI — French for "true."</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="footer__social-link" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.19-.78 1.2-5.07 1.2-5.07s-.31-.61-.31-1.51c0-1.42.82-2.48 1.84-2.48.87 0 1.29.65 1.29 1.43 0 .87-.56 2.18-.84 3.39-.24 1.01.51 1.83 1.5 1.83 1.8 0 3.19-1.9 3.19-4.65 0-2.43-1.75-4.13-4.24-4.13-2.89 0-4.58 2.16-4.58 4.4 0 .87.34 1.8.75 2.31.08.1.09.19.07.29l-.28 1.14c-.05.19-.15.23-.35.14-1.31-.61-2.13-2.52-2.13-4.06 0-3.31 2.41-6.35 6.94-6.35 3.65 0 6.48 2.6 6.48 6.07 0 3.62-2.28 6.54-5.46 6.54-1.07 0-2.07-.55-2.41-1.21l-.66 2.5c-.24.91-.88 2.06-1.31 2.76.99.31 2.03.47 3.12.47 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+            <a href="#" class="footer__social-link" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__title">Shop</h3>
+          <a href="collections.html" class="footer__link">New Arrivals</a>
+          <a href="collections.html" class="footer__link">Women</a>
+          <a href="collections.html" class="footer__link">Men</a>
+          <a href="collections.html" class="footer__link">Accessories</a>
+          <a href="collections.html" class="footer__link">Sale</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Help</h3>
+          <a href="#" class="footer__link">Shipping & Returns</a>
+          <a href="#" class="footer__link">Size Guide</a>
+          <a href="#" class="footer__link">FAQ</a>
+          <a href="#" class="footer__link">Contact Us</a>
+          <a href="#" class="footer__link">Track Order</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Company</h3>
+          <a href="about.html" class="footer__link">Our Story</a>
+          <a href="#" class="footer__link">Sustainability</a>
+          <a href="#" class="footer__link">Careers</a>
+          <a href="#" class="footer__link">Press</a>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <div class="footer__bottom">
+        <p>&copy; 2026 VRAI. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
