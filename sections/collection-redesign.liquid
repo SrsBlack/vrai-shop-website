@@ -35,43 +35,45 @@
       {%- comment -%} Filter out technical tags (model numbers, material codes, price ranges) {%- endcomment -%}
       {%- assign clean_tags = '' | split: '' -%}
       {%- for tag in collection.all_tags -%}
-        {%- assign tag_lower = tag | downcase -%}
+        {%- assign normalized_tag = tag | strip -%}
+        {%- assign tag_lower = normalized_tag | downcase -%}
+        {%- assign condensed_tag = tag_lower | remove: ' ' | remove: '-' | remove: '_' | remove: '/' | remove: '&' | remove: "'" -%}
+        {%- assign tag_upper = normalized_tag | upcase -%}
         {%- assign is_technical = false -%}
+        {%- assign has_digits = false -%}
         
-        {%- comment -%} Skip if tag contains numbers + letters mixed (14075C, 14120LU) {%- endcomment -%}
-        {%- if tag contains '0' or tag contains '1' or tag contains '2' or tag contains '3' or tag contains '4' or tag contains '5' or tag contains '6' or tag contains '7' or tag contains '8' or tag contains '9' -%}
-          {%- if tag.size < 8 and tag != tag_lower -%}
-            {%- assign is_technical = true -%}
-          {%- endif -%}
+        {%- comment -%} Detect numeric metadata tags first {%- endcomment -%}
+        {%- if condensed_tag contains '0' or condensed_tag contains '1' or condensed_tag contains '2' or condensed_tag contains '3' or condensed_tag contains '4' or condensed_tag contains '5' or condensed_tag contains '6' or condensed_tag contains '7' or condensed_tag contains '8' or condensed_tag contains '9' -%}
+          {%- assign has_digits = true -%}
         {%- endif -%}
-        
-        {%- comment -%} Skip if tag starts with "100%" (material codes) {%- endcomment -%}
-        {%- if tag contains '100%' -%}
+
+        {%- comment -%} Hide code-like tags (short alphanumeric IDs, all-caps import codes) {%- endcomment -%}
+        {%- if has_digits and normalized_tag.size <= 10 and normalized_tag == tag_upper -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+
+        {%- comment -%} Hide compact numeric codes regardless of case {%- endcomment -%}
+        {%- assign has_space = false -%}
+        {%- if normalized_tag contains ' ' -%}
+          {%- assign has_space = true -%}
+        {%- endif -%}
+        {%- if has_digits and normalized_tag.size <= 6 and has_space == false -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+
+        {%- comment -%} Hide symbol-heavy tags often generated from imports {%- endcomment -%}
+        {%- if tag contains '$' or tag contains '%' or tag contains '(' or tag contains ')' or tag contains '[' or tag contains ']' -%}
           {%- assign is_technical = true -%}
         {%- endif -%}
         
-        {%- comment -%} Skip if tag is just a number {%- endcomment -%}
-        {%- assign tag_as_number = tag | times: 1 -%}
-        {%- if tag_as_number != 0 and tag.size < 4 -%}
+        {%- comment -%} Hide extremely long tags that read like feed metadata {%- endcomment -%}
+        {%- if normalized_tag.size > 30 -%}
           {%- assign is_technical = true -%}
         {%- endif -%}
         
-        {%- comment -%} Skip price ranges {%- endcomment -%}
-        {%- if tag contains '$' or tag contains '-$' -%}
-          {%- assign is_technical = true -%}
-        {%- endif -%}
-        
-        {%- comment -%} Skip if tag is all uppercase and contains numbers {%- endcomment -%}
-        {%- assign tag_upper = tag | upcase -%}
-        {%- assign tag_lower = tag | downcase -%}
-        {%- if tag == tag_upper and tag != tag_lower and tag.size < 10 -%}
-          {%- if tag contains '0' or tag contains '1' or tag contains '2' or tag contains '3' or tag contains '4' or tag contains '5' or tag contains '6' or tag contains '7' or tag contains '8' or tag contains '9' -%}
-            {%- assign is_technical = true -%}
-          {%- endif -%}
-        {%- endif -%}
-        
-        {%- unless is_technical -%}
-          {%- assign clean_tags = clean_tags | append: tag | append: ',' | split: ',' -%}
+        {%- unless is_technical or normalized_tag == blank -%}
+          {%- assign normalized_array = normalized_tag | split: '|||' -%}
+          {%- assign clean_tags = clean_tags | concat: normalized_array -%}
         {%- endunless -%}
       {%- endfor -%}
       

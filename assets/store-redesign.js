@@ -40,6 +40,7 @@
     const compareNode = page.querySelector('[data-vrai-compare]');
     const submitButton = page.querySelector('[data-vrai-submit]');
     const featuredImage = page.querySelector('.vrai-product__featured');
+    const thumbs = page.querySelectorAll('[data-vrai-thumb]');
 
     if (!variantSelect || !variantsNode || !priceNode || !submitButton) return;
 
@@ -85,6 +86,108 @@
 
       if (featuredImage && variant.featured_image && variant.featured_image.src) {
         featuredImage.src = variant.featured_image.src;
+        featuredImage.srcset = '';
+        featuredImage.setAttribute('data-vrai-zoom-src', variant.featured_image.src);
+      }
+
+      if (thumbs.length) {
+        thumbs.forEach(function (thumb) {
+          thumb.classList.remove('is-active');
+          thumb.setAttribute('aria-pressed', 'false');
+        });
+      }
+    });
+  }
+
+  function initProductGalleryUI() {
+    var page = document.querySelector('.vrai-product-page');
+    if (!page) return;
+
+    var featuredImage = page.querySelector('.vrai-product__featured');
+    var featuredTrigger = page.querySelector('[data-vrai-open-zoom]');
+    var thumbs = page.querySelectorAll('[data-vrai-thumb]');
+    var modal = page.querySelector('[data-vrai-image-modal]');
+    var modalImage = page.querySelector('[data-vrai-modal-image]');
+    var closeButton = page.querySelector('[data-vrai-close-zoom]');
+    var lastFocused = null;
+
+    if (!featuredImage) return;
+    if (page.dataset.vraiGalleryInit === 'true') return;
+    page.dataset.vraiGalleryInit = 'true';
+
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        var fullSrc = thumb.getAttribute('data-vrai-thumb-full');
+        var zoomSrc = thumb.getAttribute('data-vrai-thumb-zoom');
+        var imageAlt = thumb.getAttribute('data-vrai-thumb-alt') || featuredImage.alt || '';
+
+        if (fullSrc) {
+          featuredImage.src = fullSrc;
+          featuredImage.srcset = '';
+        }
+
+        featuredImage.alt = imageAlt;
+
+        if (zoomSrc) {
+          featuredImage.setAttribute('data-vrai-zoom-src', zoomSrc);
+        }
+
+        thumbs.forEach(function (candidate) {
+          candidate.classList.remove('is-active');
+          candidate.setAttribute('aria-pressed', 'false');
+        });
+        thumb.classList.add('is-active');
+        thumb.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    function openModal() {
+      if (!modal || !modalImage) return;
+      lastFocused = document.activeElement;
+      var zoomSrc = featuredImage.getAttribute('data-vrai-zoom-src') || featuredImage.currentSrc || featuredImage.src;
+      modalImage.src = zoomSrc;
+      modalImage.alt = featuredImage.alt || '';
+      modal.hidden = false;
+      document.body.classList.add('vrai-no-scroll');
+      if (closeButton) {
+        closeButton.focus();
+      }
+    }
+
+    function closeModal() {
+      if (!modal || !modalImage) return;
+      modal.hidden = true;
+      modalImage.removeAttribute('src');
+      document.body.classList.remove('vrai-no-scroll');
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
+    }
+
+    if (featuredTrigger) {
+      featuredTrigger.addEventListener('click', openModal);
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+    }
+
+    if (modal) {
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+    page.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && modal && !modal.hidden) {
+        closeModal();
+      }
+
+      if (event.key === 'Tab' && modal && !modal.hidden && closeButton) {
+        event.preventDefault();
+        closeButton.focus();
       }
     });
   }
@@ -92,10 +195,12 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initProductVariantUI();
+      initProductGalleryUI();
       initScrollReveal();
     });
   } else {
     initProductVariantUI();
+    initProductGalleryUI();
     initScrollReveal();
   }
 })();
