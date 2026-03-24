@@ -102,14 +102,14 @@
           "type": "_announcement",
           "settings": {
             "text": "Ethically created diamonds",
-            "link": "/pages/our-story"
+            "link": ""
           }
         },
         "announcement_3": {
           "type": "_announcement",
           "settings": {
             "text": "30-day easy returns",
-            "link": "/pages/shipping-returns"
+            "link": ""
           }
         }
       },
