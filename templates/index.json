@@ -635,9 +635,9 @@
       "settings": {
         "movement_direction": "normal",
         "color_scheme": "scheme-5",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
-        "gap_between_elements": 100
+        "padding-block-start": 30,
+        "padding-block-end": 34,
+        "gap_between_elements": 37
       }
     }
   },
