@@ -1,0 +1,97 @@
+{{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'store-redesign.js' | asset_url }}" defer></script>
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="vrai-store-page vrai-product-page">
+  <header class="vrai-product__top">
+    <p class="vrai-store-page__eyebrow">Product</p>
+    <h1 class="vrai-store-page__title">{{ product.title }}</h1>
+  </header>
+
+  <div class="vrai-product">
+    <div class="vrai-product__gallery">
+      {%- if product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 1400 | image_tag: alt: product.title, class: 'vrai-product__featured', loading: 'eager' }}
+      {%- endif -%}
+
+      {%- if product.images.size > 1 -%}
+        <div class="vrai-product__thumbs">
+          {%- for image in product.images limit: 8 -%}
+            {{ image | image_url: width: 320 | image_tag: alt: image.alt | default: product.title, loading: 'lazy' }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="vrai-product__details">
+      <p class="vrai-product__vendor">{{ product.vendor }}</p>
+      <h2 class="vrai-product__name">{{ product.title }}</h2>
+
+      <p class="vrai-product__price">
+        <span data-vrai-price>{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="vrai-card__compare" data-vrai-compare>{{ current_variant.compare_at_price | money }}</span>
+        {%- else -%}
+          <span class="vrai-card__compare" data-vrai-compare hidden></span>
+        {%- endif -%}
+      </p>
+
+      {%- form 'product', product, class: 'vrai-product__form' -%}
+        {%- if product.variants.size > 1 -%}
+          <div class="vrai-product__form-row">
+            <label for="VariantSelect">Choose option</label>
+            <select id="VariantSelect" name="id" data-vrai-variant-select>
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" {% if variant.id == current_variant.id %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endif -%}
+
+        <div class="vrai-product__form-row">
+          <label for="Quantity">Quantity</label>
+          <input id="Quantity" type="number" name="quantity" value="1" min="1">
+        </div>
+
+        <button type="submit" data-vrai-submit {% unless current_variant.available %}disabled{% endunless %}>
+          {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
+        {{ form | payment_button }}
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <div class="vrai-product__description rte">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <aside class="vrai-product__meta">
+    <h3>Fit and finish</h3>
+    <p>Designed with elevated materials and made to style seamlessly from day to evening.</p>
+    <h3>Shipping</h3>
+    <p>Complimentary tracked shipping and easy returns on all orders.</p>
+    <h3>Styling notes</h3>
+    <p>Pair with minimal tailoring, tonal knitwear, and refined accessories for a complete look.</p>
+  </aside>
+</section>
+
+<script type="application/json" data-vrai-variants>
+  {{ product.variants | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Product redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product redesign"
+    }
+  ]
+}
+{% endschema %}

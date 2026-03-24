@@ -1,0 +1,203 @@
+{{ 'homepage-redesign.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign all_collection = collections['all']
+  assign adventure_collection = collections['adventure-series']
+  assign streetwear_collection = collections['streetwear']
+  assign minimal_collection = collections['minimal']
+
+  assign adventure_url = routes.all_products_collection_url
+  if adventure_collection != blank
+    assign adventure_url = adventure_collection.url
+  endif
+
+  assign streetwear_url = routes.all_products_collection_url
+  if streetwear_collection != blank
+    assign streetwear_url = streetwear_collection.url
+  endif
+
+  assign minimal_url = routes.all_products_collection_url
+  if minimal_collection != blank
+    assign minimal_url = minimal_collection.url
+  endif
+-%}
+
+<section class="vrai-homepage">
+  <a href="#VraiHomepageMain" class="vrai-homepage__skip-link">Skip to content</a>
+
+  <div class="vrai-homepage__announcement">
+    Complimentary express shipping on all orders. New season pieces now live.
+  </div>
+
+  <header class="vrai-homepage__header" aria-label="VRAI header">
+    <div class="vrai-homepage__header-inner">
+      <a class="vrai-homepage__wordmark" href="{{ routes.root_url }}">VRAI</a>
+      <nav class="vrai-homepage__nav" aria-label="Primary">
+        <a href="{{ routes.all_products_collection_url }}">New Arrivals</a>
+        <a href="{{ minimal_url }}">Minimal</a>
+        <a href="{{ streetwear_url }}">Streetwear</a>
+        <a href="{{ adventure_url }}">Adventure</a>
+        <a href="/pages/contact">Contact</a>
+      </nav>
+      <div class="vrai-homepage__header-actions">
+        <a href="/search">Search</a>
+        <a href="/account">Account</a>
+        <a href="/cart">Cart</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="VraiHomepageMain" class="vrai-homepage__main">
+    <section class="vrai-homepage__hero" aria-labelledby="VraiHomepageHeroTitle">
+      <div class="vrai-homepage__hero-copy">
+        <p class="vrai-homepage__eyebrow">Spring Summer 2026</p>
+        <h1 id="VraiHomepageHeroTitle">An editorial storefront for modern dressing.</h1>
+        <p class="vrai-homepage__lede">
+          Structured tailoring, fluid essentials, and elevated layers curated with a quieter luxury point of view.
+        </p>
+        <div class="vrai-homepage__hero-actions">
+          <a class="vrai-homepage__button vrai-homepage__button--primary" href="{{ routes.all_products_collection_url }}">Shop the edit</a>
+          <a class="vrai-homepage__button vrai-homepage__button--ghost" href="{{ minimal_url }}">View minimal</a>
+        </div>
+      </div>
+      <div class="vrai-homepage__hero-media">
+        <img
+          src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80"
+          alt="Model wearing a tailored neutral look in studio lighting"
+          loading="eager"
+        >
+      </div>
+    </section>
+
+    <section class="vrai-homepage__collections" aria-labelledby="VraiHomepageCollectionsTitle">
+      <div class="vrai-homepage__section-heading">
+        <p class="vrai-homepage__eyebrow">Collections</p>
+        <h2 id="VraiHomepageCollectionsTitle">Shop by mood</h2>
+      </div>
+      <div class="vrai-homepage__collection-grid">
+        <a class="vrai-homepage__collection-card" href="{{ minimal_url }}">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection in neutral tailored styling" loading="lazy">
+          <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
+          <strong>Minimal</strong>
+        </a>
+        <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
+          <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection with layered monochrome styling" loading="lazy">
+          <span class="vrai-homepage__collection-meta">Utility layers</span>
+          <strong>Streetwear</strong>
+        </a>
+        <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection featuring technical outerwear" loading="lazy">
+          <span class="vrai-homepage__collection-meta">Technical outerwear</span>
+          <strong>Adventure</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="vrai-homepage__products" aria-labelledby="VraiHomepageProductsTitle">
+      <div class="vrai-homepage__section-heading vrai-homepage__section-heading--split">
+        <div>
+          <p class="vrai-homepage__eyebrow">Now available</p>
+          <h2 id="VraiHomepageProductsTitle">Fresh arrivals</h2>
+        </div>
+        <a class="vrai-homepage__text-link" href="{{ routes.all_products_collection_url }}">View all</a>
+      </div>
+
+      <div class="vrai-homepage__product-grid">
+        {%- if all_collection != blank and all_collection.products_count > 0 -%}
+          {%- for product in all_collection.products limit: 4 -%}
+            <article class="vrai-homepage__product-card">
+              <a class="vrai-homepage__product-image" href="{{ product.url }}">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
+                {%- else -%}
+                  <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?auto=format&fit=crop&w=900&q=80" alt="{{ product.title | escape }}" loading="lazy">
+                {%- endif -%}
+              </a>
+              <div class="vrai-homepage__product-body">
+                <p class="vrai-homepage__product-vendor">{{ product.vendor }}</p>
+                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                <p class="vrai-homepage__product-price">
+                  {{ product.price | money }}
+                  {%- if product.compare_at_price > product.price -%}
+                    <span>{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </p>
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          <article class="vrai-homepage__product-card">
+            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=80" alt="Oversized linen blazer" loading="lazy"></div>
+            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Oversized Linen Blazer</h3><p class="vrai-homepage__product-price">$285</p></div>
+          </article>
+          <article class="vrai-homepage__product-card">
+            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Silk midi dress" loading="lazy"></div>
+            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Silk Midi Dress</h3><p class="vrai-homepage__product-price">$345</p></div>
+          </article>
+          <article class="vrai-homepage__product-card">
+            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80" alt="Tailored wool coat" loading="lazy"></div>
+            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Tailored Wool Coat</h3><p class="vrai-homepage__product-price">$420 <span>$560</span></p></div>
+          </article>
+          <article class="vrai-homepage__product-card">
+            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Cashmere knit" loading="lazy"></div>
+            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Cashmere Knit</h3><p class="vrai-homepage__product-price">$190</p></div>
+          </article>
+        {%- endif -%}
+      </div>
+    </section>
+
+    <section class="vrai-homepage__editorial" aria-labelledby="VraiHomepageEditorialTitle">
+      <div class="vrai-homepage__editorial-media">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=80" alt="Editorial fashion portrait with structured outerwear" loading="lazy">
+      </div>
+      <div class="vrai-homepage__editorial-copy">
+        <p class="vrai-homepage__eyebrow">Brand point of view</p>
+        <h2 id="VraiHomepageEditorialTitle">Fashion-first, not template-first.</h2>
+        <p>
+          This storefront is built to feel more like a lookbook than a default Shopify homepage: stronger imagery, sharper typography, and more intentional spacing.
+        </p>
+        <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/contact">Book a styling session</a>
+      </div>
+    </section>
+
+    <section class="vrai-homepage__newsletter" aria-labelledby="VraiHomepageNewsletterTitle">
+      <div>
+        <p class="vrai-homepage__eyebrow">Private list</p>
+        <h2 id="VraiHomepageNewsletterTitle">Early access to drops and capsule releases.</h2>
+      </div>
+      {%- form 'customer', class: 'vrai-homepage__newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="VraiHomepageEmail">Email address</label>
+        <input id="VraiHomepageEmail" type="email" name="contact[email]" placeholder="Email address" required>
+        <button type="submit">Join now</button>
+        {%- if form.posted_successfully? -%}
+          <p class="vrai-homepage__form-message" role="status">You are on the list.</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="vrai-homepage__form-message vrai-homepage__form-message--error" role="alert">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </section>
+  </main>
+
+  <footer class="vrai-homepage__footer">
+    <p>VRAI</p>
+    <div>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a href="/pages/contact">Contact</a>
+      <a href="/policies/privacy-policy">Privacy</a>
+    </div>
+  </footer>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Homepage redesign"
+    }
+  ]
+}
+{% endschema %}

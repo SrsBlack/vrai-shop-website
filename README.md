@@ -61,3 +61,35 @@ npx serve .
 ## License
 
 All rights reserved. This project is proprietary.
+
+## Shopify Theme Deployment Workflow
+
+This repository now includes a staging-first Shopify deployment flow.
+
+1. Configure environment variables:
+
+```powershell
+$env:SHOPIFY_STORE_DOMAIN = "vraicanada.myshopify.com"
+$env:SHOPIFY_THEME_STAGING_ID = "REPLACE_WITH_STAGING_THEME_ID"
+$env:SHOPIFY_THEME_LIVE_ID = "184459231527"
+```
+
+2. Deploy to staging (default):
+
+```powershell
+.\scripts\deploy-theme.ps1
+```
+
+3. Deploy selected files only:
+
+```powershell
+.\scripts\deploy-theme.ps1 -Only templates/product.json,sections/product-redesign.liquid
+```
+
+4. Deploy to live (main/master branch only):
+
+```powershell
+.\scripts\deploy-theme.ps1 -Live
+```
+
+See `docs/SHOPIFY_DEPLOY_FLOW.md` for the full branch strategy, staging QA sequence, and release checklist.

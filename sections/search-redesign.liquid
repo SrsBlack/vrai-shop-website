@@ -1,0 +1,87 @@
+{{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+
+<section class="vrai-store-page">
+  <header class="vrai-product__top">
+    <p class="vrai-store-page__eyebrow">Search</p>
+    <h1 class="vrai-store-page__title">Find your next piece</h1>
+    <p class="vrai-store-page__lead">Browse products, pages, and editorials from one place.</p>
+  </header>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" class="vrai-search__form">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search by name, style, or fabric">
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="vrai-homepage__button vrai-homepage__button--primary">Search</button>
+  </form>
+
+  {%- paginate search.results by 16 -%}
+    {%- if search.performed -%}
+      <p class="vrai-collection__count">{{ search.results_count }} results for "{{ search.terms }}"</p>
+    {%- endif -%}
+
+    <div class="vrai-search__results">
+      {%- if search.results_count > 0 -%}
+        <div class="vrai-search__results-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              <article class="vrai-card">
+                <a class="vrai-card__image" href="{{ item.url }}">
+                  {%- if item.featured_image != blank -%}
+                    {{ item.featured_image | image_url: width: 900 | image_tag: alt: item.title, loading: 'lazy' }}
+                  {%- endif -%}
+                </a>
+                <div class="vrai-card__body">
+                  <p class="vrai-card__vendor">{{ item.vendor }}</p>
+                  <h2 class="vrai-card__title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                  <p class="vrai-card__price">{{ item.price | money }}</p>
+                </div>
+              </article>
+            {%- else -%}
+              <article class="vrai-search__non-product">
+                <p class="vrai-card__vendor">{{ item.object_type }}</p>
+                <h2 class="vrai-card__title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- elsif search.performed -%}
+        <div class="vrai-empty-state">
+          <p>No matches found for "{{ search.terms }}".</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="vrai-pagination" aria-label="Search pagination">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}">Prev</a>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}
+            <span class="current" aria-current="page">{{ part.title }}</span>
+          {%- else -%}
+            <span>{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}">Next</a>
+        {%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{
+  "name": "Search redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Search redesign"
+    }
+  ]
+}
+{% endschema %}

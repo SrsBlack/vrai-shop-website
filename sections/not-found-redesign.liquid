@@ -1,0 +1,45 @@
+{{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+
+<section class="vrai-store-page vrai-not-found-page">
+  <div class="vrai-not-found">
+    <header class="vrai-not-found__hero">
+      <p class="vrai-store-page__eyebrow">404</p>
+      <h1 class="vrai-store-page__title">This piece is off runway.</h1>
+      <p class="vrai-store-page__lead">The page you requested is no longer available. Continue shopping from our current edit.</p>
+      <div class="vrai-not-found__cta-wrap">
+        <a class="vrai-cta" href="{{ routes.all_products_collection_url }}">Shop all</a>
+        <a class="vrai-ghost-cta" href="{{ routes.search_url }}">Search</a>
+      </div>
+    </header>
+
+    <div class="vrai-not-found__grid">
+      {% for product in collections.all.products limit: 3 %}
+        <article class="vrai-not-found__card">
+          <a href="{{ product.url }}">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
+            {% endif %}
+          </a>
+          <div class="vrai-not-found__card-content">
+            <p class="vrai-not-found__tag">Recommended</p>
+            <h2 class="vrai-not-found__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
+            <p class="vrai-not-found__excerpt">{{ product.price | money }}</p>
+            <p class="vrai-not-found__footer"><a class="vrai-ghost-cta" href="{{ product.url }}">View product</a></p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Not found redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Not found redesign"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,421 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+body.page-type-index #header-group,
+body.page-type-index footer,
+body.page-type-index .shopify-section-group-header-group,
+body.page-type-index .shopify-section-group-footer-group {
+  display: none;
+}
+
+body.page-type-index {
+  background:
+    radial-gradient(circle at top left, rgba(212, 197, 180, 0.25), transparent 40%),
+    linear-gradient(180deg, #f8f2eb 0%, #f5efe8 32%, #f8f5f1 100%);
+}
+
+.vrai-homepage {
+  color: #181411;
+  font-family: 'Inter', sans-serif;
+}
+
+.vrai-homepage *,
+.vrai-homepage *::before,
+.vrai-homepage *::after {
+  box-sizing: border-box;
+}
+
+.vrai-homepage a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vrai-homepage img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.vrai-homepage__skip-link {
+  left: 16px;
+  position: absolute;
+  top: -48px;
+}
+
+.vrai-homepage__skip-link:focus {
+  background: #181411;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  top: 16px;
+  z-index: 30;
+}
+
+.vrai-homepage__announcement {
+  background: #181411;
+  color: #f8f5f1;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__header,
+.vrai-homepage__main,
+.vrai-homepage__footer {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.vrai-homepage__header {
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.vrai-homepage__header-inner {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.vrai-homepage__wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  letter-spacing: 0.2em;
+}
+
+.vrai-homepage__nav,
+.vrai-homepage__header-actions,
+.vrai-homepage__footer div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.vrai-homepage__nav {
+  justify-content: center;
+}
+
+.vrai-homepage__header-actions {
+  justify-content: flex-end;
+}
+
+.vrai-homepage__nav a,
+.vrai-homepage__header-actions a,
+.vrai-homepage__footer a,
+.vrai-homepage__text-link {
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__hero {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+  padding: 1.5rem 0 2rem;
+}
+
+.vrai-homepage__hero-copy,
+.vrai-homepage__editorial-copy {
+  align-self: center;
+}
+
+.vrai-homepage__eyebrow {
+  color: #8a6d53;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  margin: 0 0 0.8rem;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__hero h1,
+.vrai-homepage__section-heading h2,
+.vrai-homepage__editorial-copy h2,
+.vrai-homepage__newsletter h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.vrai-homepage__section-heading h2,
+.vrai-homepage__editorial-copy h2,
+.vrai-homepage__newsletter h2 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
+}
+
+.vrai-homepage__lede,
+.vrai-homepage__editorial-copy p,
+.vrai-homepage__newsletter {
+  color: #4f463f;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.vrai-homepage__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.vrai-homepage__button {
+  border: 1px solid #181411;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  padding: 1rem 1.4rem;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__button--primary {
+  background: #181411;
+  color: #f7f1eb;
+}
+
+.vrai-homepage__button--ghost {
+  background: transparent;
+}
+
+.vrai-homepage__hero-media img,
+.vrai-homepage__editorial-media img,
+.vrai-homepage__collection-card img,
+.vrai-homepage__product-image img {
+  border-radius: 28px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.vrai-homepage__hero-media img {
+  aspect-ratio: 0.88;
+  box-shadow: 0 24px 80px rgba(31, 22, 18, 0.15);
+}
+
+.vrai-homepage__collections,
+.vrai-homepage__products,
+.vrai-homepage__editorial,
+.vrai-homepage__newsletter {
+  padding: clamp(2.5rem, 7vw, 6rem) 0;
+}
+
+.vrai-homepage__section-heading {
+  margin-bottom: 1.8rem;
+}
+
+.vrai-homepage__section-heading--split {
+  align-items: end;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.vrai-homepage__collection-grid,
+.vrai-homepage__product-grid,
+.vrai-homepage__editorial {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.vrai-homepage__collection-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vrai-homepage__collection-card,
+.vrai-homepage__product-card,
+.vrai-homepage__newsletter,
+.vrai-homepage__editorial-copy {
+  background: rgba(255, 251, 247, 0.78);
+  border: 1px solid rgba(24, 20, 17, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(44, 28, 17, 0.06);
+}
+
+.vrai-homepage__collection-card {
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.vrai-homepage__collection-card img {
+  aspect-ratio: 0.82;
+  margin-bottom: 1rem;
+}
+
+.vrai-homepage__collection-card strong,
+.vrai-homepage__product-card h3 {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.vrai-homepage__collection-meta,
+.vrai-homepage__product-vendor,
+.vrai-homepage__product-price span {
+  color: #7e6f64;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.vrai-homepage__product-card {
+  overflow: hidden;
+}
+
+.vrai-homepage__product-image img {
+  aspect-ratio: 0.78;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.vrai-homepage__product-body {
+  padding: 1.2rem 1.2rem 1.4rem;
+}
+
+.vrai-homepage__product-body h3 {
+  font-size: 1.5rem;
+  margin: 0.2rem 0 0.5rem;
+}
+
+.vrai-homepage__product-price {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+  font-size: 1rem;
+}
+
+.vrai-homepage__editorial {
+  grid-template-columns: minmax(320px, 1.05fr) minmax(0, 0.95fr);
+}
+
+.vrai-homepage__editorial-media img {
+  aspect-ratio: 1.05;
+  height: 100%;
+}
+
+.vrai-homepage__editorial-copy {
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.vrai-homepage__newsletter {
+  align-items: center;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.vrai-homepage__newsletter-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.vrai-homepage__newsletter-form input,
+.vrai-homepage__newsletter-form button {
+  border: 1px solid rgba(24, 20, 17, 0.16);
+  border-radius: 999px;
+  font: inherit;
+  min-height: 56px;
+  padding: 0 1rem;
+}
+
+.vrai-homepage__newsletter-form button {
+  background: #181411;
+  color: #f7f1eb;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__form-message {
+  color: #3f6149;
+  font-size: 0.95rem;
+}
+
+.vrai-homepage__form-message--error {
+  color: #8b2f28;
+}
+
+.vrai-homepage__footer {
+  align-items: center;
+  border-top: 1px solid rgba(24, 20, 17, 0.08);
+  display: flex;
+  font-size: 0.82rem;
+  justify-content: space-between;
+  letter-spacing: 0.12em;
+  padding-bottom: 2rem;
+  padding-top: 1.5rem;
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (max-width: 1100px) {
+  .vrai-homepage__hero,
+  .vrai-homepage__editorial,
+  .vrai-homepage__newsletter,
+  .vrai-homepage__product-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vrai-homepage__collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .vrai-homepage__header-inner,
+  .vrai-homepage__hero,
+  .vrai-homepage__editorial,
+  .vrai-homepage__newsletter,
+  .vrai-homepage__product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vrai-homepage__nav,
+  .vrai-homepage__header-actions,
+  .vrai-homepage__section-heading--split,
+  .vrai-homepage__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .vrai-homepage__header-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .vrai-homepage__hero h1,
+  .vrai-homepage__section-heading h2,
+  .vrai-homepage__editorial-copy h2,
+  .vrai-homepage__newsletter h2 {
+    line-height: 1.02;
+  }
+
+  .vrai-homepage__header,
+  .vrai-homepage__main,
+  .vrai-homepage__footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

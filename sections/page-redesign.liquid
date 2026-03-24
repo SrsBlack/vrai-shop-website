@@ -1,0 +1,24 @@
+{{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+
+<section class="vrai-store-page">
+  <header class="vrai-product__top">
+    <p class="vrai-store-page__eyebrow">Page</p>
+    <h1 class="vrai-store-page__title">{{ page.title }}</h1>
+  </header>
+
+  <article class="vrai-page rte">
+    {{ page.content }}
+  </article>
+</section>
+
+{% schema %}
+{
+  "name": "Page redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Page redesign"
+    }
+  ]
+}
+{% endschema %}

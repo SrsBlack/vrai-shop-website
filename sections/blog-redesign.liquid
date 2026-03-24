@@ -1,0 +1,73 @@
+{{ 'store-redesign.css' | asset_url | stylesheet_tag }}
+
+<section class="vrai-store-page vrai-blog-page">
+  <header class="vrai-product__top">
+    <p class="vrai-store-page__eyebrow">Journal</p>
+    <h1 class="vrai-store-page__title">{{ blog.title }}</h1>
+    <p class="vrai-store-page__lead">Editorial notes, style stories, and behind-the-label updates.</p>
+  </header>
+
+  <div class="vrai-blog">
+    {% paginate blog.articles by 9 %}
+      {% if blog.articles_count > 0 %}
+        <div class="vrai-blog__grid">
+          {% for article in blog.articles %}
+            <article class="vrai-blog__card">
+              <a href="{{ article.url }}">
+                {% if article.image %}
+                  {{ article.image | image_url: width: 980 | image_tag: alt: article.title, loading: 'lazy' }}
+                {% else %}
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                {% endif %}
+              </a>
+              <div class="vrai-blog__card-content">
+                <p class="vrai-blog__meta">{{ article.published_at | date: '%b %d, %Y' }}</p>
+                <h2 class="vrai-blog__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                <p class="vrai-blog__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 130 }}</p>
+                <p class="vrai-blog__footer">
+                  <a class="vrai-ghost-cta" href="{{ article.url }}">Read story</a>
+                </p>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="vrai-empty-state">
+          <p>No stories yet. Check back soon for our next editorial drop.</p>
+        </div>
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <nav class="vrai-pagination" aria-label="Blog pagination">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}">Prev</a>
+          {% endif %}
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {% elsif part.title == paginate.current_page %}
+              <span class="current">{{ part.title }}</span>
+            {% else %}
+              <span>{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}">Next</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog redesign",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Blog redesign"
+    }
+  ]
+}
+{% endschema %}
