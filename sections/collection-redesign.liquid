@@ -62,7 +62,9 @@
         {%- endif -%}
         
         {%- comment -%} Skip if tag is all uppercase and contains numbers {%- endcomment -%}
-        {%- if tag == tag | upcase and tag != tag_lower and tag.size < 10 -%}
+        {%- assign tag_upper = tag | upcase -%}
+        {%- assign tag_lower = tag | downcase -%}
+        {%- if tag == tag_upper and tag != tag_lower and tag.size < 10 -%}
           {%- if tag contains '0' or tag contains '1' or tag contains '2' or tag contains '3' or tag contains '4' or tag contains '5' or tag contains '6' or tag contains '7' or tag contains '8' or tag contains '9' -%}
             {%- assign is_technical = true -%}
           {%- endif -%}
