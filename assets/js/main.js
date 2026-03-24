@@ -231,6 +231,8 @@
       this.modal = $('.size-guide-modal');
       if (!this.modal) return;
 
+      this.tabs = $$('.size-guide-modal__tab, .size-guide-tab', this.modal);
+
       $$('[data-open-size-guide]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -250,7 +252,7 @@
       });
 
       // Tab switching
-      $$('.size-guide-modal__tab', this.modal).forEach(tab => {
+      this.tabs.forEach(tab => {
         tab.addEventListener('click', () => this.switchTab(tab));
       });
     },
@@ -260,6 +262,7 @@
     },
 
     open() {
+      this.modal.hidden = false;
       this.modal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       this.modal.setAttribute('role', 'dialog');
@@ -272,15 +275,20 @@
       this.modal.classList.remove('is-open');
       document.body.style.overflow = '';
       this.modal.removeAttribute('aria-modal');
+      this.modal.hidden = true;
       const trigger = $('[data-open-size-guide]');
       if (trigger) trigger.focus();
     },
 
     switchTab(tab) {
       const target = tab.dataset.tab;
-      $$('.size-guide-modal__tab', this.modal).forEach(t => t.classList.remove('is-active'));
+      this.tabs.forEach(t => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
       $$('.size-guide-modal__panel', this.modal).forEach(p => p.hidden = true);
       tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
       const panel = $(`[data-panel="${target}"]`, this.modal);
       if (panel) panel.hidden = false;
     }
@@ -299,7 +307,7 @@
     },
 
     handleSubmit() {
-      const input = $('.back-in-stock__input', this.form);
+      const input = $('.back-in-stock__input, input[type="email"]', this.form);
       const email = input?.value?.trim();
       if (!email) return;
 
@@ -322,7 +330,10 @@
       // Show success
       this.form.style.display = 'none';
       const success = $('.back-in-stock__success');
-      if (success) success.classList.add('is-visible');
+      if (success) {
+        success.hidden = false;
+        success.classList.add('is-visible');
+      }
       Toast.show('You\'ll be notified when this item is back in stock!', 'success');
     }
   };
@@ -337,7 +348,8 @@
         thumb.addEventListener('click', () => {
           $$('.product-gallery__thumb').forEach(t => t.classList.remove('is-active'));
           thumb.classList.add('is-active');
-          const src = thumb.querySelector('img')?.dataset.fullSrc || thumb.querySelector('img')?.src;
+          const img = thumb.querySelector('img');
+          const src = img?.dataset.full || img?.dataset.fullSrc || img?.src;
           if (src) this.mainImg.src = src;
         });
       });
@@ -348,21 +360,29 @@
   const ProductOptions = {
     init() {
       // Color swatches
-      $$('.color-swatch').forEach(swatch => {
+      $$('.color-swatch, .product-color-swatch').forEach(swatch => {
         swatch.addEventListener('click', () => {
-          $$('.color-swatch').forEach(s => s.classList.remove('is-active'));
+          $$('.color-swatch, .product-color-swatch').forEach(s => {
+            s.classList.remove('is-active');
+            s.setAttribute('aria-pressed', 'false');
+          });
           swatch.classList.add('is-active');
-          const label = swatch.closest('.product-option')?.querySelector('.product-option__label span');
+          swatch.setAttribute('aria-pressed', 'true');
+          const label = swatch.closest('.product-option, .product-info__option')?.querySelector('.product-option__label span, .product-info__option-label strong');
           if (label) label.textContent = swatch.dataset.color || '';
         });
       });
 
       // Size buttons
-      $$('.size-btn:not(.is-disabled)').forEach(btn => {
+      $$('.size-btn:not(.is-disabled), .product-size-btn:not(.is-disabled)').forEach(btn => {
         btn.addEventListener('click', () => {
-          $$('.size-btn').forEach(b => b.classList.remove('is-active'));
+          $$('.size-btn, .product-size-btn').forEach(b => {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-pressed', 'false');
+          });
           btn.classList.add('is-active');
-          const label = btn.closest('.product-option')?.querySelector('.product-option__label span');
+          btn.setAttribute('aria-pressed', 'true');
+          const label = btn.closest('.product-option, .product-info__option')?.querySelector('.product-option__label span, .product-info__option-label strong');
           if (label) label.textContent = btn.textContent.trim();
         });
       });
@@ -372,8 +392,8 @@
   /* ---------- Quantity Selector ---------- */
   const QuantitySelector = {
     init() {
-      $$('.quantity-selector').forEach(selector => {
-        const input = $('input', selector);
+      $$('.quantity-selector, .product-quantity').forEach(selector => {
+        const input = $('input, .product-quantity__input', selector);
         const minusBtn = $('[data-quantity="minus"]', selector);
         const plusBtn = $('[data-quantity="plus"]', selector);
         if (!input) return;
@@ -394,10 +414,10 @@
   /* ---------- Accordion ---------- */
   const Accordion = {
     init() {
-      $$('.product-accordion__trigger').forEach(trigger => {
+      $$('.product-accordion__trigger, .accordion__trigger').forEach(trigger => {
         trigger.addEventListener('click', () => {
-          const item = trigger.closest('.product-accordion__item');
-          const content = item?.querySelector('.product-accordion__content');
+          const item = trigger.closest('.product-accordion__item, .accordion__item');
+          const content = item?.querySelector('.product-accordion__content, .accordion__panel');
           if (!item || !content) return;
 
           const isOpen = item.classList.contains('is-open');
@@ -465,7 +485,7 @@
   /* ---------- Newsletter ---------- */
   const Newsletter = {
     init() {
-      const form = $('.newsletter__form');
+      const form = $('.newsletter__form, .newsletter-form, [data-newsletter-form]');
       if (!form) return;
 
       form.addEventListener('submit', (e) => {
