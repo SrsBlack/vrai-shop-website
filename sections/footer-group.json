@@ -35,89 +35,47 @@
           },
           "blocks": {}
         },
-        "brand_group_vrai": {
-          "type": "group",
-          "name": "Brand",
+        "menu_UR3gWa": {
+          "type": "menu",
+          "name": "t:names.menu",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "gap": 8,
-            "width": "fill",
+            "menu": "footer",
+            "heading": "BRAND",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
             "inherit_color_scheme": true,
             "color_scheme": "",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "brand_heading_vrai": {
-              "type": "text",
-              "settings": {
-                "text": "BRAND",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "h5"
-              }
-            },
-            "brand_body_vrai": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Lab-grown diamond jewelry shaped with clean lines, everyday ease, and a more thoughtful standard of luxury.</p>",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "rte"
-              }
-            }
-          },
-          "block_order": [
-            "brand_heading_vrai",
-            "brand_body_vrai"
-          ]
+          "blocks": {}
         },
-        "connect_group_vrai": {
-          "type": "group",
-          "name": "Connect",
+        "menu_4KapTg": {
+          "type": "menu",
+          "name": "t:names.menu",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "gap": 8,
-            "width": "fill",
+            "menu": "footer",
+            "heading": "CONNECT",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
             "inherit_color_scheme": true,
             "color_scheme": "",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "connect_heading_vrai": {
-              "type": "text",
-              "settings": {
-                "text": "CONNECT",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "h5"
-              }
-            },
-            "connect_body_vrai": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Follow new arrivals, styling notes, and limited releases through our social channels and private email list below.</p>",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "rte"
-              }
-            }
-          },
-          "block_order": [
-            "connect_heading_vrai",
-            "connect_body_vrai"
-          ]
+          "blocks": {}
         },
         "email_signup_tBDzRh": {
           "type": "email-signup",
@@ -158,8 +116,8 @@
       },
       "block_order": [
         "menu_ywDwTf",
-        "brand_group_vrai",
-        "connect_group_vrai",
+        "menu_UR3gWa",
+        "menu_4KapTg",
         "social_links_vrai",
         "payment_icons_vrai",
         "email_signup_tBDzRh"
