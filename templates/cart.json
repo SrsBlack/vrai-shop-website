@@ -45,13 +45,39 @@
           "type": "_cart-summary",
           "static": true,
           "settings": {
-            "extend_summary": false,
+            "extend_summary": true,
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+            "color_scheme": "scheme-2",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 4
+          },
+          "blocks": {}
+        },
+        "cart_trust_text": {
+          "type": "text",
+          "name": "Cart trust",
+          "settings": {
+            "text": "<p>Secure checkout | Complimentary shipping | Easy returns</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         }

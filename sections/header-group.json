@@ -48,11 +48,11 @@
             "type_case_secondary_link": "none",
             "type_font_tertiary_link": "secondary",
             "type_case_tertiary_link": "none",
-            "navigation_bar": false,
+            "navigation_bar": true,
             "color_scheme_navigation_bar": "",
-            "drawer_accordion": false,
-            "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
+            "drawer_accordion": true,
+            "drawer_accordion_expand_first": true,
+            "drawer_dividers": true
           },
           "blocks": {}
         }
@@ -87,9 +87,49 @@
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default"
       }
+    },
+    "header_announcements": {
+      "type": "header-announcements",
+      "blocks": {
+        "announcement_1": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Complimentary shipping on all orders",
+            "link": "/collections/all"
+          }
+        },
+        "announcement_2": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Ethically created diamonds",
+            "link": "/pages/our-story"
+          }
+        },
+        "announcement_3": {
+          "type": "_announcement",
+          "settings": {
+            "text": "30-day easy returns",
+            "link": "/pages/shipping-returns"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_1",
+        "announcement_2",
+        "announcement_3"
+      ],
+      "settings": {
+        "speed": 5,
+        "section_width": "page-width",
+        "color_scheme": "scheme-4",
+        "divider_width": 0,
+        "padding-block-start": 12,
+        "padding-block-end": 12
+      }
     }
   },
   "order": [
+    "header_announcements",
     "header_section"
   ]
 }
