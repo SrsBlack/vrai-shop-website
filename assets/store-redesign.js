@@ -87,7 +87,10 @@
       if (featuredImage && variant.featured_image && variant.featured_image.src) {
         featuredImage.src = variant.featured_image.src;
         featuredImage.srcset = '';
-        featuredImage.setAttribute('data-vrai-zoom-src', variant.featured_image.src);
+        var trigger = page.querySelector('[data-vrai-open-zoom]');
+        if (trigger) {
+          trigger.setAttribute('data-vrai-zoom-src', variant.featured_image.src);
+        }
       }
 
       if (thumbs.length) {
@@ -128,8 +131,8 @@
 
         featuredImage.alt = imageAlt;
 
-        if (zoomSrc) {
-          featuredImage.setAttribute('data-vrai-zoom-src', zoomSrc);
+        if (zoomSrc && featuredTrigger) {
+          featuredTrigger.setAttribute('data-vrai-zoom-src', zoomSrc);
         }
 
         thumbs.forEach(function (candidate) {
@@ -144,10 +147,11 @@
     function openModal() {
       if (!modal || !modalImage) return;
       lastFocused = document.activeElement;
-      var zoomSrc = featuredImage.getAttribute('data-vrai-zoom-src') || featuredImage.currentSrc || featuredImage.src;
+      var zoomSrc = (featuredTrigger && featuredTrigger.getAttribute('data-vrai-zoom-src')) || featuredImage.currentSrc || featuredImage.src;
       modalImage.src = zoomSrc;
       modalImage.alt = featuredImage.alt || '';
       modal.hidden = false;
+      requestAnimationFrame(function () { modal.classList.add('is-visible'); });
       document.body.classList.add('vrai-no-scroll');
       if (closeButton) {
         closeButton.focus();
@@ -156,6 +160,7 @@
 
     function closeModal() {
       if (!modal || !modalImage) return;
+      modal.classList.remove('is-visible');
       modal.hidden = true;
       modalImage.removeAttribute('src');
       document.body.classList.remove('vrai-no-scroll');

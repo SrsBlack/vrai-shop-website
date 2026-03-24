@@ -67,6 +67,13 @@
   margin: 0;
 }
 
+.vrai-product-page .vrai-store-page__title {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
 .vrai-store-page__lead {
   color: #4f463f;
   font-size: 1rem;
@@ -321,7 +328,31 @@
   cursor: zoom-in;
   display: block;
   padding: 0;
+  position: relative;
   width: 100%;
+}
+
+.vrai-product__zoom-hint {
+  align-items: center;
+  background: rgba(255, 251, 247, 0.88);
+  border-radius: 50%;
+  bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  color: #181411;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 1rem;
+  transition: opacity 0.3s ease;
+  width: 40px;
+}
+
+.vrai-product__featured-trigger:hover .vrai-product__zoom-hint,
+.vrai-product__featured-trigger:focus-visible .vrai-product__zoom-hint {
+  opacity: 1;
 }
 
 .vrai-product__gallery:hover .vrai-product__featured {
@@ -340,14 +371,21 @@
 
 .vrai-product__thumb {
   background: transparent;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 12px;
   cursor: pointer;
+  overflow: hidden;
   padding: 0;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vrai-product__thumb:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 
 .vrai-product__thumb.is-active {
-  border-color: rgba(24, 20, 17, 0.35);
+  border-color: #181411;
 }
 
 .vrai-product__thumbs img {
@@ -359,7 +397,7 @@
 
 .vrai-product__image-modal {
   align-items: center;
-  background: rgba(10, 8, 7, 0.84);
+  background: rgba(10, 8, 7, 0);
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -368,34 +406,55 @@
   position: fixed;
   right: 0;
   top: 0;
+  transition: background 0.3s ease;
   z-index: 9999;
+}
+
+.vrai-product__image-modal.is-visible {
+  background: rgba(10, 8, 7, 0.88);
 }
 
 .vrai-product__image-modal[hidden] {
   display: none;
 }
 
-.vrai-product__image-modal img {
-  border-radius: 18px;
-  max-height: min(88vh, 980px);
-  max-width: min(92vw, 1200px);
+.vrai-product__image-modal .vrai-product__modal-img {
+  border-radius: 14px;
+  max-height: min(90vh, 1000px);
+  max-width: min(94vw, 1300px);
   object-fit: contain;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vrai-product__image-modal.is-visible .vrai-product__modal-img {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .vrai-product__image-modal-close {
+  align-items: center;
   background: rgba(255, 251, 247, 0.92);
-  border: 1px solid rgba(24, 20, 17, 0.2);
-  border-radius: 999px;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   color: #181411;
   cursor: pointer;
-  font: inherit;
-  letter-spacing: 0.12em;
-  min-height: 42px;
-  padding: 0 1rem;
+  display: flex;
+  height: 44px;
+  justify-content: center;
   position: absolute;
-  right: 1rem;
-  text-transform: uppercase;
-  top: 1rem;
+  right: 1.2rem;
+  top: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 44px;
+  z-index: 1;
+}
+
+.vrai-product__image-modal-close:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transform: scale(1.1);
 }
 
 .vrai-no-scroll {
@@ -411,14 +470,18 @@
 
 .vrai-product__name {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 0.95;
-  margin: 0.4rem 0 1rem;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  line-height: 1.05;
+  margin: 0.4rem 0 0.8rem;
 }
 
 .vrai-product__price {
-  font-size: 1.15rem;
-  margin-bottom: 1rem;
+  align-items: baseline;
+  display: flex;
+  font-size: 1.25rem;
+  font-weight: 600;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
 }
 
 .vrai-product__form-row {
@@ -473,8 +536,12 @@
 }
 
 .vrai-product__description {
+  border-top: 1px solid rgba(24, 20, 17, 0.08);
   color: #4f463f;
+  font-size: 0.94rem;
   line-height: 1.75;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
 }
 
 .vrai-product__meta h3 {
@@ -940,8 +1007,8 @@
   }
 
   .vrai-store-page__title {
-    font-size: clamp(1.65rem, 9vw, 2.5rem);
-    line-height: 0.98;
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    line-height: 1.05;
   }
 
   .vrai-contact__grid {
