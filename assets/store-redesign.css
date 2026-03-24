@@ -887,6 +887,13 @@
 }
 
 @media (max-width: 780px) {
+  .page-type-collection .header__row--bottom .menu-list,
+  .page-type-product .header__row--bottom .menu-list,
+  .page-type-cart .header__row--bottom .menu-list,
+  .page-type-search .header__row--bottom .menu-list,
+  .page-type-page .header__row--bottom .menu-list,
+  .page-type-blog .header__row--bottom .menu-list,
+  .page-type-article .header__row--bottom .menu-list,
   .page-type-collection .menu-list,
   .page-type-product .menu-list,
   .page-type-cart .menu-list,
@@ -894,7 +901,8 @@
   .page-type-page .menu-list,
   .page-type-blog .menu-list,
   .page-type-article .menu-list {
-    display: none;
+    display: none !important;
+    visibility: hidden;
   }
 
   .page-type-collection .header__row--bottom,
