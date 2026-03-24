@@ -887,6 +887,16 @@
 }
 
 @media (max-width: 780px) {
+  .page-type-collection .header__row--bottom,
+  .page-type-product .header__row--bottom,
+  .page-type-cart .header__row--bottom,
+  .page-type-search .header__row--bottom,
+  .page-type-page .header__row--bottom,
+  .page-type-blog .header__row--bottom,
+  .page-type-article .header__row--bottom {
+    display: none;
+  }
+
   .vrai-product,
   .vrai-collection__grid,
   .vrai-search__results-grid,

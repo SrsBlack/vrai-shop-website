@@ -92,7 +92,7 @@
 
     {%- if collection.products_count > 0 -%}
       {%- comment -%} Calculate 30 days ago timestamp for "New" badge {%- endcomment -%}
-      {%- assign now_timestamp = 'now' | date: '%s' -%}
+      {%- assign now_timestamp = 'now' | date: '%s' | plus: 0 -%}
       {%- assign thirty_days_seconds = 2592000 -%}
       {%- assign new_threshold = now_timestamp | minus: thirty_days_seconds -%}
       
@@ -100,7 +100,7 @@
         {%- for product in collection.products -%}
           <article class="vrai-card vrai-reveal">
             <a class="vrai-card__image" href="{{ product.url }}">
-              {%- assign product_created_timestamp = product.created_at | date: '%s' -%}
+              {%- assign product_created_timestamp = product.created_at | date: '%s' | plus: 0 -%}
               {%- if product.compare_at_price > product.price -%}
                 <span class="vrai-card__badge vrai-card__badge--sale">Sale</span>
               {%- elsif product_created_timestamp > new_threshold -%}
