@@ -926,6 +926,11 @@
     padding-top: 2rem;
   }
 
+  .page-type-product .vrai-store-page,
+  .page-type-collection .vrai-store-page {
+    padding-top: 4.5rem;
+  }
+
   .vrai-store-page__title {
     font-size: clamp(1.65rem, 9vw, 2.5rem);
     line-height: 0.98;
