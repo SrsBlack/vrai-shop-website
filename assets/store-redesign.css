@@ -186,7 +186,7 @@
 }
 
 .vrai-card__image img {
-  aspect-ratio: 0.78;
+  aspect-ratio: 0.72;
   object-fit: cover;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   width: 100%;
@@ -1402,7 +1402,7 @@
   background: #ffffff;
   max-width: 900px;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 2rem;
   max-height: 80vh;
   overflow-y: auto;
@@ -1420,7 +1420,7 @@
 
 .vrai-quickview__image-wrapper {
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 18px;
   background-color: #f4f1ee;
 }
 
@@ -1455,7 +1455,7 @@
   aspect-ratio: 4 / 5;
   height: auto;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 18px;
 }
 
 .vrai-quickview__info {
@@ -1488,7 +1488,7 @@
 .vrai-quickview__availability {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
@@ -1515,7 +1515,7 @@
   color: #ffffff;
   padding: 0.875rem 1.5rem;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 999px;
   font-weight: 500;
   transition: background-color 150ms ease;
 }
@@ -1553,7 +1553,7 @@
   background: #ffffff;
   max-width: 700px;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 2.5rem;
   max-height: 80vh;
   overflow-y: auto;
@@ -1693,7 +1693,7 @@
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 999px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 150ms ease;
@@ -1711,7 +1711,7 @@
 
 .vrai-review {
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 1.5rem;
   background-color: #ffffff;
 }
@@ -1777,7 +1777,7 @@
   background: none;
   border: 2px solid #0a0807;
   color: #0a0807;
-  border-radius: 4px;
+  border-radius: 999px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 150ms ease, color 150ms ease;

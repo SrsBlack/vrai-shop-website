@@ -52,9 +52,9 @@ body.page-type-index {
 .vrai-homepage__announcement {
   background: #181411;
   color: #f8f5f1;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  padding: 0.85rem 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  padding: 0.95rem 1rem;
   text-align: center;
   text-transform: uppercase;
 }
@@ -119,6 +119,28 @@ body.page-type-index {
   text-transform: uppercase;
 }
 
+.vrai-homepage__nav a {
+  position: relative;
+}
+
+.vrai-homepage__nav a::after {
+  background: currentColor;
+  bottom: -2px;
+  content: '';
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.35s ease;
+  width: 100%;
+}
+
+.vrai-homepage__nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
 .vrai-homepage__hero {
   align-items: stretch;
   display: grid;
@@ -159,9 +181,16 @@ body.page-type-index {
   line-height: 1;
 }
 
+/* ── Fashion editorial hero headline ── */
+.vrai-homepage__hero h1 {
+  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  font-style: italic;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+}
+
 .vrai-homepage__lede,
-.vrai-homepage__editorial-copy p,
-.vrai-homepage__newsletter {
+.vrai-homepage__editorial-copy p {
   color: #4f463f;
   font-size: 1.05rem;
   line-height: 1.8;
@@ -217,7 +246,7 @@ body.page-type-index {
 }
 
 .vrai-homepage__hero-media img {
-  aspect-ratio: 0.88;
+  aspect-ratio: 0.80;
   box-shadow: 0 24px 80px rgba(31, 22, 18, 0.15);
 }
 
@@ -267,7 +296,6 @@ body.page-type-index {
 
 .vrai-homepage__collection-card,
 .vrai-homepage__product-card,
-.vrai-homepage__newsletter,
 .vrai-homepage__editorial-copy {
   background: rgba(255, 251, 247, 0.78);
   border: 1px solid rgba(24, 20, 17, 0.08);
@@ -275,6 +303,56 @@ body.page-type-index {
   box-shadow: 0 16px 40px rgba(44, 28, 17, 0.06);
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Newsletter: dark editorial section ── */
+.vrai-homepage__newsletter {
+  background: #1e1a17;
+  border: 1px solid rgba(255, 251, 247, 0.06);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(10, 8, 6, 0.25);
+  color: #f5f0ea;
+  transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vrai-homepage__newsletter h2,
+.vrai-homepage__newsletter p {
+  color: #f5f0ea;
+}
+
+.vrai-homepage__newsletter .vrai-homepage__eyebrow {
+  color: rgba(245, 240, 234, 0.52);
+}
+
+.vrai-homepage__newsletter .vrai-homepage__newsletter-form input {
+  background: rgba(245, 240, 234, 0.08);
+  border-color: rgba(245, 240, 234, 0.18);
+  color: #f5f0ea;
+}
+
+.vrai-homepage__newsletter .vrai-homepage__newsletter-form input::placeholder {
+  color: rgba(245, 240, 234, 0.38);
+}
+
+.vrai-homepage__newsletter .vrai-homepage__newsletter-form button {
+  background: #f5f0ea;
+  border-color: #f5f0ea;
+  color: #1e1a17;
+}
+
+.vrai-homepage__newsletter .vrai-homepage__newsletter-form button:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.vrai-homepage__newsletter .vrai-homepage__form-message {
+  color: #7ecfa5;
+}
+
+.vrai-homepage__newsletter .vrai-homepage__form-message--error {
+  color: #e8948f;
 }
 
 .vrai-homepage__collection-card:hover,
@@ -293,7 +371,7 @@ body.page-type-index {
 }
 
 .vrai-homepage__collection-card img {
-  aspect-ratio: 0.82;
+  aspect-ratio: 0.73;
   margin-bottom: 1rem;
 }
 
@@ -303,6 +381,7 @@ body.page-type-index {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.9rem;
   font-weight: 600;
+  line-height: 1.12;
   margin-top: 0.25rem;
 }
 
@@ -334,7 +413,7 @@ body.page-type-index {
 }
 
 .vrai-homepage__product-image img {
-  aspect-ratio: 0.78;
+  aspect-ratio: 0.70;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -465,7 +544,7 @@ body.page-type-index {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 28px;
 }
 
 .vrai-homepage__brand-story-img {
@@ -517,9 +596,7 @@ body.page-type-index {
   .vrai-homepage__brand-story-text {
     max-width: 100%;
   }
-}
 
-@media (max-width: 1100px) {
   .vrai-homepage__hero,
   .vrai-homepage__editorial,
   .vrai-homepage__newsletter,
@@ -602,8 +679,7 @@ body.page-type-index {
   }
 
   .vrai-homepage__lede,
-  .vrai-homepage__editorial-copy p,
-  .vrai-homepage__newsletter {
+  .vrai-homepage__editorial-copy p {
     font-size: 0.98rem;
     line-height: 1.7;
   }
