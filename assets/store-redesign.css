@@ -191,6 +191,40 @@
   transform: scale(1.06);
 }
 
+.vrai-card__quickview {
+  align-items: center;
+  background: rgba(255, 251, 247, 0.94);
+  border: 0;
+  border-radius: 999px;
+  bottom: 0.9rem;
+  box-shadow: 0 12px 28px rgba(12, 8, 6, 0.18);
+  color: #0a0807;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 600;
+  gap: 0.45rem;
+  letter-spacing: 0.12em;
+  padding: 0.7rem 0.95rem;
+  position: absolute;
+  right: 0.9rem;
+  text-transform: uppercase;
+  transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  z-index: 2;
+}
+
+.vrai-card__quickview:hover,
+.vrai-card__quickview:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 16px 34px rgba(12, 8, 6, 0.24);
+  transform: translateY(-1px);
+}
+
+.vrai-card__quickview:focus-visible {
+  outline: 2px solid #0a0807;
+  outline-offset: 2px;
+}
+
 /* ── Product badges ── */
 .vrai-card__badge {
   border-radius: 999px;
@@ -1314,15 +1348,25 @@
   max-width: 900px;
   width: 100%;
   border-radius: 4px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
   padding: 2rem;
   max-height: 80vh;
   overflow-y: auto;
   opacity: 0;
   transform: scale(0.92);
   transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.vrai-quickview__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.vrai-quickview__image-wrapper {
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #f4f1ee;
 }
 
 .vrai-quickview-modal.is-visible .vrai-quickview__content {
@@ -1353,9 +1397,16 @@
 
 .vrai-quickview__image {
   width: 100%;
+  aspect-ratio: 4 / 5;
   height: auto;
   object-fit: cover;
   border-radius: 4px;
+}
+
+.vrai-quickview__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .vrai-quickview__title {
@@ -1398,7 +1449,12 @@
   color: #c62828;
 }
 
-.vrai-quickview__link {
+.vrai-quickview__actions {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.vrai-quickview__btn {
   display: inline-block;
   background-color: #0a0807;
   color: #ffffff;
@@ -1409,7 +1465,7 @@
   transition: background-color 150ms ease;
 }
 
-.vrai-quickview__link:hover {
+.vrai-quickview__btn:hover {
   background-color: #2a2827;
 }
 
@@ -1535,7 +1591,7 @@
   color: #333;
 }
 
-  .vrai-size-guide__note {
+.vrai-size-guide__note {
   font-size: 0.875rem;
   color: #666;
   font-style: italic;
@@ -1725,12 +1781,11 @@
 @media (max-width: 780px) {
   .vrai-quickview__content,
   .vrai-size-guide__content {
-    grid-template-columns: 1fr;
     padding: 1.5rem;
     max-height: 90vh;
   }
   
-  .vrai-quickview__content {
+  .vrai-quickview__body {
     grid-template-columns: 1fr;
   }
   
