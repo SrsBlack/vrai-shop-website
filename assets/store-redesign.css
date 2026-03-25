@@ -100,12 +100,11 @@
 }
 
 .vrai-collection__filters {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.2rem;
-  max-height: 3.2rem;
-  overflow: hidden;
 }
 
 .vrai-collection__filters a {
@@ -119,6 +118,12 @@
 }
 
 .vrai-collection__filters a:hover {
+  background: #181411;
+  border-color: #181411;
+  color: #f7f1eb;
+}
+
+.vrai-collection__filters a[aria-current='page'] {
   background: #181411;
   border-color: #181411;
   color: #f7f1eb;
@@ -1291,9 +1296,59 @@
     padding-top: 2rem;
   }
 
+  .vrai-store-page__lead {
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
   .page-type-product .vrai-store-page,
   .page-type-collection .vrai-store-page {
     padding-top: 4.5rem;
+  }
+
+  .vrai-collection__toolbar {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .vrai-collection__sort {
+    width: 100%;
+  }
+
+  .vrai-collection__sort select {
+    flex: 1;
+  }
+
+  .vrai-collection__filters {
+    flex-wrap: nowrap;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.3rem;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .vrai-collection__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vrai-collection__filters a {
+    flex: 0 0 auto;
+    font-size: 0.72rem;
+    padding: 0.42rem 0.72rem;
+    white-space: nowrap;
+  }
+
+  .vrai-card__title {
+    font-size: 1.28rem;
+  }
+
+  .vrai-card__quickview {
+    bottom: 0.7rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    padding: 0.58rem 0.74rem;
+    right: 0.7rem;
   }
 
   .vrai-store-page__title {

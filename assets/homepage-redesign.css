@@ -534,6 +534,31 @@ body.page-type-index {
     grid-template-columns: 1fr;
   }
 
+  .vrai-homepage__header-inner {
+    gap: 0.8rem;
+  }
+
+  .vrai-homepage__wordmark {
+    justify-self: start;
+  }
+
+  .vrai-homepage__nav {
+    flex-wrap: nowrap;
+    gap: 0.9rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .vrai-homepage__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vrai-homepage__nav a {
+    white-space: nowrap;
+  }
+
   .vrai-homepage__nav,
   .vrai-homepage__header-actions,
   .vrai-homepage__section-heading--split,
@@ -543,7 +568,13 @@ body.page-type-index {
   }
 
   .vrai-homepage__header-actions {
+    flex-direction: row;
+    gap: 1rem;
     justify-content: flex-start;
+  }
+
+  .vrai-homepage__hero {
+    padding-top: 0.75rem;
   }
 }
 
@@ -560,5 +591,16 @@ body.page-type-index {
   .vrai-homepage__footer {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .vrai-homepage__lede,
+  .vrai-homepage__editorial-copy p,
+  .vrai-homepage__newsletter {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .vrai-homepage__button {
+    padding: 0.9rem 1.15rem;
   }
 }
