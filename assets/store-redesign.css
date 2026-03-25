@@ -1300,6 +1300,10 @@
   transition: background-color 200ms ease;
 }
 
+.vrai-quickview-modal[hidden] {
+  display: none !important;
+}
+
 .vrai-quickview-modal.is-visible {
   background-color: rgba(10, 8, 7, 0.88);
 }
@@ -1423,6 +1427,10 @@
   justify-content: center;
   padding: 1rem;
   transition: background-color 200ms ease;
+}
+
+.vrai-size-guide-modal[hidden] {
+  display: none !important;
 }
 
 .vrai-size-guide-modal.is-visible {
