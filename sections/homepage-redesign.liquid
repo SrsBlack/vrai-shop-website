@@ -39,7 +39,7 @@
   <a href="#VraiHomepageMain" class="vrai-homepage__skip-link">Skip to content</a>
 
   <div class="vrai-homepage__announcement">
-    Complimentary express shipping on all orders. New season pieces now live.
+    {{ section.settings.announcement_text | default: 'Complimentary express shipping on all orders. New season pieces now live.' }}
   </div>
 
   <header class="vrai-homepage__header" aria-label="VRAI header">
@@ -221,6 +221,10 @@
           {%- for product in all_collection.products limit: 4 -%}
             <article class="vrai-homepage__product-card">
               <a class="vrai-homepage__product-image" href="{{ product.url }}">
+                {%- if product.compare_at_price > product.price -%}
+                  {%- assign hp_save_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                  <span class="vrai-card__badge vrai-card__badge--sale">Save {{ hp_save_pct }}%</span>
+                {%- endif -%}
                 {%- if product.featured_image != blank -%}
                   {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
                 {%- else -%}
@@ -309,7 +313,8 @@
     <section class="vrai-homepage__newsletter vrai-reveal" aria-labelledby="VraiHomepageNewsletterTitle">
       <div>
         <p class="vrai-homepage__eyebrow">Private list</p>
-        <h2 id="VraiHomepageNewsletterTitle">Early access to drops and capsule releases.</h2>
+        <h2 id="VraiHomepageNewsletterTitle">Get 10% off your first order.</h2>
+        <p class="vrai-homepage__newsletter-sub">Join for early access to new drops, capsule releases, and member-only offers.</p>
       </div>
       {%- form 'customer', class: 'vrai-homepage__newsletter-form' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
@@ -340,6 +345,12 @@
 {
   "name": "Homepage redesign",
   "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement bar text",
+      "default": "Complimentary express shipping on all orders. New season pieces now live."
+    },
     {
       "type": "link_list",
       "id": "primary_menu",

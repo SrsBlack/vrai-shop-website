@@ -123,7 +123,8 @@
             <a class="vrai-card__image" href="{{ product.url }}">
               {%- assign product_created_timestamp = product.created_at | date: '%s' | plus: 0 -%}
               {%- if product.compare_at_price > product.price -%}
-                <span class="vrai-card__badge vrai-card__badge--sale">Sale</span>
+                {%- assign save_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                <span class="vrai-card__badge vrai-card__badge--sale">Save {{ save_pct }}%</span>
               {%- elsif product_created_timestamp > new_threshold -%}
                 <span class="vrai-card__badge vrai-card__badge--new">New</span>
               {%- endif -%}

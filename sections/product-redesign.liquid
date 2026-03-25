@@ -70,10 +70,21 @@
         <span data-vrai-price>{{ current_variant.price | money }}</span>
         {%- if current_variant.compare_at_price > current_variant.price -%}
           <span class="vrai-card__compare" data-vrai-compare>{{ current_variant.compare_at_price | money }}</span>
+          {%- assign savings_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+          <span class="vrai-product__save-badge">Save {{ savings_pct }}%</span>
         {%- else -%}
           <span class="vrai-card__compare" data-vrai-compare hidden></span>
         {%- endif -%}
       </p>
+
+      {%- if current_variant.inventory_management != blank and current_variant.inventory_policy == 'deny' -%}
+        {%- if current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 5 -%}
+          <p class="vrai-product__stock-urgency" data-vrai-stock-urgency>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Only {{ current_variant.inventory_quantity }} left in stock
+          </p>
+        {%- endif -%}
+      {%- endif -%}
 
       {%- form 'product', product, class: 'vrai-product__form' -%}
         {%- if product.variants.size > 1 -%}
