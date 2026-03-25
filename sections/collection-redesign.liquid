@@ -31,7 +31,12 @@
   </div>
 
   {%- paginate collection.products by 12 -%}
-    {%- if collection.all_tags.size > 0 -%}
+    {%- assign show_tag_filters = true -%}
+    {%- if collection.handle == 'all' or collection.all_tags.size > 24 -%}
+      {%- assign show_tag_filters = false -%}
+    {%- endif -%}
+
+    {%- if show_tag_filters and collection.all_tags.size > 0 -%}
       {%- comment -%} Filter out technical tags (model numbers, material codes, price ranges) {%- endcomment -%}
       {%- assign clean_tags = '' | split: '' -%}
       {%- for tag in collection.all_tags -%}
