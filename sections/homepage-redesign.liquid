@@ -194,6 +194,31 @@
       </div>
     </section>
 
+    <section class="vrai-homepage__brand-story vrai-reveal" aria-labelledby="VraiBrandStoryTitle">
+      <div class="vrai-homepage__brand-story-content">
+        <div class="vrai-homepage__brand-story-media">
+          {%- assign story_product = all_collection.products | where: 'available', true | sample -%}
+          {%- if story_product.images[2] != blank -%}
+            {{ story_product.images[2] | image_url: width: 1800 | image_tag: alt: 'Our Story', loading: 'lazy', class: 'vrai-homepage__brand-story-img' }}
+          {%- elsif story_product.featured_image != blank -%}
+            {{ story_product.featured_image | image_url: width: 1800 | image_tag: alt: 'Our Story', loading: 'lazy', class: 'vrai-homepage__brand-story-img' }}
+          {%- else -%}
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1800&q=80" alt="Brand story visual" loading="lazy" class="vrai-homepage__brand-story-img">
+          {%- endif -%}
+        </div>
+        <div class="vrai-homepage__brand-story-text">
+          <p class="vrai-homepage__eyebrow">Since 2024</p>
+          <h2 id="VraiBrandStoryTitle">Redefining authentic style</h2>
+          <div class="vrai-homepage__brand-story-body">
+            <p>VRAI was born from a simple belief: that authentic style doesn't follow trends—it creates them. We design for the modern individual who values quality over quantity, timelessness over seasonality, and authenticity over imitation.</p>
+            <p>Every piece in our collection is thoughtfully crafted with premium materials and meticulous attention to detail. We collaborate with artisans who share our commitment to exceptional craftsmanship, ensuring that each item tells its own story.</p>
+            <p>From our signature minimal essentials to our bold statement pieces, VRAI represents a new approach to modern dressing—one that honors individuality, celebrates craftsmanship, and embraces the beauty of genuine self-expression.</p>
+          </div>
+          <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/about">Discover Our Story</a>
+        </div>
+      </div>
+    </section>
+
     <section class="vrai-homepage__newsletter vrai-reveal" aria-labelledby="VraiHomepageNewsletterTitle">
       <div>
         <p class="vrai-homepage__eyebrow">Private list</p>

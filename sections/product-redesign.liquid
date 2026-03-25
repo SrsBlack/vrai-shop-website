@@ -41,6 +41,7 @@
               data-vrai-thumb-full="{{ image | image_url: width: 1400 }}"
               data-vrai-thumb-zoom="{{ image | image_url: width: 2200 }}"
               data-vrai-thumb-alt="{{ image.alt | default: product.title | escape }}"
+              data-vrai-thumb-index="{{ forloop.index0 }}"
               aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
               aria-label="Show image {{ forloop.index }} of {{ product.title | escape }}"
             >
@@ -49,6 +50,9 @@
           {%- endfor -%}
         </div>
       {%- endif -%}
+      <div class="vrai-product__swipe-hint" data-vrai-swipe-hint hidden aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
 
       <div class="vrai-product__image-modal" data-vrai-image-modal hidden role="dialog" aria-modal="true" aria-label="Enlarged product image">
         <button type="button" class="vrai-product__image-modal-close" data-vrai-close-zoom aria-label="Close image preview">
@@ -92,6 +96,11 @@
           <input id="Quantity" type="number" name="quantity" value="1" min="1">
         </div>
 
+        <button type="button" class="vrai-product__size-guide-btn" data-vrai-size-guide-open>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          Size Guide
+        </button>
+
         <button type="submit" data-vrai-submit {% unless current_variant.available %}disabled{% endunless %}>
           {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
         </button>
@@ -112,6 +121,188 @@
     <h3>Styling notes</h3>
     <p>Pair with minimal tailoring, tonal knitwear, and refined accessories for a complete look.</p>
   </aside>
+
+  {%- comment -%} Related Products Carousel {%- endcomment -%}
+  {%- if product.collections.size > 0 -%}
+    {%- assign primary_collection = product.collections.first -%}
+    {%- assign related_products = primary_collection.products | where_not: "id", product.id | limit: 8 -%}
+    {%- if related_products.size > 0 -%}
+    <section class="vrai-related vrai-reveal" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="vrai-related__title">You may also like</h2>
+      <div class="vrai-related__carousel" data-vrai-carousel>
+        <button class="vrai-related__nav vrai-related__nav--prev" data-vrai-carousel-prev aria-label="Previous products" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="vrai-related__track" data-vrai-carousel-track>
+          {%- for related in related_products -%}
+            {%- assign related_variant = related.selected_or_first_available_variant -%}
+            <article class="vrai-related__item">
+              <a href="{{ related.url }}" class="vrai-related__link">
+                {%- if related.featured_image -%}
+                  {{ related.featured_image | image_url: width: 600 | image_tag: alt: related.title, class: 'vrai-related__image', loading: 'lazy' }}
+                {%- endif -%}
+                <div class="vrai-related__info">
+                  <p class="vrai-related__vendor">{{ related.vendor }}</p>
+                  <h3 class="vrai-related__name">{{ related.title | truncate: 60 }}</h3>
+                  <p class="vrai-related__price">{{ related_variant.price | money }}</p>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        <button class="vrai-related__nav vrai-related__nav--next" data-vrai-carousel-next aria-label="Next products">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </section>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} Reviews Section {%- endcomment -%}
+  <section class="vrai-reviews vrai-reveal" data-vrai-reviews>
+    <div class="vrai-reviews__header">
+      <h2>Customer Reviews</h2>
+      <div class="vrai-reviews__summary">
+        <div class="vrai-reviews__rating">
+          <div class="vrai-reviews__stars" aria-label="Average rating: 4.5 out of 5 stars">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span class="vrai-reviews__average">4.5</span>
+          <span class="vrai-reviews__count">(127 reviews)</span>
+        </div>
+        <button class="vrai-reviews__write-btn">Write a Review</button>
+      </div>
+    </div>
+    <div class="vrai-reviews__list">
+      <article class="vrai-review">
+        <div class="vrai-review__header">
+          <div class="vrai-review__stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="vrai-review__meta">
+            <span class="vrai-review__author">Sarah M.</span>
+            <span class="vrai-review__date">2 weeks ago</span>
+          </div>
+        </div>
+        <h3 class="vrai-review__title">Perfect fit and amazing quality!</h3>
+        <p class="vrai-review__text">This exceeded my expectations. The fabric is soft, the stitching is perfect, and it fits exactly as described. Will definitely order again!</p>
+        <span class="vrai-review__verified">✓ Verified Purchase</span>
+      </article>
+      <article class="vrai-review">
+        <div class="vrai-review__header">
+          <div class="vrai-review__stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" opacity="0.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="vrai-review__meta">
+            <span class="vrai-review__author">James K.</span>
+            <span class="vrai-review__date">1 month ago</span>
+          </div>
+        </div>
+        <h3 class="vrai-review__title">Great value for money</h3>
+        <p class="vrai-review__text">Really happy with this purchase. The quality is excellent and the price point is fair. Shipping was fast too.</p>
+        <span class="vrai-review__verified">✓ Verified Purchase</span>
+      </article>
+      <article class="vrai-review">
+        <div class="vrai-review__header">
+          <div class="vrai-review__stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="vrai-review__meta">
+            <span class="vrai-review__author">Emily R.</span>
+            <span class="vrai-review__date">3 weeks ago</span>
+          </div>
+        </div>
+        <h3 class="vrai-review__title">Love it!</h3>
+        <p class="vrai-review__text">Exactly what I was looking for. The color matches the photos perfectly and the material feels premium. Highly recommend!</p>
+        <span class="vrai-review__verified">✓ Verified Purchase</span>
+      </article>
+    </div>
+    <button class="vrai-reviews__load-more">Load More Reviews</button>
+  </section>
+
+  {%- comment -%} Sticky Add to Cart (Mobile) {%- endcomment -%}
+  <div class="vrai-sticky-atc" data-vrai-sticky-atc hidden>
+    <div class="vrai-sticky-atc__inner">
+      <div class="vrai-sticky-atc__info">
+        <p class="vrai-sticky-atc__price" data-vrai-sticky-price>{{ current_variant.price | money }}</p>
+      </div>
+      <button type="button" class="vrai-sticky-atc__btn" data-vrai-sticky-submit>
+        Add to cart
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Size Guide Modal {%- endcomment -%}
+  <div class="vrai-size-guide-modal" data-vrai-size-guide-modal hidden role="dialog" aria-modal="true" aria-labelledby="size-guide-title">
+    <div class="vrai-size-guide__content">
+      <button type="button" class="vrai-size-guide__close" data-vrai-size-guide-close aria-label="Close size guide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h2 id="size-guide-title">Size Guide</h2>
+      <div class="vrai-size-guide__body">
+        <div class="vrai-size-guide__tabs">
+          <button class="vrai-size-guide__tab is-active" data-tab="womens">Women's</button>
+          <button class="vrai-size-guide__tab" data-tab="mens">Men's</button>
+        </div>
+        <div class="vrai-size-guide__table" data-tab-content="womens">
+          <table>
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Bust (in)</th>
+                <th>Waist (in)</th>
+                <th>Hip (in)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>XS</td><td>30-32</td><td>24-26</td><td>34-36</td></tr>
+              <tr><td>S</td><td>32-34</td><td>26-28</td><td>36-38</td></tr>
+              <tr><td>M</td><td>34-36</td><td>28-30</td><td>38-40</td></tr>
+              <tr><td>L</td><td>36-38</td><td>30-32</td><td>40-42</td></tr>
+              <tr><td>XL</td><td>38-40</td><td>32-34</td><td>42-44</td></tr>
+            </tbody>
+          </table>
+          <p class="vrai-size-guide__note">All measurements are approximate and may vary by style.</p>
+        </div>
+        <div class="vrai-size-guide__table" data-tab-content="mens" hidden>
+          <table>
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest (in)</th>
+                <th>Waist (in)</th>
+                <th>Sleeve (in)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>S</td><td>34-36</td><td>28-30</td><td>32-33</td></tr>
+              <tr><td>M</td><td>36-38</td><td>30-32</td><td>33-34</td></tr>
+              <tr><td>L</td><td>38-40</td><td>32-34</td><td>34-35</td></tr>
+              <tr><td>XL</td><td>40-42</td><td>34-36</td><td>35-36</td></tr>
+              <tr><td>XXL</td><td>42-44</td><td>36-38</td><td>36-37</td></tr>
+            </tbody>
+          </table>
+          <p class="vrai-size-guide__note">All measurements are approximate and may vary by style.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script type="application/json" data-vrai-variants>
