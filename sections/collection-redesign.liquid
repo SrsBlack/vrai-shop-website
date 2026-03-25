@@ -76,6 +76,10 @@
         {%- if normalized_tag == tag_lower and has_space == false -%}
           {%- assign is_technical = true -%}
         {%- endif -%}
+        {%- assign title_case_tag = tag_lower | capitalize -%}
+        {%- if has_space == false and normalized_tag != tag_lower and normalized_tag != tag_upper and normalized_tag != title_case_tag -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
 
         {%- comment -%} Hide symbol-heavy tags often generated from imports {%- endcomment -%}
         {%- if tag contains '$' or tag contains '%' or tag contains '(' or tag contains ')' or tag contains '[' or tag contains ']' -%}
