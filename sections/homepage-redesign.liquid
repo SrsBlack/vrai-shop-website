@@ -39,7 +39,13 @@
   <a href="#VraiHomepageMain" class="vrai-homepage__skip-link">Skip to content</a>
 
   <div class="vrai-homepage__announcement">
-    {{ section.settings.announcement_text | default: 'Complimentary express shipping on all orders. New season pieces now live.' }}
+    <p class="visually-hidden">{{ section.settings.announcement_text | default: 'Complimentary express shipping on all orders. New season pieces now live.' }}</p>
+    <div class="vrai-homepage__announcement-track" aria-hidden="true">
+      {%- assign _ann = section.settings.announcement_text | default: 'Complimentary express shipping on all orders. New season pieces now live.' -%}
+      <span>{{ _ann }} &nbsp;·&nbsp; </span>
+      <span>{{ _ann }} &nbsp;·&nbsp; </span>
+      <span>{{ _ann }} &nbsp;·&nbsp; </span>
+    </div>
   </div>
 
   <header class="vrai-homepage__header" aria-label="VRAI header">
@@ -130,8 +136,10 @@
                 {%- else -%}
                   <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_title | escape }}" loading="lazy">
                 {%- endif -%}
-                <span class="vrai-homepage__collection-meta">{{ category_descriptor | escape }}</span>
-                <strong>{{ category_title | escape }}</strong>
+                <div class="vrai-homepage__collection-card-body">
+                  <span class="vrai-homepage__collection-meta">{{ category_descriptor | escape }}</span>
+                  <strong>{{ category_title | escape }}</strong>
+                </div>
               </a>
             {%- endif -%}
           {%- endfor -%}
@@ -153,8 +161,10 @@
               {%- else -%}
                 <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_collection.title | escape }}" loading="lazy">
               {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Curated edit</span>
-              <strong>{{ category_collection.title | escape }}</strong>
+              <div class="vrai-homepage__collection-card-body">
+                <span class="vrai-homepage__collection-meta">Curated edit</span>
+                <strong>{{ category_collection.title | escape }}</strong>
+              </div>
             </a>
           {%- endfor -%}
 
@@ -167,8 +177,10 @@
               {%- else -%}
                 <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection" loading="lazy">
               {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
-              <strong>Minimal</strong>
+              <div class="vrai-homepage__collection-card-body">
+                <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
+                <strong>Minimal</strong>
+              </div>
             </a>
             <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
               {%- if streetwear_collection.image != blank -%}
@@ -178,8 +190,10 @@
               {%- else -%}
                 <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection" loading="lazy">
               {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Utility layers</span>
-              <strong>Streetwear</strong>
+              <div class="vrai-homepage__collection-card-body">
+                <span class="vrai-homepage__collection-meta">Utility layers</span>
+                <strong>Streetwear</strong>
+              </div>
             </a>
             <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
               {%- if adventure_collection.image != blank -%}
@@ -189,8 +203,10 @@
               {%- else -%}
                 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection" loading="lazy">
               {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Technical outerwear</span>
-              <strong>Adventure</strong>
+              <div class="vrai-homepage__collection-card-body">
+                <span class="vrai-homepage__collection-meta">Technical outerwear</span>
+                <strong>Adventure</strong>
+              </div>
             </a>
           {%- endif -%}
         {%- endif -%}
@@ -206,6 +222,14 @@
         </div>
       {%- endif -%}
     </section>
+
+    <div class="vrai-homepage__ticker" aria-hidden="true">
+      <div class="vrai-homepage__ticker-track">
+        <span>New Season &mdash; Spring Summer 2026 &mdash;&ensp; Free Shipping &mdash;&ensp; The Edit &mdash;&ensp; New Arrivals &mdash;&ensp;</span>
+        <span>New Season &mdash; Spring Summer 2026 &mdash;&ensp; Free Shipping &mdash;&ensp; The Edit &mdash;&ensp; New Arrivals &mdash;&ensp;</span>
+        <span>New Season &mdash; Spring Summer 2026 &mdash;&ensp; Free Shipping &mdash;&ensp; The Edit &mdash;&ensp; New Arrivals &mdash;&ensp;</span>
+      </div>
+    </div>
 
     <section class="vrai-homepage__products vrai-reveal" aria-labelledby="VraiHomepageProductsTitle">
       <div class="vrai-homepage__section-heading vrai-homepage__section-heading--split">
