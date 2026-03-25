@@ -66,6 +66,17 @@
           {%- assign is_technical = true -%}
         {%- endif -%}
 
+        {%- comment -%} Hide feed-style slugs and short uppercase measurement codes {%- endcomment -%}
+        {%- if normalized_tag contains '-' or normalized_tag contains '_' -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+        {%- if normalized_tag.size <= 3 and normalized_tag == tag_upper -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+        {%- if normalized_tag == tag_lower and has_space == false -%}
+          {%- assign is_technical = true -%}
+        {%- endif -%}
+
         {%- comment -%} Hide symbol-heavy tags often generated from imports {%- endcomment -%}
         {%- if tag contains '$' or tag contains '%' or tag contains '(' or tag contains ')' or tag contains '[' or tag contains ']' -%}
           {%- assign is_technical = true -%}

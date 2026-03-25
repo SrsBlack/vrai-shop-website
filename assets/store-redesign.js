@@ -345,9 +345,13 @@
     var price = modal.querySelector('[data-vrai-quickview-price]');
     var link = modal.querySelector('[data-vrai-quickview-link]');
     var availability = modal.querySelector('[data-vrai-quickview-availability]');
+    var lastFocused = null;
+
+    function getFocusableElements() {
+      return Array.prototype.slice.call(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+    }
 
     function openModal(btn) {
-      var productId = btn.getAttribute('data-product-id');
       var productUrl = btn.getAttribute('data-product-url');
       var productTitle = btn.getAttribute('data-product-title');
       var productVendor = btn.getAttribute('data-product-vendor');
@@ -355,7 +359,10 @@
       var productImage = btn.getAttribute('data-product-image');
       var productAvailable = btn.getAttribute('data-product-available') === 'true';
 
+      lastFocused = document.activeElement;
+
       if (image) image.src = productImage;
+      if (image) image.alt = productTitle || '';
       if (title) title.textContent = productTitle;
       if (vendor) vendor.textContent = productVendor;
       if (price) price.textContent = productPrice;
@@ -378,6 +385,9 @@
       setTimeout(function () {
         modal.hidden = true;
         document.body.style.overflow = '';
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
       }, 200);
     }
 
@@ -397,7 +407,24 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !modal.hidden) closeModal();
+      if (modal.hidden) return;
+      if (e.key === 'Escape') {
+        closeModal();
+        return;
+      }
+      if (e.key === 'Tab') {
+        var focusable = getFocusableElements();
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 
@@ -409,8 +436,14 @@
     var closeBtn = modal.querySelector('[data-vrai-size-guide-close]');
     var tabs = modal.querySelectorAll('[data-tab]');
     var tabContents = modal.querySelectorAll('[data-tab-content]');
+    var lastFocused = null;
+
+    function getFocusableElements() {
+      return Array.prototype.slice.call(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+    }
 
     function openModal() {
+      lastFocused = document.activeElement;
       modal.hidden = false;
       requestAnimationFrame(function () {
         modal.classList.add('is-visible');
@@ -424,6 +457,9 @@
       setTimeout(function () {
         modal.hidden = true;
         document.body.style.overflow = '';
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
       }, 200);
     }
 
@@ -443,7 +479,24 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !modal.hidden) closeModal();
+      if (modal.hidden) return;
+      if (e.key === 'Escape') {
+        closeModal();
+        return;
+      }
+      if (e.key === 'Tab') {
+        var focusable = getFocusableElements();
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     tabs.forEach(function (tab) {

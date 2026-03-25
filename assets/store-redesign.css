@@ -1626,27 +1626,11 @@
   gap: 1rem;
 }
 
-.vrai-reviews__rating {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.vrai-reviews__stars {
-  display: flex;
-  gap: 0.25rem;
-  color: #f59e0b;
-}
-
-.vrai-reviews__average {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #0a0807;
-}
-
 .vrai-reviews__count {
   color: #666;
   font-size: 0.875rem;
+  line-height: 1.7;
+  max-width: 42rem;
 }
 
 .vrai-reviews__write-btn {
@@ -1680,16 +1664,9 @@
 .vrai-review__header {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.vrai-review__stars {
-  display: flex;
-  gap: 0.25rem;
-  color: #f59e0b;
 }
 
 .vrai-review__meta {
@@ -1727,6 +1704,13 @@
   font-size: 0.875rem;
   color: #2e7d32;
   font-weight: 500;
+}
+
+.vrai-reviews__footnote {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .vrai-reviews__load-more {
