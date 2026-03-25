@@ -256,7 +256,13 @@ body.page-type-index {
 }
 
 .vrai-homepage__collection-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--vrai-category-columns, 3), minmax(0, 1fr));
+}
+
+.vrai-homepage__section-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.6rem;
 }
 
 .vrai-homepage__collection-card,
@@ -521,7 +527,7 @@ body.page-type-index {
   }
 
   .vrai-homepage__collection-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -530,7 +536,8 @@ body.page-type-index {
   .vrai-homepage__hero,
   .vrai-homepage__editorial,
   .vrai-homepage__newsletter,
-  .vrai-homepage__product-grid {
+  .vrai-homepage__product-grid,
+  .vrai-homepage__collection-grid {
     grid-template-columns: 1fr;
   }
 

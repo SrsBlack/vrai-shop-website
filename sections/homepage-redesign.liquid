@@ -3,9 +3,21 @@
 
 {%- liquid
   assign all_collection = collections['all']
+  assign all_collections_url = routes.collections_url
+  if all_collections_url == blank
+    assign all_collections_url = '/collections'
+  endif
   assign adventure_collection = collections['adventure-series']
   assign streetwear_collection = collections['streetwear']
   assign minimal_collection = collections['minimal']
+  assign category_limit = section.settings.collections_limit | default: 9
+  assign category_blocks_count = 0
+
+  for block in section.blocks
+    if block.type == 'collection_category' and block.settings.collection != blank
+      assign category_blocks_count = category_blocks_count | plus: 1
+    endif
+  endfor
 
   assign adventure_url = routes.all_products_collection_url
   if adventure_collection != blank
@@ -40,11 +52,17 @@
         {%- endif -%}
       </a>
       <nav class="vrai-homepage__nav" aria-label="Primary">
-        <a href="{{ routes.all_products_collection_url }}">New Arrivals</a>
-        <a href="{{ minimal_url }}">Minimal</a>
-        <a href="{{ streetwear_url }}">Streetwear</a>
-        <a href="{{ adventure_url }}">Adventure</a>
-        <a href="/pages/contact">Contact</a>
+        {%- if section.settings.primary_menu != blank and section.settings.primary_menu.links.size > 0 -%}
+          {%- for link in section.settings.primary_menu.links limit: 6 -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.all_products_collection_url }}">New Arrivals</a>
+          <a href="{{ minimal_url }}">Minimal</a>
+          <a href="{{ streetwear_url }}">Streetwear</a>
+          <a href="{{ adventure_url }}">Adventure</a>
+          <a href="/pages/contact">Contact</a>
+        {%- endif -%}
       </nav>
       <div class="vrai-homepage__header-actions">
         <a href="/search">Search</a>
@@ -80,44 +98,113 @@
 
     <section class="vrai-homepage__collections vrai-reveal" aria-labelledby="VraiHomepageCollectionsTitle">
       <div class="vrai-homepage__section-heading">
-        <p class="vrai-homepage__eyebrow">Collections</p>
-        <h2 id="VraiHomepageCollectionsTitle">Shop by mood</h2>
+        <p class="vrai-homepage__eyebrow">{{ section.settings.collections_eyebrow | default: 'Collections' }}</p>
+        <h2 id="VraiHomepageCollectionsTitle">{{ section.settings.collections_heading | default: 'Shop by mood' }}</h2>
       </div>
-      <div class="vrai-homepage__collection-grid">
-        <a class="vrai-homepage__collection-card" href="{{ minimal_url }}">
-          {%- if minimal_collection.image != blank -%}
-            {{ minimal_collection.image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
-          {%- elsif minimal_collection.products.first.featured_image != blank -%}
-            {{ minimal_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
-          {%- else -%}
-            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection" loading="lazy">
+      <div
+        class="vrai-homepage__collection-grid"
+        style="--vrai-category-columns: {{ section.settings.collections_columns | default: 3 }};"
+      >
+        {%- if category_blocks_count > 0 -%}
+          {%- assign rendered_category_blocks = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if rendered_category_blocks >= category_limit -%}
+              {%- break -%}
+            {%- endif -%}
+            {%- if block.type == 'collection_category' and block.settings.collection != blank -%}
+              {%- assign rendered_category_blocks = rendered_category_blocks | plus: 1 -%}
+              {%- assign category_collection = block.settings.collection -%}
+              {%- assign category_title = block.settings.custom_title | strip -%}
+              {%- if category_title == blank -%}
+                {%- assign category_title = category_collection.title -%}
+              {%- endif -%}
+              {%- assign category_descriptor = block.settings.descriptor | strip -%}
+              {%- if category_descriptor == blank -%}
+                {%- assign category_descriptor = 'Curated edit' -%}
+              {%- endif -%}
+              <a class="vrai-homepage__collection-card" href="{{ category_collection.url }}" {{ block.shopify_attributes }}>
+                {%- if category_collection.image != blank -%}
+                  {{ category_collection.image | image_url: width: 900 | image_tag: alt: category_title, loading: 'lazy' }}
+                {%- elsif category_collection.products.first.featured_image != blank -%}
+                  {{ category_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: category_title, loading: 'lazy' }}
+                {%- else -%}
+                  <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_title | escape }}" loading="lazy">
+                {%- endif -%}
+                <span class="vrai-homepage__collection-meta">{{ category_descriptor | escape }}</span>
+                <strong>{{ category_title | escape }}</strong>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign fallback_category_count = 0 -%}
+          {%- for category_collection in collections -%}
+            {%- if fallback_category_count >= category_limit -%}
+              {%- break -%}
+            {%- endif -%}
+            {%- if category_collection.handle == 'all' or category_collection.handle == 'frontpage' or category_collection.products_count == 0 -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- assign fallback_category_count = fallback_category_count | plus: 1 -%}
+            <a class="vrai-homepage__collection-card" href="{{ category_collection.url }}">
+              {%- if category_collection.image != blank -%}
+                {{ category_collection.image | image_url: width: 900 | image_tag: alt: category_collection.title, loading: 'lazy' }}
+              {%- elsif category_collection.products.first.featured_image != blank -%}
+                {{ category_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: category_collection.title, loading: 'lazy' }}
+              {%- else -%}
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_collection.title | escape }}" loading="lazy">
+              {%- endif -%}
+              <span class="vrai-homepage__collection-meta">Curated edit</span>
+              <strong>{{ category_collection.title | escape }}</strong>
+            </a>
+          {%- endfor -%}
+
+          {%- if fallback_category_count == 0 -%}
+            <a class="vrai-homepage__collection-card" href="{{ minimal_url }}">
+              {%- if minimal_collection.image != blank -%}
+                {{ minimal_collection.image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
+              {%- elsif minimal_collection.products.first.featured_image != blank -%}
+                {{ minimal_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
+              {%- else -%}
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection" loading="lazy">
+              {%- endif -%}
+              <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
+              <strong>Minimal</strong>
+            </a>
+            <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
+              {%- if streetwear_collection.image != blank -%}
+                {{ streetwear_collection.image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
+              {%- elsif streetwear_collection.products.first.featured_image != blank -%}
+                {{ streetwear_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
+              {%- else -%}
+                <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection" loading="lazy">
+              {%- endif -%}
+              <span class="vrai-homepage__collection-meta">Utility layers</span>
+              <strong>Streetwear</strong>
+            </a>
+            <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
+              {%- if adventure_collection.image != blank -%}
+                {{ adventure_collection.image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
+              {%- elsif adventure_collection.products.first.featured_image != blank -%}
+                {{ adventure_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
+              {%- else -%}
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection" loading="lazy">
+              {%- endif -%}
+              <span class="vrai-homepage__collection-meta">Technical outerwear</span>
+              <strong>Adventure</strong>
+            </a>
           {%- endif -%}
-          <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
-          <strong>Minimal</strong>
-        </a>
-        <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
-          {%- if streetwear_collection.image != blank -%}
-            {{ streetwear_collection.image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
-          {%- elsif streetwear_collection.products.first.featured_image != blank -%}
-            {{ streetwear_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
-          {%- else -%}
-            <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection" loading="lazy">
-          {%- endif -%}
-          <span class="vrai-homepage__collection-meta">Utility layers</span>
-          <strong>Streetwear</strong>
-        </a>
-        <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
-          {%- if adventure_collection.image != blank -%}
-            {{ adventure_collection.image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
-          {%- elsif adventure_collection.products.first.featured_image != blank -%}
-            {{ adventure_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
-          {%- else -%}
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection" loading="lazy">
-          {%- endif -%}
-          <span class="vrai-homepage__collection-meta">Technical outerwear</span>
-          <strong>Adventure</strong>
-        </a>
+        {%- endif -%}
       </div>
+      {%- if section.settings.show_collections_cta -%}
+        <div class="vrai-homepage__section-footer">
+          <a
+            class="vrai-homepage__button vrai-homepage__button--ghost"
+            href="{{ section.settings.collections_cta_url | default: all_collections_url }}"
+          >
+            {{ section.settings.collections_cta_label | default: 'Browse all categories' }}
+          </a>
+        </div>
+      {%- endif -%}
     </section>
 
     <section class="vrai-homepage__products vrai-reveal" aria-labelledby="VraiHomepageProductsTitle">
@@ -252,7 +339,85 @@
 {% schema %}
 {
   "name": "Homepage redesign",
-  "settings": [],
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "primary_menu",
+      "label": "Primary navigation menu"
+    },
+    {
+      "type": "text",
+      "id": "collections_heading",
+      "label": "Collections section heading",
+      "default": "Shop by mood"
+    },
+    {
+      "type": "text",
+      "id": "collections_eyebrow",
+      "label": "Collections section eyebrow",
+      "default": "Collections"
+    },
+    {
+      "type": "range",
+      "id": "collections_limit",
+      "label": "Maximum categories to show",
+      "min": 3,
+      "max": 18,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "collections_columns",
+      "label": "Collection columns on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collections_cta",
+      "label": "Show collections call to action",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "collections_cta_label",
+      "label": "Collections call to action label",
+      "default": "Browse all categories"
+    },
+    {
+      "type": "url",
+      "id": "collections_cta_url",
+      "label": "Collections call to action link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_category",
+      "name": "Collection category",
+      "limit": 18,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title (optional)"
+        },
+        {
+          "type": "text",
+          "id": "descriptor",
+          "label": "Descriptor",
+          "default": "Curated edit"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Homepage redesign"
