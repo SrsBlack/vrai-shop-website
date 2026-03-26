@@ -1,4 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ── Editorial Design System (Stitch / The Digital Curator) ── */
+:root {
+  --ed-font-headline: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --ed-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --ed-surface: #fbf9f4;
+  --ed-on-surface: #31332c;
+  --ed-on-surface-variant: #5e6058;
+  --ed-inverse-surface: #0e0e0c;
+  --ed-surface-container: #efeee6;
+  --ed-surface-container-low: #f5f4ed;
+  --ed-outline-variant: #b1b3a9;
+  --ed-ghost-border: rgba(49, 51, 44, 0.15);
+  --ed-tonal-lift: rgba(49, 51, 44, 0.04);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ── Editorial Header: Glassmorphic (Phase 2) ── */
+header-component,
+.header-section {
+  background: rgba(251, 249, 244, 0.80) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+header-component .header__row--top,
+header-component .header__row--bottom {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Editorial logo wordmark */
+.header .header-logo__text,
+.header .header-logo a {
+  font-family: var(--ed-font-headline) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+/* Editorial nav links */
+.header .menu-list__link,
+.header .menu-item__link {
+  font-family: var(--ed-font-body) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+/* Header actions (cart, account icons) */
+.header .header-actions__action {
+  font-family: var(--ed-font-body) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.14em !important;
+}
+
+/* ── Editorial Footer: Tonal Shift (Phase 2) ── */
+.section-wrapper:has(.footer-content) {
+  background: var(--ed-surface-container-low, #f5f4ed) !important;
+  position: relative;
+}
+
+.footer-content .menu__heading__default,
+.footer-content h2,
+.footer-content h3 {
+  font-family: var(--ed-font-body) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+}
+
+.footer-content .menu__list a,
+.footer-content a {
+  font-family: var(--ed-font-body) !important;
+  font-size: 0.88rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Footer newsletter input */
+.footer-content input[type="email"] {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--ed-outline-variant, #b1b3a9) !important;
+  border-radius: 0 !important;
+  font-family: var(--ed-font-headline) !important;
+  font-style: italic !important;
+  padding: 0.5rem 0 !important;
+}
+
+.footer-content button[type="submit"] {
+  background: var(--ed-inverse-surface, #0e0e0c) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  color: var(--ed-surface, #fbf9f4) !important;
+  font-family: var(--ed-font-body) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Global Typography Override ── */
+h1, h2, h3 {
+  font-family: var(--ed-font-headline) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.03em !important;
+}
+
+h4, h5, h6 {
+  font-family: var(--ed-font-body) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+}
+
+body {
+  font-family: var(--ed-font-body) !important;
+}
 
 /* ── Scroll-reveal animation ── */
 @keyframes vraiReveal {
@@ -26,8 +155,8 @@
 }
 
 .vrai-store-page {
-  color: #181411;
-  font-family: 'Inter', sans-serif;
+  color: var(--ed-on-surface, #31332c);
+  font-family: var(--ed-font-body, 'Inter', sans-serif);
   margin: 0 auto;
   max-width: 1440px;
   padding: 2rem clamp(1rem, 3vw, 2.5rem) 4rem;
@@ -51,19 +180,21 @@
 }
 
 .vrai-store-page__eyebrow {
-  color: #8a6d53;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-family: var(--ed-font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   margin: 0 0 0.7rem;
   text-transform: uppercase;
 }
 
 .vrai-store-page__title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
   font-size: clamp(2rem, 5vw, 4.2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
   margin: 0;
 }
 
@@ -75,7 +206,7 @@
 }
 
 .vrai-store-page__lead {
-  color: #4f463f;
+  color: var(--ed-on-surface-variant, #5e6058);
   font-size: 1rem;
   line-height: 1.75;
   margin-top: 1rem;
@@ -84,9 +215,9 @@
 
 .vrai-collection__head,
 .vrai-product__top {
-  background: linear-gradient(180deg, rgba(247, 241, 234, 0.9), rgba(251, 248, 244, 0.7));
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 28px;
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -108,25 +239,27 @@
 }
 
 .vrai-collection__filters a {
-  border: 1px solid rgba(24, 20, 17, 0.2);
-  border-radius: 999px;
-  font-size: 0.76rem;
-  letter-spacing: 0.12em;
+  border: 1px solid var(--ed-ghost-border, rgba(49, 51, 44, 0.15));
+  border-radius: var(--ed-radius-pill, 9999px);
+  font-size: 0.72rem;
+  font-family: var(--ed-font-body);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   padding: 0.4rem 0.8rem;
   text-transform: uppercase;
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 .vrai-collection__filters a:hover {
-  background: #181411;
-  border-color: #181411;
-  color: #f7f1eb;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border-color: var(--ed-inverse-surface, #0e0e0c);
+  color: var(--ed-surface, #fbf9f4);
 }
 
 .vrai-collection__filters a[aria-current='page'] {
-  background: #181411;
-  border-color: #181411;
-  color: #f7f1eb;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border-color: var(--ed-inverse-surface, #0e0e0c);
+  color: var(--ed-surface, #fbf9f4);
 }
 
 .vrai-collection__count {
@@ -165,10 +298,9 @@
 }
 
 .vrai-card {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 24px;
-  box-shadow: 0 14px 34px rgba(44, 28, 17, 0.06);
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   overflow: hidden;
   position: relative;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -176,8 +308,8 @@
 }
 
 .vrai-card:hover {
-  box-shadow: 0 20px 50px rgba(44, 28, 17, 0.12);
-  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(14, 14, 12, 0.08);
+  transform: translateY(-4px);
 }
 
 .vrai-card__image {
@@ -186,10 +318,11 @@
 }
 
 .vrai-card__image img {
-  aspect-ratio: 0.72;
+  aspect-ratio: 3/4;
   object-fit: cover;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   width: 100%;
+  filter: grayscale(10%) brightness(0.97);
 }
 
 .vrai-card:hover .vrai-card__image img {
@@ -258,17 +391,19 @@
 }
 
 .vrai-card__vendor {
-  color: #7e6f64;
-  font-size: 0.76rem;
-  letter-spacing: 0.15em;
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-family: var(--ed-font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .vrai-card__title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.45rem;
-  font-weight: 600;
-  line-height: 1.1;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.15;
   margin: 0.3rem 0 0.45rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -323,10 +458,9 @@
 .vrai-product__gallery,
 .vrai-product__details,
 .vrai-product__meta {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 24px;
-  box-shadow: 0 14px 34px rgba(44, 28, 17, 0.06);
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   padding: 1rem;
 }
 
@@ -337,8 +471,8 @@
 .page-type-page .header,
 .page-type-blog .header,
 .page-type-article .header {
-  border-bottom: 1px solid rgba(24, 20, 17, 0.08);
-  box-shadow: 0 10px 28px rgba(44, 28, 17, 0.08);
+  border-bottom: none;
+  box-shadow: none;
 }
 
 .page-type-collection .header__row--bottom,
@@ -348,8 +482,9 @@
 .page-type-page .header__row--bottom,
 .page-type-blog .header__row--bottom,
 .page-type-article .header__row--bottom {
-  background: rgba(250, 249, 247, 0.96);
-  backdrop-filter: blur(10px);
+  background: rgba(251, 249, 244, 0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .vrai-product__featured {
@@ -501,15 +636,19 @@
 }
 
 .vrai-product__vendor {
-  color: #7e6f64;
-  font-size: 0.76rem;
-  letter-spacing: 0.15em;
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-family: var(--ed-font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .vrai-product__name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0.4rem 0 0.8rem;
 }
@@ -529,34 +668,37 @@
 
 .vrai-product select,
 .vrai-product input[type='number'] {
-  background: #fff;
-  border: 1px solid rgba(24, 20, 17, 0.16);
-  border-radius: 999px;
+  background: var(--ed-surface-container-lowest, #ffffff);
+  border: none;
+  border-bottom: 1px solid var(--ed-outline-variant, #b1b3a9);
+  border-radius: 0;
   font: inherit;
+  font-family: var(--ed-font-body);
   min-height: 46px;
   padding: 0 0.9rem;
   width: 100%;
 }
 
 .vrai-product button[type='submit'] {
-  background: #181411;
-  border: 1px solid #181411;
-  border-radius: 999px;
-  color: #fff;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border: none;
+  border-radius: var(--ed-radius-pill, 9999px);
+  color: var(--ed-surface, #fbf9f4);
   cursor: pointer;
   font: inherit;
-  letter-spacing: 0.12em;
-  min-height: 50px;
+  font-family: var(--ed-font-body);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  min-height: 52px;
   padding: 0 1.2rem;
   text-transform: uppercase;
-  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  transition: background 0.35s ease, transform 0.25s ease;
   width: 100%;
 }
 
 .vrai-product button[type='submit']:hover:not(:disabled) {
-  background: #2a2520;
-  box-shadow: 0 6px 20px rgba(24, 20, 17, 0.25);
-  transform: translateY(-2px);
+  background: var(--ed-on-surface, #31332c);
+  transform: translateY(-1px);
 }
 
 .vrai-product .shopify-payment-button {
@@ -575,8 +717,8 @@
 }
 
 .vrai-product__description {
-  border-top: 1px solid rgba(24, 20, 17, 0.08);
-  color: #4f463f;
+  border-top: 1px solid var(--ed-ghost-border, rgba(49, 51, 44, 0.15));
+  color: var(--ed-on-surface-variant, #5e6058);
   font-size: 0.94rem;
   line-height: 1.75;
   margin-top: 1.2rem;
@@ -584,14 +726,58 @@
 }
 
 .vrai-product__meta h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.45rem;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.3rem;
+  font-weight: 400;
   margin: 0 0 0.4rem;
 }
 
 .vrai-product__meta p {
-  color: #4f463f;
+  color: var(--ed-on-surface-variant, #5e6058);
   margin: 0 0 1rem;
+}
+
+/* ── Editorial Product Meta (Material / Care) ── */
+.vrai-product__meta--editorial {
+  border-top: 1px solid rgba(177, 179, 169, 0.15);
+  padding-top: 2.5rem;
+}
+
+.vrai-product__meta-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.vrai-product__meta-icon {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.vrai-product__meta-icon .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.vrai-product__meta-icon span:last-child {
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vrai-product__meta-item p {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .vrai-product__meta-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .vrai-empty-state {
@@ -616,10 +802,9 @@
 .vrai-cart__summary,
 .vrai-search__results,
 .vrai-page {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 24px;
-  box-shadow: 0 14px 34px rgba(44, 28, 17, 0.06);
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   padding: 1rem;
 }
 
@@ -641,10 +826,10 @@
 }
 
 .vrai-cart__item-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.1;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.15;
   margin: 0.1rem 0 0.3rem;
 }
 
@@ -735,17 +920,20 @@
 
 .vrai-contact__field input,
 .vrai-contact__field textarea {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(24, 20, 17, 0.2);
-  border-radius: 999px;
-  color: #181411;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ed-outline-variant, #b1b3a9);
+  border-radius: 0;
+  color: var(--ed-on-surface, #31332c);
   font: inherit;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-style: italic;
   min-height: 46px;
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 0;
 }
 
 .vrai-contact__field textarea {
-  border-radius: 18px;
+  border-radius: 0;
   min-height: 150px;
   padding-top: 0.9rem;
   resize: vertical;
@@ -785,47 +973,49 @@
 .vrai-cta,
 .vrai-ghost-cta {
   align-items: center;
-  border-radius: 999px;
+  border-radius: var(--ed-radius-pill, 9999px);
   display: inline-flex;
-  font-size: 0.78rem;
+  font-family: var(--ed-font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
   gap: 0.35rem;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.16em;
   min-height: 44px;
   padding: 0 1.05rem;
   text-transform: uppercase;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
 }
 
 .vrai-cta:hover {
-  background: #2a2520;
-  box-shadow: 0 4px 16px rgba(24, 20, 17, 0.2);
-  transform: translateY(-2px);
+  background: var(--ed-on-surface, #31332c);
+  transform: translateY(-1px);
 }
 
 .vrai-ghost-cta:hover {
-  background: #181411;
-  color: #f7f1eb;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  color: var(--ed-surface, #fbf9f4);
 }
 
 /* ── Contact submit button ── */
 .vrai-contact__submit {
-  background: #181411;
-  border: 1px solid #181411;
-  border-radius: 999px;
-  color: #fff;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border: none;
+  border-radius: var(--ed-radius-pill, 9999px);
+  color: var(--ed-surface, #fbf9f4);
   cursor: pointer;
   font: inherit;
-  letter-spacing: 0.13em;
-  min-height: 50px;
+  font-family: var(--ed-font-body);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  min-height: 52px;
   padding: 0 1.4rem;
   text-transform: uppercase;
-  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  transition: background 0.35s ease, transform 0.25s ease;
 }
 
 .vrai-contact__submit:hover {
-  background: #2a2520;
-  box-shadow: 0 6px 20px rgba(24, 20, 17, 0.25);
-  transform: translateY(-2px);
+  background: var(--ed-on-surface, #31332c);
+  transform: translateY(-1px);
 }
 
 /* ── Breadcrumbs ── */
@@ -853,14 +1043,14 @@
 }
 
 .vrai-cta {
-  background: #181411;
-  border: 1px solid #181411;
-  color: #fff;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border: none;
+  color: var(--ed-surface, #fbf9f4);
 }
 
 .vrai-ghost-cta {
-  border: 1px solid rgba(24, 20, 17, 0.2);
-  color: #181411;
+  border: 1px solid var(--ed-ghost-border, rgba(49, 51, 44, 0.15));
+  color: var(--ed-on-surface, #31332c);
 }
 
 .vrai-blog,
@@ -882,10 +1072,9 @@
 .vrai-collection-list__card,
 .vrai-not-found__card,
 .vrai-article__body {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 24px;
-  box-shadow: 0 14px 34px rgba(44, 28, 17, 0.06);
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   overflow: hidden;
 }
 
@@ -916,9 +1105,10 @@
 .vrai-blog__title,
 .vrai-collection-list__title,
 .vrai-not-found__title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  line-height: 1.08;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.12;
   margin: 0 0 0.55rem;
 }
 
@@ -940,6 +1130,207 @@
   padding: 1rem;
 }
 
+/* ── Blog Featured Article ── */
+.vrai-blog__featured {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: 7fr 5fr;
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+.vrai-blog__featured-image {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.vrai-blog__featured-image img {
+  aspect-ratio: 4/3;
+  filter: grayscale(30%);
+  object-fit: cover;
+  transition: filter 0.5s ease;
+  width: 100%;
+}
+
+.vrai-blog__featured:hover .vrai-blog__featured-image img {
+  filter: grayscale(0%);
+}
+
+.vrai-blog__featured-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.vrai-blog__featured-title {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0.5rem 0 1rem;
+}
+
+.vrai-blog__featured-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vrai-blog__card-image {
+  border-radius: 2px;
+  display: block;
+  overflow: hidden;
+}
+
+.vrai-blog__card-image img {
+  filter: grayscale(30%);
+  transition: filter 0.5s ease;
+}
+
+.vrai-blog__card:hover .vrai-blog__card-image img {
+  filter: grayscale(0%);
+}
+
+/* ── Search Input Wrap ── */
+.vrai-search__input-wrap {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.vrai-search__icon {
+  color: var(--ed-outline, #797c73);
+  left: 0.75rem;
+  position: absolute;
+}
+
+.vrai-search__input-wrap input {
+  padding-left: 2.75rem;
+  width: 100%;
+}
+
+@media (max-width: 820px) {
+  .vrai-blog__featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL – The Edits (Collection List)
+   ═══════════════════════════════════════════════ */
+.vrai-edits__head {
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.vrai-edits__title {
+  font-size: clamp(4rem, 10vw, 9rem) !important;
+  font-weight: 200 !important;
+}
+
+.vrai-edits__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.vrai-edits__card {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.vrai-edits__card--pos0 { grid-column: span 7; }
+.vrai-edits__card--pos1 { grid-column: 9 / span 4; margin-top: 6rem; }
+.vrai-edits__card--pos2 { grid-column: 3 / span 8; }
+.vrai-edits__card--pos3 { grid-column: span 4; margin-top: -6rem; }
+.vrai-edits__card--pos4 { grid-column: 6 / span 7; }
+
+.vrai-edits__card-media {
+  background: var(--ed-surface-container-low, #f5f4ed);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.vrai-edits__card--pos0 .vrai-edits__card-media { aspect-ratio: 4/5; }
+.vrai-edits__card--pos1 .vrai-edits__card-media { aspect-ratio: 3/4; }
+.vrai-edits__card--pos2 .vrai-edits__card-media { aspect-ratio: 16/9; }
+.vrai-edits__card--pos3 .vrai-edits__card-media { aspect-ratio: 4/5; }
+.vrai-edits__card--pos4 .vrai-edits__card-media { aspect-ratio: 1; }
+
+.vrai-edits__card-media img {
+  filter: grayscale(20%) brightness(0.95);
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+}
+
+.vrai-edits__card:hover .vrai-edits__card-media img {
+  transform: scale(1.05);
+}
+
+.vrai-edits__card-copy {
+  align-items: baseline;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.vrai-edits__card-copy h2 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.vrai-edits__issue {
+  color: var(--ed-outline, #797c73);
+  flex-shrink: 0;
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vrai-edits__card-desc {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-top: 1rem;
+  max-width: 30rem;
+}
+
+.vrai-edits__view-link {
+  border-bottom: 1px solid var(--ed-on-surface, #31332c);
+  display: inline-block;
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  margin-top: 1.5rem;
+  padding-bottom: 0.25rem;
+  text-transform: uppercase;
+  transition: padding-right 0.3s ease;
+}
+
+.vrai-edits__card:hover .vrai-edits__view-link {
+  padding-right: 1rem;
+}
+
+@media (max-width: 820px) {
+  .vrai-edits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vrai-edits__card--pos0,
+  .vrai-edits__card--pos1,
+  .vrai-edits__card--pos2,
+  .vrai-edits__card--pos3,
+  .vrai-edits__card--pos4 {
+    grid-column: 1;
+    margin-top: 0;
+  }
+}
+
 .vrai-article__hero {
   border-radius: 18px;
   margin-bottom: 1rem;
@@ -954,15 +1345,252 @@
   margin-top: 1.2rem;
 }
 
+/* ═══════════════════════════════════════════════
+   EDITORIAL – About Page
+   ═══════════════════════════════════════════════ */
+.vrai-about__hero--editorial {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: flex-end;
+  margin: -1.25rem -1.25rem 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.vrai-about__hero-bg {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.vrai-about__hero-bg img {
+  filter: grayscale(100%);
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  width: 100%;
+}
+
+.vrai-about__hero-gradient {
+  background: linear-gradient(to top, #fbf9f4 0%, transparent 60%);
+  inset: 0;
+  opacity: 0.6;
+  position: absolute;
+}
+
+.vrai-about__hero-copy {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2.5rem clamp(3rem, 6vw, 6rem);
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.vrai-about__hero-copy h1 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  margin: 0 0 2rem;
+}
+
+.vrai-about__hero-italic {
+  font-style: italic;
+  font-weight: 400;
+  margin-left: 10vw;
+}
+
+.vrai-about__hero-copy p {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 30rem;
+}
+
+/* ── About: Philosophy ── */
+.vrai-about__philosophy {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: 5fr 6fr;
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.vrai-about__philosophy h2 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.vrai-about__philosophy p {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.vrai-about__philosophy-media {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.vrai-about__philosophy-media img {
+  aspect-ratio: 4/5;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* ── About: Blockquote Break ── */
+.vrai-about__quote {
+  background: var(--ed-surface-container-low, #f5f4ed);
+  margin: 0 -1.25rem;
+  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem);
+  text-align: center;
+}
+
+.vrai-about__quote .material-symbols-outlined {
+  color: var(--ed-primary-dim, #535252);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.vrai-about__quote blockquote {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(1.5rem, 3.5vw, 3.2rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.35;
+  margin: 0 auto 1.5rem;
+  max-width: 48rem;
+}
+
+.vrai-about__quote cite {
+  color: var(--ed-outline, #797c73);
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-style: normal;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── About: Our Craft (Dark Section) ── */
+.vrai-about__craft {
+  background: #1c1917;
+  color: #f5f5f4;
+  margin: 0 -1.25rem;
+  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem);
+}
+
+.vrai-about__craft-header {
+  align-items: flex-end;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-bottom: clamp(3rem, 5vw, 6rem);
+}
+
+.vrai-about__craft-header h2 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(3rem, 8vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.vrai-about__craft-header h2 span {
+  color: #a8a29e;
+}
+
+.vrai-about__craft-steps {
+  color: #a8a29e;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  gap: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vrai-about__craft-grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.vrai-about__craft-divider {
+  background: #44403c;
+  height: 1px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.vrai-about__craft-item h3 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.vrai-about__craft-item p {
+  color: #a8a29e;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* ── About: CTA ── */
+.vrai-about__cta {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+  text-align: center;
+}
+
+.vrai-about__cta h2 {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.vrai-about__cta p {
+  color: var(--ed-on-surface-variant, #5e6058);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 820px) {
+  .vrai-about__philosophy {
+    grid-template-columns: 1fr;
+  }
+
+  .vrai-about__craft-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vrai-about__craft-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .vrai-not-found {
   display: grid;
   gap: 1.35rem;
 }
 
 .vrai-not-found__hero {
-  background: linear-gradient(180deg, rgba(247, 241, 234, 0.9), rgba(251, 248, 244, 0.7));
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 28px;
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   padding: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -977,7 +1605,7 @@
 .vrai-store-page button:focus-visible,
 .vrai-store-page select:focus-visible,
 .vrai-store-page input:focus-visible {
-  outline: 2px solid #181411;
+  outline: 2px solid var(--ed-inverse-surface, #0e0e0c);
   outline-offset: 2px;
 }
 
@@ -987,10 +1615,10 @@
 }
 
 .vrai-related__title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 300;
+  letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0 0 1.5rem;
   text-align: center;
@@ -1022,17 +1650,16 @@
 }
 
 .vrai-related__link {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 20px;
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 2px;
   display: block;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .vrai-related__link:hover {
-  box-shadow: 0 8px 28px rgba(44, 28, 17, 0.12);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 
 .vrai-related__image {
@@ -1054,8 +1681,9 @@
 }
 
 .vrai-related__name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
   font-size: 1.1rem;
+  font-weight: 400;
   line-height: 1.15;
   margin: 0 0 0.5rem;
 }
@@ -1106,10 +1734,11 @@
 
 /* ── Sticky Add to Cart (Mobile) ── */
 .vrai-sticky-atc {
-  background: rgba(255, 251, 247, 0.96);
-  border-top: 1px solid rgba(24, 20, 17, 0.1);
+  background: rgba(251, 249, 244, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: none;
   bottom: 0;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
   left: 0;
   padding: 0.75rem clamp(1rem, 3vw, 2rem);
   position: fixed;
@@ -1139,24 +1768,24 @@
 }
 
 .vrai-sticky-atc__btn {
-  background: #181411;
-  border: 1px solid #181411;
-  border-radius: 999px;
-  color: #fff;
+  background: var(--ed-inverse-surface, #0e0e0c);
+  border: none;
+  border-radius: var(--ed-radius-pill, 9999px);
+  color: var(--ed-surface, #fbf9f4);
   cursor: pointer;
   font: inherit;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--ed-font-body);
+  font-weight: 500;
+  letter-spacing: 0.1em;
   min-height: 44px;
   padding: 0 1.5rem;
   text-transform: uppercase;
-  transition: background 0.25s ease, transform 0.2s ease;
+  transition: background 0.25s ease;
   white-space: nowrap;
 }
 
 .vrai-sticky-atc__btn:hover {
-  background: #2a2520;
-  transform: scale(1.03);
+  background: var(--ed-on-surface, #31332c);
 }
 
 /* ── Touch Swipe Hint ── */
@@ -1958,6 +2587,103 @@
   text-transform: uppercase;
 }
 
+.vrai-cart__trust li .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+/* ── Cart Editorial Enhancements ── */
+.vrai-cart__item-image {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.vrai-cart__item-image img {
+  filter: grayscale(40%);
+  transition: filter 0.4s ease;
+}
+
+.vrai-cart__item:hover .vrai-cart__item-image img {
+  filter: grayscale(0%);
+}
+
+.vrai-cart__item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.vrai-cart__item-variant {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 0.8rem;
+}
+
+.vrai-cart__qty-control input {
+  background: var(--ed-surface-container-low, #f5f4ed);
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  text-align: center;
+  width: 4.5rem;
+}
+
+.vrai-cart__line-price {
+  font-family: var(--ed-font-headline, 'Newsreader', serif);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.vrai-cart__remove {
+  background: none;
+  border: none;
+  color: var(--ed-outline, #797c73);
+  cursor: pointer;
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  margin-top: 0.5rem;
+  padding: 0;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.vrai-cart__remove:hover {
+  color: var(--ed-on-surface, #31332c);
+}
+
+.vrai-cart__summary-title {
+  font-family: var(--ed-font-label, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.vrai-cart__summary-note {
+  color: var(--ed-on-surface-variant, #5e6058);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0.25rem 0;
+}
+
+.vrai-shipping-progress .material-symbols-outlined {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.vrai-empty-state__icon {
+  color: var(--ed-outline, #797c73);
+  display: block;
+  font-size: 3rem;
+  margin: 0 auto 1rem;
+}
+
+.vrai-contact__styling-cta .material-symbols-outlined {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
 /* ── Product Page: Save Badge & Low Stock ── */
 .vrai-product__save-badge {
   background: #8b2f28;
@@ -1979,5 +2705,3 @@
   letter-spacing: 0.04em;
   margin-top: 0.6rem;
 }
-
-
