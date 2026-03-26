@@ -77,6 +77,27 @@
           },
           "blocks": {}
         },
+        "menu_support": {
+          "type": "menu",
+          "name": "t:names.menu",
+          "settings": {
+            "menu": "footer",
+            "heading": "SUPPORT",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "accordion_icon": "caret",
+            "accordion_dividers": false,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "email_signup_tBDzRh": {
           "type": "email-signup",
           "name": "t:names.email_signup",
@@ -117,6 +138,7 @@
       "block_order": [
         "menu_ywDwTf",
         "menu_UR3gWa",
+        "menu_support",
         "menu_4KapTg",
         "social_links_vrai",
         "payment_icons_vrai",

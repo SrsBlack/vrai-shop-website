@@ -9,8 +9,14 @@
       <p class="vrai-store-page__lead">The page you requested is no longer available. Continue shopping from our current edit.</p>
       <div class="vrai-not-found__cta-wrap">
         <a class="vrai-cta" href="{{ routes.all_products_collection_url }}">Shop all</a>
-        <a class="vrai-ghost-cta" href="{{ routes.search_url }}">Search</a>
+        <a class="vrai-ghost-cta" href="/collections">Browse collections</a>
+        <a class="vrai-ghost-cta" href="/pages/contact">Contact us</a>
       </div>
+      <form class="vrai-not-found__search" action="{{ routes.search_url }}" method="get">
+        <label for="Vrai404Search" class="visually-hidden">Search store</label>
+        <input id="Vrai404Search" type="search" name="q" placeholder="Search styles" required>
+        <button type="submit" class="vrai-cta">Search</button>
+      </form>
     </header>
 
     <div class="vrai-not-found__grid">

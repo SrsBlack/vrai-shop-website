@@ -10,14 +10,11 @@
   assign adventure_collection = collections['adventure-series']
   assign streetwear_collection = collections['streetwear']
   assign minimal_collection = collections['minimal']
-  assign category_limit = section.settings.collections_limit | default: 9
-  assign category_blocks_count = 0
-
-  for block in section.blocks
-    if block.type == 'collection_category' and block.settings.collection != blank
-      assign category_blocks_count = category_blocks_count | plus: 1
-    endif
-  endfor
+  assign coquette_collection = collections['trending-now-coquette']
+  assign mood_handles = 'adventure-series,minimal,streetwear,trending-now-coquette' | split: ','
+  assign now_timestamp = 'now' | date: '%s' | plus: 0
+  assign fourteen_days_seconds = 1209600
+  assign new_threshold = now_timestamp | minus: fourteen_days_seconds
 
   assign adventure_url = routes.all_products_collection_url
   if adventure_collection != blank
@@ -38,45 +35,11 @@
 <section class="vrai-homepage">
   <a href="#VraiHomepageMain" class="vrai-homepage__skip-link">Skip to content</a>
 
-  <div class="vrai-homepage__announcement">
-    {{ section.settings.announcement_text | default: 'Complimentary express shipping on all orders. New season pieces now live.' }}
-  </div>
-
-  <header class="vrai-homepage__header" aria-label="VRAI header">
-    <div class="vrai-homepage__header-inner">
-      <a class="vrai-homepage__wordmark" href="{{ routes.root_url }}">
-        {%- if settings.logo != blank -%}
-          {{ settings.logo | image_url: width: 200 | image_tag: alt: shop.name, class: 'vrai-homepage__logo' }}
-        {%- else -%}
-          VRAI
-        {%- endif -%}
-      </a>
-      <nav class="vrai-homepage__nav" aria-label="Primary">
-        {%- if section.settings.primary_menu != blank and section.settings.primary_menu.links.size > 0 -%}
-          {%- for link in section.settings.primary_menu.links limit: 6 -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- else -%}
-          <a href="{{ routes.all_products_collection_url }}">New Arrivals</a>
-          <a href="{{ minimal_url }}">Minimal</a>
-          <a href="{{ streetwear_url }}">Streetwear</a>
-          <a href="{{ adventure_url }}">Adventure</a>
-          <a href="/pages/contact">Contact</a>
-        {%- endif -%}
-      </nav>
-      <div class="vrai-homepage__header-actions">
-        <a href="/search">Search</a>
-        <a href="/account">Account</a>
-        <a href="/cart">Cart</a>
-      </div>
-    </div>
-  </header>
-
   <main id="VraiHomepageMain" class="vrai-homepage__main">
     <section class="vrai-homepage__hero vrai-reveal" aria-labelledby="VraiHomepageHeroTitle">
       <div class="vrai-homepage__hero-copy">
-        <p class="vrai-homepage__eyebrow">Spring Summer 2026</p>
-        <h1 id="VraiHomepageHeroTitle">An editorial storefront for modern dressing.</h1>
+        <p class="vrai-homepage__eyebrow">Spring / Summer 2026</p>
+        <h1 id="VraiHomepageHeroTitle">AN EDITORIAL STOREFRONT FOR MODERN DRESSING.</h1>
         <p class="vrai-homepage__lede">
           Structured tailoring, fluid essentials, and elevated layers curated with a quieter luxury point of view.
         </p>
@@ -85,126 +48,44 @@
           <a class="vrai-homepage__button vrai-homepage__button--ghost" href="{{ minimal_url }}">View minimal</a>
         </div>
       </div>
-      <div class="vrai-homepage__hero-media">
+      <div class="vrai-homepage__hero-media" data-vrai-parallax-wrap>
         {%- if all_collection.products.first.featured_image != blank -%}
-          {{ all_collection.products.first.featured_image | image_url: width: 1400 | image_tag: alt: 'New season arrivals', loading: 'eager' }}
+          {{ all_collection.products.first.featured_image | image_url: width: 1400 | image_tag: alt: 'New season arrivals', loading: 'eager', class: 'vrai-homepage__parallax-image' }}
         {%- elsif all_collection.image != blank -%}
-          {{ all_collection.image | image_url: width: 1400 | image_tag: alt: 'Shop the collection', loading: 'eager' }}
+          {{ all_collection.image | image_url: width: 1400 | image_tag: alt: 'Shop the collection', loading: 'eager', class: 'vrai-homepage__parallax-image' }}
         {%- else -%}
-          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80" alt="Model wearing a tailored neutral look in studio lighting" loading="eager">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80" alt="Model wearing a tailored neutral look in studio lighting" loading="eager" class="vrai-homepage__parallax-image">
         {%- endif -%}
       </div>
     </section>
 
     <section class="vrai-homepage__collections vrai-reveal" aria-labelledby="VraiHomepageCollectionsTitle">
       <div class="vrai-homepage__section-heading">
-        <p class="vrai-homepage__eyebrow">{{ section.settings.collections_eyebrow | default: 'Collections' }}</p>
-        <h2 id="VraiHomepageCollectionsTitle">{{ section.settings.collections_heading | default: 'Shop by mood' }}</h2>
+        <p class="vrai-homepage__eyebrow">Collections</p>
+        <h2 id="VraiHomepageCollectionsTitle">Shop by mood</h2>
       </div>
-      <div
-        class="vrai-homepage__collection-grid"
-        style="--vrai-category-columns: {{ section.settings.collections_columns | default: 3 }};"
-      >
-        {%- if category_blocks_count > 0 -%}
-          {%- assign rendered_category_blocks = 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if rendered_category_blocks >= category_limit -%}
-              {%- break -%}
-            {%- endif -%}
-            {%- if block.type == 'collection_category' and block.settings.collection != blank -%}
-              {%- assign rendered_category_blocks = rendered_category_blocks | plus: 1 -%}
-              {%- assign category_collection = block.settings.collection -%}
-              {%- assign category_title = block.settings.custom_title | strip -%}
-              {%- if category_title == blank -%}
-                {%- assign category_title = category_collection.title -%}
-              {%- endif -%}
-              {%- assign category_descriptor = block.settings.descriptor | strip -%}
-              {%- if category_descriptor == blank -%}
-                {%- assign category_descriptor = 'Curated edit' -%}
-              {%- endif -%}
-              <a class="vrai-homepage__collection-card" href="{{ category_collection.url }}" {{ block.shopify_attributes }}>
-                {%- if category_collection.image != blank -%}
-                  {{ category_collection.image | image_url: width: 900 | image_tag: alt: category_title, loading: 'lazy' }}
-                {%- elsif category_collection.products.first.featured_image != blank -%}
-                  {{ category_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: category_title, loading: 'lazy' }}
-                {%- else -%}
-                  <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_title | escape }}" loading="lazy">
-                {%- endif -%}
-                <span class="vrai-homepage__collection-meta">{{ category_descriptor | escape }}</span>
-                <strong>{{ category_title | escape }}</strong>
-              </a>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          {%- assign fallback_category_count = 0 -%}
-          {%- for category_collection in collections -%}
-            {%- if fallback_category_count >= category_limit -%}
-              {%- break -%}
-            {%- endif -%}
-            {%- if category_collection.handle == 'all' or category_collection.handle == 'frontpage' or category_collection.products_count == 0 -%}
-              {%- continue -%}
-            {%- endif -%}
-            {%- assign fallback_category_count = fallback_category_count | plus: 1 -%}
-            <a class="vrai-homepage__collection-card" href="{{ category_collection.url }}">
-              {%- if category_collection.image != blank -%}
-                {{ category_collection.image | image_url: width: 900 | image_tag: alt: category_collection.title, loading: 'lazy' }}
-              {%- elsif category_collection.products.first.featured_image != blank -%}
-                {{ category_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: category_collection.title, loading: 'lazy' }}
-              {%- else -%}
-                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="{{ category_collection.title | escape }}" loading="lazy">
-              {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Curated edit</span>
-              <strong>{{ category_collection.title | escape }}</strong>
-            </a>
-          {%- endfor -%}
-
-          {%- if fallback_category_count == 0 -%}
-            <a class="vrai-homepage__collection-card" href="{{ minimal_url }}">
-              {%- if minimal_collection.image != blank -%}
-                {{ minimal_collection.image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
-              {%- elsif minimal_collection.products.first.featured_image != blank -%}
-                {{ minimal_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: minimal_collection.title, loading: 'lazy' }}
-              {%- else -%}
-                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Minimal collection" loading="lazy">
-              {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Clean silhouettes</span>
-              <strong>Minimal</strong>
-            </a>
-            <a class="vrai-homepage__collection-card" href="{{ streetwear_url }}">
-              {%- if streetwear_collection.image != blank -%}
-                {{ streetwear_collection.image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
-              {%- elsif streetwear_collection.products.first.featured_image != blank -%}
-                {{ streetwear_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: streetwear_collection.title, loading: 'lazy' }}
-              {%- else -%}
-                <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80" alt="Streetwear collection" loading="lazy">
-              {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Utility layers</span>
-              <strong>Streetwear</strong>
-            </a>
-            <a class="vrai-homepage__collection-card" href="{{ adventure_url }}">
-              {%- if adventure_collection.image != blank -%}
-                {{ adventure_collection.image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
-              {%- elsif adventure_collection.products.first.featured_image != blank -%}
-                {{ adventure_collection.products.first.featured_image | image_url: width: 900 | image_tag: alt: adventure_collection.title, loading: 'lazy' }}
-              {%- else -%}
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Adventure collection" loading="lazy">
-              {%- endif -%}
-              <span class="vrai-homepage__collection-meta">Technical outerwear</span>
-              <strong>Adventure</strong>
-            </a>
+      <div class="vrai-homepage__collection-grid">
+        {%- for handle in mood_handles -%}
+          {%- assign mood_collection = collections[handle] -%}
+          {%- assign mood_title = mood_collection.title -%}
+          {%- if mood_collection == blank -%}
+            {%- continue -%}
           {%- endif -%}
-        {%- endif -%}
-      </div>
-      {%- if section.settings.show_collections_cta -%}
-        <div class="vrai-homepage__section-footer">
-          <a
-            class="vrai-homepage__button vrai-homepage__button--ghost"
-            href="{{ section.settings.collections_cta_url | default: all_collections_url }}"
-          >
-            {{ section.settings.collections_cta_label | default: 'Browse all categories' }}
+          <a class="vrai-homepage__collection-card vrai-homepage__collection-card--overlay" href="{{ mood_collection.url }}">
+            {%- if mood_collection.image != blank -%}
+              {{ mood_collection.image | image_url: width: 1200 | image_tag: alt: mood_title, loading: 'lazy' }}
+            {%- elsif mood_collection.products.first.images[1] != blank -%}
+              {{ mood_collection.products.first.images[1] | image_url: width: 1200 | image_tag: alt: mood_title, loading: 'lazy' }}
+            {%- elsif mood_collection.products.first.featured_image != blank -%}
+              {{ mood_collection.products.first.featured_image | image_url: width: 1200 | image_tag: alt: mood_title, loading: 'lazy' }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80" alt="{{ mood_title | escape }}" loading="lazy">
+            {%- endif -%}
+            <span class="vrai-homepage__collection-overlay"></span>
+            <strong>{{ mood_title }}</strong>
           </a>
-        </div>
-      {%- endif -%}
+        {%- endfor -%}
+      </div>
     </section>
 
     <section class="vrai-homepage__products vrai-reveal" aria-labelledby="VraiHomepageProductsTitle">
@@ -219,27 +100,36 @@
       <div class="vrai-homepage__product-grid">
         {%- if all_collection != blank and all_collection.products_count > 0 -%}
           {%- for product in all_collection.products limit: 4 -%}
+            {%- assign first_variant = product.selected_or_first_available_variant -%}
+            {%- assign product_created_timestamp = product.created_at | date: '%s' | plus: 0 -%}
             <article class="vrai-homepage__product-card">
               <a class="vrai-homepage__product-image" href="{{ product.url }}">
-                {%- if product.compare_at_price > product.price -%}
-                  {%- assign hp_save_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
-                  <span class="vrai-card__badge vrai-card__badge--sale">Save {{ hp_save_pct }}%</span>
+                {%- if product_created_timestamp > new_threshold -%}
+                  <span class="vrai-card__badge vrai-card__badge--new">New</span>
                 {%- endif -%}
                 {%- if product.featured_image != blank -%}
-                  {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy', class: 'vrai-homepage__image-primary' }}
+                  {%- if product.images[1] != blank -%}
+                    {{ product.images[1] | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy', class: 'vrai-homepage__image-secondary' }}
+                  {%- endif -%}
                 {%- else -%}
-                  <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?auto=format&fit=crop&w=900&q=80" alt="{{ product.title | escape }}" loading="lazy">
+                  <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?auto=format&fit=crop&w=900&q=80" alt="{{ product.title | escape }}" loading="lazy" class="vrai-homepage__image-primary">
                 {%- endif -%}
               </a>
               <div class="vrai-homepage__product-body">
-                <p class="vrai-homepage__product-vendor">{{ product.vendor }}</p>
-                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                <h3><a href="{{ product.url }}">{{ product.title | truncatewords: 6, '' }}</a></h3>
                 <p class="vrai-homepage__product-price">
                   {{ product.price | money }}
                   {%- if product.compare_at_price > product.price -%}
                     <span>{{ product.compare_at_price | money }}</span>
                   {%- endif -%}
                 </p>
+                {%- if first_variant != blank and first_variant.available -%}
+                  {%- form 'product', product, class: 'vrai-homepage__quick-add-form' -%}
+                    <input type="hidden" name="id" value="{{ first_variant.id }}">
+                    <button type="submit" class="vrai-homepage__quick-add">Quick add</button>
+                  {%- endform -%}
+                {%- endif -%}
               </div>
             </article>
           {%- endfor -%}
@@ -264,31 +154,11 @@
       </div>
     </section>
 
-    <section class="vrai-homepage__editorial vrai-reveal" aria-labelledby="VraiHomepageEditorialTitle">
-      <div class="vrai-homepage__editorial-media">
-        {%- assign editorial_product = all_collection.products | where: 'available', true | sample -%}
-        {%- if editorial_product.images[1] != blank -%}
-          {{ editorial_product.images[1] | image_url: width: 1400 | image_tag: alt: 'Editorial styling', loading: 'lazy' }}
-        {%- elsif editorial_product.featured_image != blank -%}
-          {{ editorial_product.featured_image | image_url: width: 1400 | image_tag: alt: 'Editorial styling', loading: 'lazy' }}
-        {%- else -%}
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=80" alt="Editorial fashion portrait" loading="lazy">
-        {%- endif -%}
-      </div>
-      <div class="vrai-homepage__editorial-copy">
-        <p class="vrai-homepage__eyebrow">Brand point of view</p>
-        <h2 id="VraiHomepageEditorialTitle">Fashion-first, not template-first.</h2>
-        <p>
-          This storefront is built to feel more like a lookbook than a default Shopify homepage: stronger imagery, sharper typography, and more intentional spacing.
-        </p>
-        <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/contact">Book a styling session</a>
-      </div>
-    </section>
-
     <section class="vrai-homepage__brand-story vrai-reveal" aria-labelledby="VraiBrandStoryTitle">
       <div class="vrai-homepage__brand-story-content">
         <div class="vrai-homepage__brand-story-media">
-          {%- assign story_product = all_collection.products | where: 'available', true | sample -%}
+          {%- assign available_story_products = all_collection.products | where: 'available', true -%}
+          {%- assign story_product = available_story_products.first -%}
           {%- if story_product.images[2] != blank -%}
             {{ story_product.images[2] | image_url: width: 1800 | image_tag: alt: 'Our Story', loading: 'lazy', class: 'vrai-homepage__brand-story-img' }}
           {%- elsif story_product.featured_image != blank -%}
@@ -298,15 +168,34 @@
           {%- endif -%}
         </div>
         <div class="vrai-homepage__brand-story-text">
-          <p class="vrai-homepage__eyebrow">Since 2024</p>
+          <p class="vrai-homepage__eyebrow">Our story</p>
           <h2 id="VraiBrandStoryTitle">Redefining authentic style</h2>
           <div class="vrai-homepage__brand-story-body">
-            <p>VRAI was born from a simple belief: that authentic style doesn't follow trends—it creates them. We design for the modern individual who values quality over quantity, timelessness over seasonality, and authenticity over imitation.</p>
-            <p>Every piece in our collection is thoughtfully crafted with premium materials and meticulous attention to detail. We collaborate with artisans who share our commitment to exceptional craftsmanship, ensuring that each item tells its own story.</p>
-            <p>From our signature minimal essentials to our bold statement pieces, VRAI represents a new approach to modern dressing—one that honors individuality, celebrates craftsmanship, and embraces the beauty of genuine self-expression.</p>
+            <p>VRAI was born from a belief that authentic style doesn't follow trends - it creates them. We curate for the modern individual: quality over quantity, timelessness over seasonality.</p>
+            <p>Since 2024, every piece is thoughtfully selected from artisans who share our commitment to craft.</p>
           </div>
-          <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/about">Discover Our Story</a>
+          <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/about">Discover our story</a>
         </div>
+      </div>
+    </section>
+
+    <section class="vrai-homepage__ugc vrai-reveal" aria-labelledby="VraiHomepageUgcTitle">
+      <div class="vrai-homepage__section-heading">
+        <p class="vrai-homepage__eyebrow">Community</p>
+        <h2 id="VraiHomepageUgcTitle">#VRAICANADA</h2>
+      </div>
+      <div class="vrai-homepage__ugc-grid">
+        {%- for product in all_collection.products limit: 6 -%}
+          <a href="{{ product.url }}" class="vrai-homepage__ugc-item" aria-label="View {{ product.title | escape }}">
+            {%- if product.images[1] != blank -%}
+              {{ product.images[1] | image_url: width: 700 | image_tag: alt: product.title, loading: 'lazy' }}
+            {%- elsif product.featured_image != blank -%}
+              {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, loading: 'lazy' }}
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80" alt="Community style" loading="lazy">
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
       </div>
     </section>
 
@@ -321,6 +210,7 @@
         <label class="visually-hidden" for="VraiHomepageEmail">Email address</label>
         <input id="VraiHomepageEmail" type="email" name="contact[email]" placeholder="Email address" required>
         <button type="submit">Join now</button>
+        <p class="vrai-homepage__privacy-note">By joining, you agree to receive marketing emails. You can unsubscribe at any time.</p>
         {%- if form.posted_successfully? -%}
           <p class="vrai-homepage__form-message" role="status">You are on the list.</p>
         {%- endif -%}
@@ -330,105 +220,13 @@
       {%- endform -%}
     </section>
   </main>
-
-  <footer class="vrai-homepage__footer">
-    <p>VRAI</p>
-    <div>
-      <a href="{{ routes.all_products_collection_url }}">Shop</a>
-      <a href="/pages/contact">Contact</a>
-      <a href="/policies/privacy-policy">Privacy</a>
-    </div>
-  </footer>
 </section>
 
 {% schema %}
 {
   "name": "Homepage redesign",
-  "settings": [
-    {
-      "type": "text",
-      "id": "announcement_text",
-      "label": "Announcement bar text",
-      "default": "Complimentary express shipping on all orders. New season pieces now live."
-    },
-    {
-      "type": "link_list",
-      "id": "primary_menu",
-      "label": "Primary navigation menu"
-    },
-    {
-      "type": "text",
-      "id": "collections_heading",
-      "label": "Collections section heading",
-      "default": "Shop by mood"
-    },
-    {
-      "type": "text",
-      "id": "collections_eyebrow",
-      "label": "Collections section eyebrow",
-      "default": "Collections"
-    },
-    {
-      "type": "range",
-      "id": "collections_limit",
-      "label": "Maximum categories to show",
-      "min": 3,
-      "max": 18,
-      "step": 1,
-      "default": 9
-    },
-    {
-      "type": "range",
-      "id": "collections_columns",
-      "label": "Collection columns on desktop",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "default": 3
-    },
-    {
-      "type": "checkbox",
-      "id": "show_collections_cta",
-      "label": "Show collections call to action",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "collections_cta_label",
-      "label": "Collections call to action label",
-      "default": "Browse all categories"
-    },
-    {
-      "type": "url",
-      "id": "collections_cta_url",
-      "label": "Collections call to action link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "collection_category",
-      "name": "Collection category",
-      "limit": 18,
-      "settings": [
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Collection"
-        },
-        {
-          "type": "text",
-          "id": "custom_title",
-          "label": "Custom title (optional)"
-        },
-        {
-          "type": "text",
-          "id": "descriptor",
-          "label": "Descriptor",
-          "default": "Curated edit"
-        }
-      ]
-    }
-  ],
+  "settings": [],
+  "blocks": [],
   "presets": [
     {
       "name": "Homepage redesign"

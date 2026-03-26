@@ -14,7 +14,11 @@
   </header>
 
   <div class="vrai-contact">
-    <p class="vrai-contact__lead">Questions on fit, shipping, or custom sourcing? Send us a note and our team will reply shortly.</p>
+    {%- assign contact_email = shop.email | default: 'support@vraicanada.com' -%}
+    <p class="vrai-contact__lead">Questions on fit, styling, or custom sourcing? We typically respond within 24 hours.</p>
+    <div class="vrai-contact__styling-cta-wrap">
+      <a class="vrai-contact__styling-cta" href="mailto:{{ contact_email | escape }}?subject=Styling%20Session%20Request">Book a Styling Session</a>
+    </div>
 
     {% form 'contact', class: 'vrai-contact__form' %}
       {% if form.posted_successfully? %}
@@ -39,8 +43,19 @@
         </div>
 
         <div class="vrai-contact__field vrai-contact__field--full">
-          <label for="ContactFormPhone">Phone</label>
-          <input id="ContactFormPhone" type="tel" name="contact[phone]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" autocomplete="tel">
+          <label for="ContactOrderNumber">Order Number (optional)</label>
+          <input id="ContactOrderNumber" type="text" name="contact[Order Number]" value="" autocomplete="off">
+        </div>
+
+        <div class="vrai-contact__field vrai-contact__field--full">
+          <label for="ContactSubject">Subject</label>
+          <select id="ContactSubject" name="contact[Subject]" required>
+            <option value="">Choose a subject</option>
+            <option value="Order Inquiry">Order Inquiry</option>
+            <option value="Styling">Styling</option>
+            <option value="Press">Press</option>
+            <option value="General">General</option>
+          </select>
         </div>
 
         <div class="vrai-contact__field vrai-contact__field--full">
@@ -50,6 +65,12 @@
       </div>
 
       <button class="vrai-contact__submit" type="submit">Submit</button>
+      <p class="vrai-contact__response-time">Business hours: Monday-Friday, 10 AM-6 PM EST.</p>
+      <div class="vrai-contact__socials" aria-label="Social links">
+        <a href="mailto:{{ contact_email | escape }}">Email us</a>
+        <a href="/pages/about">Our story</a>
+        <a href="{{ routes.search_url }}">Search the edit</a>
+      </div>
     {% endform %}
   </div>
 </section>

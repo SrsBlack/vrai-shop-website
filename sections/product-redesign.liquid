@@ -11,7 +11,7 @@
       <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
       <span class="vrai-breadcrumbs__separator">/</span>
     {%- endif -%}
-    <span aria-current="page">{{ product.title | truncate: 40 }}</span>
+    <span aria-current="page">{{ product.title | truncatewords: 8, '' }}</span>
   </nav>
 
   <header class="vrai-product__top vrai-reveal">
@@ -63,8 +63,8 @@
     </div>
 
     <div class="vrai-product__details vrai-reveal">
-      <p class="vrai-product__vendor">{{ product.vendor }}</p>
-      <h2 class="vrai-product__name">{{ product.title }}</h2>
+      <p class="vrai-product__vendor">VRAI Curated Edit</p>
+      <h2 class="vrai-product__name">{{ product.title | truncatewords: 8, '' }}</h2>
 
       <p class="vrai-product__price">
         <span data-vrai-price>{{ current_variant.price | money }}</span>
@@ -87,19 +87,36 @@
       {%- endif -%}
 
       {%- form 'product', product, class: 'vrai-product__form' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-vrai-variant-id>
         {%- if product.variants.size > 1 -%}
-          <div class="vrai-product__form-row">
-            <label for="VariantSelect">Choose option</label>
-            <select id="VariantSelect" name="id" data-vrai-variant-select>
-              {%- for variant in product.variants -%}
-                <option value="{{ variant.id }}" {% if variant.id == current_variant.id %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
-                  {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
-                </option>
-              {%- endfor -%}
-            </select>
-          </div>
-        {%- else -%}
-          <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {%- for option in product.options_with_values -%}
+            {%- assign option_name = option.name | downcase -%}
+            <fieldset class="vrai-product__form-row vrai-product__option-group" data-option-index="{{ option.position | minus: 1 }}">
+              <legend>{{ option.name }}</legend>
+              <div class="vrai-product__option-values {% if option_name contains 'color' or option_name contains 'colour' %}vrai-product__option-values--swatch{% else %}vrai-product__option-values--tile{% endif %}">
+                {%- for value in option.values -%}
+                  <label class="vrai-product__option-label" for="VraiOption-{{ option.position }}-{{ forloop.index0 }}">
+                    <input
+                      id="VraiOption-{{ option.position }}-{{ forloop.index0 }}"
+                      type="radio"
+                      name="option-{{ option.position }}"
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                    >
+                    <span {% if option_name contains 'color' or option_name contains 'colour' %}style="--vrai-swatch: {{ value | handle }};" class="vrai-product__swatch"{% endif %}>{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endfor -%}
+
+          <select id="VariantSelect" data-vrai-variant-select class="visually-hidden" aria-hidden="true" tabindex="-1">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {% if variant.id == current_variant.id %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}{% unless variant.available %} - Sold out{% endunless %}
+              </option>
+            {%- endfor -%}
+          </select>
         {%- endif -%}
 
         <div class="vrai-product__form-row">
@@ -115,11 +132,29 @@
         <button type="submit" data-vrai-submit {% unless current_variant.available %}disabled{% endunless %}>
           {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
         </button>
+        <p class="vrai-product__more-payments">Accelerated payment methods appear at checkout when available.</p>
         {{ form | payment_button }}
       {%- endform -%}
 
       {%- if product.description != blank -%}
-        <div class="vrai-product__description rte">{{ product.description }}</div>
+        <div class="vrai-product__accordions">
+          <details class="vrai-product__accordion" open>
+            <summary>Product details</summary>
+            <div class="vrai-product__accordion-body rte">{{ product.description }}</div>
+          </details>
+          <details class="vrai-product__accordion">
+            <summary>Shipping &amp; returns</summary>
+            <div class="vrai-product__accordion-body">
+              <p>Complimentary tracked shipping on every order, with straightforward 30-day returns.</p>
+            </div>
+          </details>
+          <details class="vrai-product__accordion">
+            <summary>Size guide</summary>
+            <div class="vrai-product__accordion-body">
+              <p>Need fit help? Use the size guide button above for complete measurements.</p>
+            </div>
+          </details>
+        </div>
       {%- endif -%}
     </div>
   </div>
@@ -136,8 +171,7 @@
   {%- comment -%} Related Products Carousel {%- endcomment -%}
   {%- if product.collections.size > 0 -%}
     {%- assign primary_collection = product.collections.first -%}
-    {%- assign related_products = primary_collection.products | where_not: "id", product.id | limit: 8 -%}
-    {%- if related_products.size > 0 -%}
+    {%- if primary_collection.products_count > 1 -%}
     <section class="vrai-related vrai-reveal" aria-labelledby="related-heading">
       <h2 id="related-heading" class="vrai-related__title">You may also like</h2>
       <div class="vrai-related__carousel" data-vrai-carousel>
@@ -145,7 +179,10 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <div class="vrai-related__track" data-vrai-carousel-track>
-          {%- for related in related_products -%}
+          {%- for related in primary_collection.products limit: 9 -%}
+            {%- if related.id == product.id -%}
+              {%- continue -%}
+            {%- endif -%}
             {%- assign related_variant = related.selected_or_first_available_variant -%}
             <article class="vrai-related__item">
               <a href="{{ related.url }}" class="vrai-related__link">
