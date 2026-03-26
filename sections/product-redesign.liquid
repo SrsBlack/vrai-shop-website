@@ -15,7 +15,13 @@
   </nav>
 
   <header class="vrai-product__top vrai-reveal">
-    <p class="vrai-store-page__eyebrow">Product</p>
+    <span class="vrai-store-page__eyebrow">
+      {%- if product.collections.size > 0 -%}
+        {{ product.collections.first.title }} Collection
+      {%- else -%}
+        New Arrival
+      {%- endif -%}
+    </span>
     <h1 class="vrai-store-page__title">{{ product.title }}</h1>
   </header>
 
@@ -159,13 +165,23 @@
     </div>
   </div>
 
-  <aside class="vrai-product__meta vrai-reveal">
-    <h3>Fit and finish</h3>
-    <p>Designed with elevated materials and made to style seamlessly from day to evening.</p>
-    <h3>Shipping</h3>
-    <p>Complimentary tracked shipping and easy returns on all orders.</p>
-    <h3>Styling notes</h3>
-    <p>Pair with minimal tailoring, tonal knitwear, and refined accessories for a complete look.</p>
+  <aside class="vrai-product__meta vrai-product__meta--editorial vrai-reveal">
+    <div class="vrai-product__meta-grid">
+      <div class="vrai-product__meta-item">
+        <div class="vrai-product__meta-icon">
+          <span class="material-symbols-outlined">architecture</span>
+          <span>Material</span>
+        </div>
+        <p>Crafted from premium materials with an emphasis on quality, texture, and longevity.</p>
+      </div>
+      <div class="vrai-product__meta-item">
+        <div class="vrai-product__meta-icon">
+          <span class="material-symbols-outlined">dry_cleaning</span>
+          <span>Care</span>
+        </div>
+        <p>Follow garment care label. Store on a hanger in a cool, dry space away from direct sunlight.</p>
+      </div>
+    </div>
   </aside>
 
   {%- comment -%} Related Products Carousel {%- endcomment -%}
