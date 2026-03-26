@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 body.page-type-index #header-group,
 body.page-type-index footer,
@@ -8,14 +9,12 @@ body.page-type-index .shopify-section-group-footer-group {
 }
 
 body.page-type-index {
-  background:
-    radial-gradient(circle at top left, rgba(212, 197, 180, 0.25), transparent 40%),
-    linear-gradient(180deg, #f8f2eb 0%, #f5efe8 32%, #f8f5f1 100%);
+  background: #fbf9f4;
 }
 
 .vrai-homepage {
-  color: #181411;
-  font-family: 'Inter', sans-serif;
+  color: #31332c;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .vrai-homepage *,
@@ -81,9 +80,11 @@ body.page-type-index {
 }
 
 .vrai-homepage__wordmark {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(1.9rem, 3vw, 2.7rem);
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .vrai-homepage__logo {
@@ -155,9 +156,11 @@ body.page-type-index {
 }
 
 .vrai-homepage__eyebrow {
-  color: #8a6d53;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  color: #5e6058;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   margin: 0 0 0.8rem;
   text-transform: uppercase;
 }
@@ -166,11 +169,11 @@ body.page-type-index {
 .vrai-homepage__section-heading h2,
 .vrai-homepage__editorial-copy h2,
 .vrai-homepage__newsletter h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(2.8rem, 7vw, 5.8rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
   margin: 0;
 }
 
@@ -185,13 +188,14 @@ body.page-type-index {
 .vrai-homepage__hero h1 {
   font-size: clamp(3.2rem, 9vw, 7.5rem);
   font-style: italic;
+  font-weight: 200;
   letter-spacing: -0.045em;
-  line-height: 0.96;
+  line-height: 0.93;
 }
 
 .vrai-homepage__lede,
 .vrai-homepage__editorial-copy p {
-  color: #4f463f;
+  color: #5e6058;
   font-size: 1.05rem;
   line-height: 1.8;
 }
@@ -204,59 +208,66 @@ body.page-type-index {
 }
 
 .vrai-homepage__button {
-  border: 1px solid #181411;
-  border-radius: 999px;
+  border: 1px solid #0e0e0c;
+  border-radius: 9999px;
   display: inline-flex;
-  font-size: 0.82rem;
-  letter-spacing: 0.15em;
-  padding: 1rem 1.4rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  padding: 1rem 1.6rem;
   text-transform: uppercase;
-  transition: background 0.35s ease, color 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.25s ease;
 }
 
 .vrai-homepage__button--primary {
-  background: #181411;
-  color: #f7f1eb;
+  background: #0e0e0c;
+  border-color: #0e0e0c;
+  color: #fbf9f4;
 }
 
 .vrai-homepage__button--primary:hover {
-  background: #2a2520;
-  box-shadow: 0 6px 24px rgba(24, 20, 17, 0.28);
-  transform: translateY(-2px);
+  background: #31332c;
+  border-color: #31332c;
+  transform: translateY(-1px);
 }
 
 .vrai-homepage__button--ghost {
-  background: transparent;
+  background: rgba(251, 249, 244, 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(49, 51, 44, 0.15);
+  color: #0e0e0c;
 }
 
 .vrai-homepage__button--ghost:hover {
-  background: #181411;
-  color: #f7f1eb;
-  transform: translateY(-2px);
+  background: #0e0e0c;
+  border-color: #0e0e0c;
+  color: #fbf9f4;
 }
 
 .vrai-homepage__hero-media img,
 .vrai-homepage__editorial-media img,
 .vrai-homepage__collection-card img,
 .vrai-homepage__product-image img {
-  border-radius: 28px;
+  border-radius: 2px;
   object-fit: cover;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   width: 100%;
+  filter: grayscale(15%) brightness(0.95);
 }
 
 .vrai-homepage__hero-media img {
   aspect-ratio: 0.80;
-  box-shadow: 0 24px 80px rgba(31, 22, 18, 0.15);
 }
 
 .vrai-homepage__hero-media:hover img {
   transform: scale(1.03);
+  filter: grayscale(0%) brightness(1);
 }
 
 .vrai-homepage__hero-media {
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 2px;
 }
 
 .vrai-homepage__collections,
@@ -297,31 +308,27 @@ body.page-type-index {
 .vrai-homepage__collection-card,
 .vrai-homepage__product-card,
 .vrai-homepage__editorial-copy {
-  background: rgba(255, 251, 247, 0.78);
-  border: 1px solid rgba(24, 20, 17, 0.08);
-  border-radius: 28px;
-  box-shadow: 0 16px 40px rgba(44, 28, 17, 0.06);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #f5f4ed;
+  border: none;
+  border-radius: 2px;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ── Newsletter: dark editorial section ── */
 .vrai-homepage__newsletter {
-  background: #1e1a17;
-  border: 1px solid rgba(255, 251, 247, 0.06);
-  border-radius: 28px;
-  box-shadow: 0 24px 60px rgba(10, 8, 6, 0.25);
-  color: #f5f0ea;
-  transition: box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  background: #0e0e0c;
+  border: none;
+  border-radius: 2px;
+  color: #fbf9f4;
 }
 
 .vrai-homepage__newsletter h2,
 .vrai-homepage__newsletter p {
-  color: #f5f0ea;
+  color: #fbf9f4;
 }
 
 .vrai-homepage__newsletter .vrai-homepage__eyebrow {
-  color: rgba(245, 240, 234, 0.52);
+  color: rgba(251, 249, 244, 0.50);
 }
 
 .vrai-homepage__newsletter .vrai-homepage__newsletter-form input {
@@ -335,16 +342,15 @@ body.page-type-index {
 }
 
 .vrai-homepage__newsletter .vrai-homepage__newsletter-form button {
-  background: #f5f0ea;
-  border-color: #f5f0ea;
-  color: #1e1a17;
+  background: #fbf9f4;
+  border-color: #fbf9f4;
+  color: #0e0e0c;
 }
 
 .vrai-homepage__newsletter .vrai-homepage__newsletter-form button:hover {
   background: #ffffff;
   border-color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .vrai-homepage__newsletter .vrai-homepage__form-message {
@@ -357,8 +363,7 @@ body.page-type-index {
 
 .vrai-homepage__collection-card:hover,
 .vrai-homepage__product-card:hover {
-  box-shadow: 0 22px 56px rgba(44, 28, 17, 0.14);
-  transform: translateY(-6px);
+  transform: translateY(-3px);
 }
 
 .vrai-homepage__collection-card {
@@ -378,19 +383,20 @@ body.page-type-index {
 .vrai-homepage__collection-card strong,
 .vrai-homepage__product-card h3 {
   display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.9rem;
-  font-weight: 600;
-  line-height: 1.12;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.15;
   margin-top: 0.25rem;
 }
 
 .vrai-homepage__collection-meta,
 .vrai-homepage__product-vendor,
 .vrai-homepage__product-price span {
-  color: #7e6f64;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  color: #5e6058;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -404,7 +410,7 @@ body.page-type-index {
 
 .vrai-homepage__product-image {
   overflow: hidden;
-  border-radius: 28px 28px 0 0;
+  border-radius: 2px 2px 0 0;
   position: relative;
 }
 
@@ -413,7 +419,7 @@ body.page-type-index {
 }
 
 .vrai-homepage__product-image img {
-  aspect-ratio: 0.70;
+  aspect-ratio: 3/4;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -449,7 +455,7 @@ body.page-type-index {
 
 .vrai-homepage__editorial-media {
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 2px;
 }
 
 .vrai-homepage__editorial-media:hover img {
@@ -475,26 +481,33 @@ body.page-type-index {
 
 .vrai-homepage__newsletter-form input,
 .vrai-homepage__newsletter-form button {
-  border: 1px solid rgba(24, 20, 17, 0.16);
-  border-radius: 999px;
+  border: none;
+  border-bottom: 1px solid rgba(251, 249, 244, 0.2);
+  border-radius: 0;
   font: inherit;
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
   min-height: 56px;
-  padding: 0 1rem;
+  padding: 0;
 }
 
 .vrai-homepage__newsletter-form button {
-  background: #181411;
-  color: #f7f1eb;
-  letter-spacing: 0.14em;
+  background: #fbf9f4;
+  border: none;
+  border-radius: 9999px;
+  color: #0e0e0c;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.25s ease;
+  transition: background 0.35s ease, transform 0.25s ease;
 }
 
 .vrai-homepage__newsletter-form button:hover {
-  background: #2a2520;
-  box-shadow: 0 6px 20px rgba(24, 20, 17, 0.25);
-  transform: translateY(-2px);
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
 .vrai-homepage__form-message {
@@ -508,11 +521,12 @@ body.page-type-index {
 
 .vrai-homepage__footer {
   align-items: center;
-  border-top: 1px solid rgba(24, 20, 17, 0.08);
+  border-top: 1px solid rgba(49, 51, 44, 0.1);
   display: flex;
-  font-size: 0.82rem;
+  font-size: 0.72rem;
+  font-weight: 500;
   justify-content: space-between;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   padding-bottom: 2rem;
   padding-top: 1.5rem;
   text-transform: uppercase;
@@ -544,7 +558,7 @@ body.page-type-index {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 2px;
 }
 
 .vrai-homepage__brand-story-img {
@@ -564,10 +578,11 @@ body.page-type-index {
 }
 
 .vrai-homepage__brand-story-text h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
-  font-weight: 600;
-  line-height: 1.12;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
   margin-bottom: 1.5rem;
   margin-top: 0.75rem;
 }
@@ -577,7 +592,7 @@ body.page-type-index {
 }
 
 .vrai-homepage__brand-story-body p {
-  color: #4a4440;
+  color: #5e6058;
   line-height: 1.75;
   margin-bottom: 1.25rem;
   font-size: 1.05rem;
@@ -695,4 +710,341 @@ body.page-type-index {
   font-size: 0.9rem;
   line-height: 1.6;
   margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – Full-screen hero
+   ═══════════════════════════════════════════════ */
+.vrai-homepage__hero--fullscreen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.vrai-homepage__hero-bg {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.vrai-homepage__hero-bg img {
+  filter: grayscale(20%) brightness(0.9);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.vrai-homepage__hero-gradient {
+  background: linear-gradient(to top, rgba(14, 14, 12, 0.40), transparent 60%);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.vrai-homepage__hero-copy--bottom {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2.5rem clamp(3rem, 6vw, 6rem);
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.vrai-homepage__hero--fullscreen h1 {
+  color: #fbf9f4;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-style: normal;
+  font-weight: 200;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  max-width: 56rem;
+  margin: 0 0 2.5rem;
+}
+
+.vrai-homepage__hero--fullscreen .vrai-homepage__button--ghost-light {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: #ffffff;
+}
+
+.vrai-homepage__hero--fullscreen .vrai-homepage__button--ghost-light:hover {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+.vrai-homepage__hero--fullscreen .vrai-homepage__button--primary {
+  background: #0e0e0c;
+  color: #fbf9f4;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – Asymmetric Mood Grid
+   ═══════════════════════════════════════════════ */
+.vrai-homepage__collection-grid--asymmetric {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 5fr 7fr;
+}
+
+.vrai-homepage__collection-grid--asymmetric .vrai-homepage__collection-card:nth-child(even) {
+  margin-top: 6rem;
+}
+
+.vrai-homepage__collection-grid--asymmetric .vrai-homepage__collection-card:nth-child(odd) img {
+  aspect-ratio: 4/5;
+}
+
+.vrai-homepage__collection-grid--asymmetric .vrai-homepage__collection-card:nth-child(even) img {
+  aspect-ratio: 16/10;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – Product Carousel
+   ═══════════════════════════════════════════════ */
+.vrai-homepage__products {
+  background: rgba(241, 238, 229, 0.50);
+}
+
+.vrai-homepage__carousel-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.vrai-homepage__carousel-btn {
+  align-items: center;
+  background: none;
+  border: 1px solid #e2e3d9;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  height: 3.25rem;
+  justify-content: center;
+  transition: border-color 0.3s ease;
+  width: 3.25rem;
+}
+
+.vrai-homepage__carousel-btn:hover {
+  border-color: #0e0e0c;
+}
+
+.vrai-homepage__carousel-btn .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.vrai-homepage__product-carousel {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.vrai-homepage__product-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.vrai-homepage__carousel-card {
+  cursor: pointer;
+  flex: 0 0 min(400px, 80vw);
+  scroll-snap-align: start;
+}
+
+.vrai-homepage__carousel-image {
+  aspect-ratio: 3/4;
+  background: #ffffff;
+  display: block;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.vrai-homepage__carousel-image img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+}
+
+.vrai-homepage__carousel-card:hover .vrai-homepage__carousel-image img {
+  transform: scale(1.05);
+}
+
+.vrai-homepage__carousel-meta {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vrai-homepage__carousel-meta h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.vrai-homepage__carousel-meta h4 a {
+  color: #0e0e0c;
+  text-decoration: none;
+}
+
+.vrai-homepage__carousel-price {
+  color: #797c73;
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – Brand Story Quote Overlay
+   ═══════════════════════════════════════════════ */
+.vrai-homepage__brand-story-media {
+  position: relative;
+}
+
+.vrai-homepage__brand-story-quote {
+  background: #f5f4ed;
+  bottom: -2.5rem;
+  display: none;
+  padding: 2rem;
+  position: absolute;
+  right: -1rem;
+  width: 50%;
+}
+
+.vrai-homepage__brand-story-quote p {
+  color: #797c73;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+@media (min-width: 821px) {
+  .vrai-homepage__brand-story-quote {
+    display: block;
+  }
+}
+
+.vrai-homepage__brand-story-text h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+}
+
+.vrai-homepage__text-link--underline {
+  border-bottom: 2px solid #0e0e0c;
+  color: #0e0e0c;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  padding-bottom: 0.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.vrai-homepage__text-link--underline:hover {
+  border-color: #797c73;
+  color: #797c73;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – UGC 4-Column Grayscale
+   ═══════════════════════════════════════════════ */
+.vrai-homepage__section-heading--center {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.vrai-homepage__ugc {
+  background: rgba(241, 238, 229, 0.60);
+}
+
+.vrai-homepage__ugc-sub {
+  color: #797c73;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 0.75rem;
+}
+
+.vrai-homepage__ugc-grid--4col {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .vrai-homepage__ugc-grid--4col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.vrai-homepage__ugc-item {
+  aspect-ratio: 1;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.vrai-homepage__ugc-item img {
+  filter: grayscale(100%);
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.7s ease, transform 0.7s ease;
+  width: 100%;
+}
+
+.vrai-homepage__ugc-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+.vrai-homepage__ugc-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.20);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.5s ease;
+}
+
+.vrai-homepage__ugc-overlay .material-symbols-outlined {
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.vrai-homepage__ugc-item:hover .vrai-homepage__ugc-overlay {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   EDITORIAL HOMEPAGE – Responsive fixes
+   ═══════════════════════════════════════════════ */
+@media (max-width: 820px) {
+  .vrai-homepage__collection-grid--asymmetric {
+    grid-template-columns: 1fr;
+  }
+
+  .vrai-homepage__collection-grid--asymmetric .vrai-homepage__collection-card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .vrai-homepage__hero--fullscreen h1 {
+    font-size: clamp(2.4rem, 10vw, 4rem);
+  }
 }
