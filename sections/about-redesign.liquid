@@ -8,41 +8,79 @@
     <span aria-current="page">About</span>
   </nav>
 
-  <section class="vrai-about__hero vrai-reveal" aria-labelledby="VraiAboutHeroTitle">
-    <div class="vrai-about__hero-media">
+  {%- comment -%} Hero: The Digital Curator {%- endcomment -%}
+  <section class="vrai-about__hero vrai-about__hero--editorial vrai-reveal" aria-labelledby="VraiAboutHeroTitle">
+    <div class="vrai-about__hero-bg">
       {%- if section.settings.hero_image != blank -%}
         {{ section.settings.hero_image | image_url: width: 2200 | image_tag: alt: 'VRAI brand story', loading: 'eager' }}
       {%- else -%}
         <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=2200&q=80" alt="VRAI brand story" loading="eager">
       {%- endif -%}
-      <h1 id="VraiAboutHeroTitle">Our Story</h1>
+      <div class="vrai-about__hero-gradient"></div>
+    </div>
+    <div class="vrai-about__hero-copy">
+      <h1 id="VraiAboutHeroTitle">The Digital <br><span class="vrai-about__hero-italic">Curator</span></h1>
+      <p>VRAI is more than a label; it is an architectural study in dressing. We curate space, light, and texture to redefine the modern wardrobe.</p>
     </div>
   </section>
 
-  <section class="vrai-about__narrative vrai-reveal">
-    <p>VRAI was born from a belief that authentic style does not follow trends - it creates them. We curate for the modern individual: quality over quantity, timelessness over seasonality.</p>
-    <p>Since 2024, each piece has been selected with intention from artisans and independent labels that prioritize craft, fit, and longevity. We are anti-hype by design, and fashion-first in every decision.</p>
-    <p>Our mission is simple: build a quieter, sharper way to shop fashion online - one that feels editorial, personal, and true.</p>
+  {%- comment -%} Our Philosophy {%- endcomment -%}
+  <section class="vrai-about__philosophy vrai-reveal">
+    <div class="vrai-about__philosophy-text">
+      <span class="vrai-store-page__eyebrow">Our Philosophy</span>
+      <h2>Authenticity is <br><span class="vrai-about__hero-italic">The Only Luxury.</span></h2>
+      <p>Atelier Vrai was founded on the belief that a garment should never compete with its wearer. Our pieces are designed as frames — quiet, structural, and profoundly permanent. We reject the seasonal cycle in favor of an ongoing exhibition of form.</p>
+    </div>
+    <div class="vrai-about__philosophy-media">
+      {%- if section.settings.philosophy_image != blank -%}
+        {{ section.settings.philosophy_image | image_url: width: 1400 | image_tag: alt: 'Our philosophy', loading: 'lazy' }}
+      {%- else -%}
+        <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&w=1400&q=80" alt="Craftsmanship detail" loading="lazy">
+      {%- endif -%}
+    </div>
   </section>
 
-  <section class="vrai-about__values vrai-reveal" aria-label="Our values">
-    <article>
-      <h2>Quality</h2>
-      <p>Premium fabrics, precise silhouettes, and lasting construction.</p>
-    </article>
-    <article>
-      <h2>Craft</h2>
-      <p>Thoughtful sourcing from makers who value process and detail.</p>
-    </article>
-    <article>
-      <h2>Authenticity</h2>
-      <p>Original style choices grounded in confidence, not noise.</p>
-    </article>
+  {%- comment -%} Blockquote Break {%- endcomment -%}
+  <section class="vrai-about__quote vrai-reveal">
+    <span class="material-symbols-outlined">auto_awesome</span>
+    <blockquote>&ldquo;We do not build collections; we build an archive. Each piece is a response to the one before it, creating a dialogue of timelessness.&rdquo;</blockquote>
+    <cite>— The Creative Director</cite>
   </section>
 
-  <section class="vrai-about__founder vrai-reveal">
-    <h2>A note from the founder</h2>
-    <p>VRAI is a long-term project in taste, trust, and authenticity. Every collection is curated to help you build a wardrobe that feels like you - not like everyone else.</p>
+  {%- comment -%} Our Craft: Dark Section {%- endcomment -%}
+  <section class="vrai-about__craft vrai-reveal">
+    <div class="vrai-about__craft-header">
+      <h2>OUR <br><span class="vrai-about__hero-italic">CRAFT</span></h2>
+      <div class="vrai-about__craft-steps">
+        <span>01. Material Selection</span>
+        <span>02. Architectural Patterning</span>
+        <span>03. Tailored Assembly</span>
+        <span>04. Final Curation</span>
+      </div>
+    </div>
+    <div class="vrai-about__craft-grid">
+      <div class="vrai-about__craft-item">
+        <div class="vrai-about__craft-divider"></div>
+        <h3>The Fiber</h3>
+        <p>We source exclusively from heritage mills in Italy and Japan, prioritizing natural fibers that age with character and grace.</p>
+      </div>
+      <div class="vrai-about__craft-item">
+        <div class="vrai-about__craft-divider"></div>
+        <h3>The Silhouette</h3>
+        <p>Our patterns are drafted with movement in mind. We believe a garment should feel like an extension of one's own posture.</p>
+      </div>
+      <div class="vrai-about__craft-item">
+        <div class="vrai-about__craft-divider"></div>
+        <h3>The Finish</h3>
+        <p>Hand-finished seams and custom-cast hardware ensure that the internal architecture is as beautiful as the exterior.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Journal CTA {%- endcomment -%}
+  <section class="vrai-about__cta vrai-reveal">
+    <h2>Follow the Exhibition</h2>
+    <p>Sign up for our Journal to receive editorial insights and early access to new Curations.</p>
     <a class="vrai-cta" href="{{ routes.all_products_collection_url }}">Shop the edit</a>
   </section>
 </section>
@@ -55,6 +93,11 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "philosophy_image",
+      "label": "Philosophy image"
     }
   ],
   "presets": [

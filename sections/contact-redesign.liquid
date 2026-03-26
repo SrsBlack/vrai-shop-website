@@ -9,7 +9,7 @@
   </nav>
 
   <header class="vrai-product__top vrai-reveal">
-    <p class="vrai-store-page__eyebrow">Contact</p>
+    <p class="vrai-store-page__eyebrow">Get in Touch</p>
     <h1 class="vrai-store-page__title">{{ page.title }}</h1>
   </header>
 
@@ -17,7 +17,10 @@
     {%- assign contact_email = shop.email | default: 'support@vraicanada.com' -%}
     <p class="vrai-contact__lead">Questions on fit, styling, or custom sourcing? We typically respond within 24 hours.</p>
     <div class="vrai-contact__styling-cta-wrap">
-      <a class="vrai-contact__styling-cta" href="mailto:{{ contact_email | escape }}?subject=Styling%20Session%20Request">Book a Styling Session</a>
+      <a class="vrai-contact__styling-cta" href="mailto:{{ contact_email | escape }}?subject=Styling%20Session%20Request">
+        <span class="material-symbols-outlined" aria-hidden="true">style</span>
+        Book a Styling Session
+      </a>
     </div>
 
     {% form 'contact', class: 'vrai-contact__form' %}

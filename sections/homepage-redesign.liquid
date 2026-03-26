@@ -36,35 +36,32 @@
   <a href="#VraiHomepageMain" class="vrai-homepage__skip-link">Skip to content</a>
 
   <main id="VraiHomepageMain" class="vrai-homepage__main">
-    <section class="vrai-homepage__hero vrai-reveal" aria-labelledby="VraiHomepageHeroTitle">
-      <div class="vrai-homepage__hero-copy">
-        <p class="vrai-homepage__eyebrow">Spring / Summer 2026</p>
-        <h1 id="VraiHomepageHeroTitle">AN EDITORIAL STOREFRONT FOR MODERN DRESSING.</h1>
-        <p class="vrai-homepage__lede">
-          Structured tailoring, fluid essentials, and elevated layers curated with a quieter luxury point of view.
-        </p>
-        <div class="vrai-homepage__hero-actions">
-          <a class="vrai-homepage__button vrai-homepage__button--primary" href="{{ routes.all_products_collection_url }}">Shop the edit</a>
-          <a class="vrai-homepage__button vrai-homepage__button--ghost" href="{{ minimal_url }}">View minimal</a>
-        </div>
-      </div>
-      <div class="vrai-homepage__hero-media" data-vrai-parallax-wrap>
+    <section class="vrai-homepage__hero vrai-homepage__hero--fullscreen vrai-reveal" aria-labelledby="VraiHomepageHeroTitle">
+      <div class="vrai-homepage__hero-bg">
         {%- if all_collection.products.first.featured_image != blank -%}
-          {{ all_collection.products.first.featured_image | image_url: width: 1400 | image_tag: alt: 'New season arrivals', loading: 'eager', class: 'vrai-homepage__parallax-image' }}
+          {{ all_collection.products.first.featured_image | image_url: width: 2000 | image_tag: alt: 'New season arrivals', loading: 'eager' }}
         {%- elsif all_collection.image != blank -%}
-          {{ all_collection.image | image_url: width: 1400 | image_tag: alt: 'Shop the collection', loading: 'eager', class: 'vrai-homepage__parallax-image' }}
+          {{ all_collection.image | image_url: width: 2000 | image_tag: alt: 'Shop the collection', loading: 'eager' }}
         {%- else -%}
-          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1400&q=80" alt="Model wearing a tailored neutral look in studio lighting" loading="eager" class="vrai-homepage__parallax-image">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=2000&q=80" alt="Editorial fashion" loading="eager">
         {%- endif -%}
+        <div class="vrai-homepage__hero-gradient"></div>
+      </div>
+      <div class="vrai-homepage__hero-copy vrai-homepage__hero-copy--bottom">
+        <h1 id="VraiHomepageHeroTitle">AN EDITORIAL STOREFRONT FOR MODERN DRESSING.</h1>
+        <div class="vrai-homepage__hero-actions">
+          <a class="vrai-homepage__button vrai-homepage__button--primary" href="{{ routes.all_products_collection_url }}">Shop the collection</a>
+          <a class="vrai-homepage__button vrai-homepage__button--ghost vrai-homepage__button--ghost-light" href="{{ minimal_url }}">Read edits</a>
+        </div>
       </div>
     </section>
 
     <section class="vrai-homepage__collections vrai-reveal" aria-labelledby="VraiHomepageCollectionsTitle">
-      <div class="vrai-homepage__section-heading">
-        <p class="vrai-homepage__eyebrow">Collections</p>
-        <h2 id="VraiHomepageCollectionsTitle">Shop by mood</h2>
+      <div class="vrai-homepage__section-heading vrai-homepage__section-heading--split">
+        <h2 id="VraiHomepageCollectionsTitle">Shop by Mood</h2>
+        <span class="vrai-homepage__eyebrow">Curated Atmospheres</span>
       </div>
-      <div class="vrai-homepage__collection-grid">
+      <div class="vrai-homepage__collection-grid vrai-homepage__collection-grid--asymmetric">
         {%- for handle in mood_handles -%}
           {%- assign mood_collection = collections[handle] -%}
           {%- assign mood_title = mood_collection.title -%}
@@ -91,64 +88,49 @@
     <section class="vrai-homepage__products vrai-reveal" aria-labelledby="VraiHomepageProductsTitle">
       <div class="vrai-homepage__section-heading vrai-homepage__section-heading--split">
         <div>
-          <p class="vrai-homepage__eyebrow">Now available</p>
-          <h2 id="VraiHomepageProductsTitle">Fresh arrivals</h2>
+          <p class="vrai-homepage__eyebrow">The Archive</p>
+          <h2 id="VraiHomepageProductsTitle">Fresh Arrivals</h2>
         </div>
-        <a class="vrai-homepage__text-link" href="{{ routes.all_products_collection_url }}">View all</a>
+        <div class="vrai-homepage__carousel-nav">
+          <button class="vrai-homepage__carousel-btn" data-dir="prev" aria-label="Previous products">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <button class="vrai-homepage__carousel-btn" data-dir="next" aria-label="Next products">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
       </div>
 
-      <div class="vrai-homepage__product-grid">
+      <div class="vrai-homepage__product-carousel" data-vrai-carousel>
         {%- if all_collection != blank and all_collection.products_count > 0 -%}
-          {%- for product in all_collection.products limit: 4 -%}
+          {%- for product in all_collection.products limit: 8 -%}
             {%- assign first_variant = product.selected_or_first_available_variant -%}
-            {%- assign product_created_timestamp = product.created_at | date: '%s' | plus: 0 -%}
-            <article class="vrai-homepage__product-card">
-              <a class="vrai-homepage__product-image" href="{{ product.url }}">
-                {%- if product_created_timestamp > new_threshold -%}
-                  <span class="vrai-card__badge vrai-card__badge--new">New</span>
-                {%- endif -%}
+            <article class="vrai-homepage__carousel-card">
+              <a class="vrai-homepage__carousel-image" href="{{ product.url }}">
                 {%- if product.featured_image != blank -%}
-                  {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy', class: 'vrai-homepage__image-primary' }}
-                  {%- if product.images[1] != blank -%}
-                    {{ product.images[1] | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy', class: 'vrai-homepage__image-secondary' }}
-                  {%- endif -%}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
                 {%- else -%}
-                  <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?auto=format&fit=crop&w=900&q=80" alt="{{ product.title | escape }}" loading="lazy" class="vrai-homepage__image-primary">
+                  <img src="https://images.unsplash.com/photo-1434389677669-e08b4cda3a76?auto=format&fit=crop&w=900&q=80" alt="{{ product.title | escape }}" loading="lazy">
                 {%- endif -%}
               </a>
-              <div class="vrai-homepage__product-body">
-                <h3><a href="{{ product.url }}">{{ product.title | truncatewords: 6, '' }}</a></h3>
-                <p class="vrai-homepage__product-price">
-                  {{ product.price | money }}
-                  {%- if product.compare_at_price > product.price -%}
-                    <span>{{ product.compare_at_price | money }}</span>
-                  {%- endif -%}
-                </p>
-                {%- if first_variant != blank and first_variant.available -%}
-                  {%- form 'product', product, class: 'vrai-homepage__quick-add-form' -%}
-                    <input type="hidden" name="id" value="{{ first_variant.id }}">
-                    <button type="submit" class="vrai-homepage__quick-add">Quick add</button>
-                  {%- endform -%}
-                {%- endif -%}
+              <div class="vrai-homepage__carousel-meta">
+                <h4><a href="{{ product.url }}">{{ product.title | truncatewords: 6, '' }}</a></h4>
+                <span class="vrai-homepage__carousel-price">{{ product.price | money }}</span>
               </div>
             </article>
           {%- endfor -%}
         {%- else -%}
-          <article class="vrai-homepage__product-card">
-            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=80" alt="Oversized linen blazer" loading="lazy"></div>
-            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Oversized Linen Blazer</h3><p class="vrai-homepage__product-price">$285</p></div>
+          <article class="vrai-homepage__carousel-card">
+            <div class="vrai-homepage__carousel-image"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=80" alt="Oversized linen blazer" loading="lazy"></div>
+            <div class="vrai-homepage__carousel-meta"><h4>Oversized Linen Blazer</h4><span class="vrai-homepage__carousel-price">$285</span></div>
           </article>
-          <article class="vrai-homepage__product-card">
-            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Silk midi dress" loading="lazy"></div>
-            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Silk Midi Dress</h3><p class="vrai-homepage__product-price">$345</p></div>
+          <article class="vrai-homepage__carousel-card">
+            <div class="vrai-homepage__carousel-image"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Silk midi dress" loading="lazy"></div>
+            <div class="vrai-homepage__carousel-meta"><h4>Silk Midi Dress</h4><span class="vrai-homepage__carousel-price">$345</span></div>
           </article>
-          <article class="vrai-homepage__product-card">
-            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80" alt="Tailored wool coat" loading="lazy"></div>
-            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Tailored Wool Coat</h3><p class="vrai-homepage__product-price">$420 <span>$560</span></p></div>
-          </article>
-          <article class="vrai-homepage__product-card">
-            <div class="vrai-homepage__product-image"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Cashmere knit" loading="lazy"></div>
-            <div class="vrai-homepage__product-body"><p class="vrai-homepage__product-vendor">VRAI</p><h3>Cashmere Knit</h3><p class="vrai-homepage__product-price">$190</p></div>
+          <article class="vrai-homepage__carousel-card">
+            <div class="vrai-homepage__carousel-image"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80" alt="Tailored wool coat" loading="lazy"></div>
+            <div class="vrai-homepage__carousel-meta"><h4>Tailored Wool Coat</h4><span class="vrai-homepage__carousel-price">$420</span></div>
           </article>
         {%- endif -%}
       </div>
@@ -166,26 +148,28 @@
           {%- else -%}
             <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1800&q=80" alt="Brand story visual" loading="lazy" class="vrai-homepage__brand-story-img">
           {%- endif -%}
+          <div class="vrai-homepage__brand-story-quote">
+            <p>&ldquo;Style is the signature of our existence in the world of forms.&rdquo;</p>
+          </div>
         </div>
         <div class="vrai-homepage__brand-story-text">
-          <p class="vrai-homepage__eyebrow">Our story</p>
-          <h2 id="VraiBrandStoryTitle">Redefining authentic style</h2>
+          <h2 id="VraiBrandStoryTitle">REDEFINING AUTHENTIC STYLE.</h2>
           <div class="vrai-homepage__brand-story-body">
-            <p>VRAI was born from a belief that authentic style doesn't follow trends - it creates them. We curate for the modern individual: quality over quantity, timelessness over seasonality.</p>
-            <p>Since 2024, every piece is thoughtfully selected from artisans who share our commitment to craft.</p>
+            <p>At VRAI, we believe clothing should be an extension of the soul. Our curation process favors the enduring over the ephemeral, the textured over the flat, and the authentic over the artificial.</p>
           </div>
-          <a class="vrai-homepage__button vrai-homepage__button--primary" href="/pages/about">Discover our story</a>
+          <a class="vrai-homepage__text-link--underline" href="/pages/about">Discover our philosophy</a>
         </div>
       </div>
     </section>
 
     <section class="vrai-homepage__ugc vrai-reveal" aria-labelledby="VraiHomepageUgcTitle">
-      <div class="vrai-homepage__section-heading">
-        <p class="vrai-homepage__eyebrow">Community</p>
-        <h2 id="VraiHomepageUgcTitle">#VRAICANADA</h2>
+      <div class="vrai-homepage__section-heading vrai-homepage__section-heading--center">
+        <p class="vrai-homepage__eyebrow">The Community</p>
+        <h2 id="VraiHomepageUgcTitle">Vrai Canada</h2>
+        <p class="vrai-homepage__ugc-sub">Tag us #VraiArchive to be featured in our monthly spread.</p>
       </div>
-      <div class="vrai-homepage__ugc-grid">
-        {%- for product in all_collection.products limit: 6 -%}
+      <div class="vrai-homepage__ugc-grid vrai-homepage__ugc-grid--4col">
+        {%- for product in all_collection.products limit: 4 -%}
           <a href="{{ product.url }}" class="vrai-homepage__ugc-item" aria-label="View {{ product.title | escape }}">
             {%- if product.images[1] != blank -%}
               {{ product.images[1] | image_url: width: 700 | image_tag: alt: product.title, loading: 'lazy' }}
@@ -194,6 +178,9 @@
             {%- else -%}
               <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80" alt="Community style" loading="lazy">
             {%- endif -%}
+            <div class="vrai-homepage__ugc-overlay">
+              <span class="material-symbols-outlined">favorite</span>
+            </div>
           </a>
         {%- endfor -%}
       </div>
@@ -211,12 +198,6 @@
         <input id="VraiHomepageEmail" type="email" name="contact[email]" placeholder="Email address" required>
         <button type="submit">Join now</button>
         <p class="vrai-homepage__privacy-note">By joining, you agree to receive marketing emails. You can unsubscribe at any time.</p>
-        {%- if form.posted_successfully? -%}
-          <p class="vrai-homepage__form-message" role="status">You are on the list.</p>
-        {%- endif -%}
-        {%- if form.errors -%}
-          <p class="vrai-homepage__form-message vrai-homepage__form-message--error" role="alert">{{ form.errors | default_errors }}</p>
-        {%- endif -%}
       {%- endform -%}
     </section>
   </main>
@@ -226,7 +207,6 @@
 {
   "name": "Homepage redesign",
   "settings": [],
-  "blocks": [],
   "presets": [
     {
       "name": "Homepage redesign"

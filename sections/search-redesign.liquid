@@ -9,13 +9,16 @@
   </nav>
 
   <header class="vrai-product__top vrai-reveal">
-    <p class="vrai-store-page__eyebrow">Search</p>
-    <h1 class="vrai-store-page__title">Find your next piece</h1>
+    <p class="vrai-store-page__eyebrow">Discover</p>
+    <h1 class="vrai-store-page__title">Search the Archive</h1>
     <p class="vrai-store-page__lead">Browse products, pages, and editorials from one place.</p>
   </header>
 
   <form action="{{ routes.search_url }}" method="get" role="search" class="vrai-search__form">
-    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search by name, style, or fabric">
+    <div class="vrai-search__input-wrap">
+      <span class="material-symbols-outlined vrai-search__icon" aria-hidden="true">search</span>
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search by name, style, or fabric">
+    </div>
     <input type="hidden" name="options[prefix]" value="last">
     <button type="submit" class="vrai-homepage__button vrai-homepage__button--primary">Search</button>
   </form>
