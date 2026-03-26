@@ -517,6 +517,20 @@
     });
   }
 
+  /* ── Product carousel (homepage editorial) ── */
+  function initProductCarousel() {
+    var carousel = document.querySelector('[data-vrai-carousel]');
+    if (!carousel) return;
+    var btns = document.querySelectorAll('.vrai-homepage__carousel-btn');
+    var scrollAmount = 420;
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dir = btn.getAttribute('data-dir') === 'prev' ? -1 : 1;
+        carousel.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+      });
+    });
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initProductVariantUI();
@@ -527,6 +541,7 @@
       initTouchSwipe();
       initQuickView();
       initSizeGuide();
+      initProductCarousel();
     });
   } else {
     initProductVariantUI();
@@ -537,5 +552,6 @@
     initTouchSwipe();
     initQuickView();
     initSizeGuide();
+    initProductCarousel();
   }
 })();
